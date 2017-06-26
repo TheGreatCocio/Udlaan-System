@@ -36,6 +36,7 @@
             <Label x:Name="LabelMifareResult" Content="Label" Canvas.Left="82" Canvas.Top="153"/>
             <Label x:Name="LabelPhoneResult" Content="Label" Canvas.Left="392" Canvas.Top="20"/>
             <Label x:Name="LabelTeacherResult" Content="Label" Canvas.Left="392" Canvas.Top="89"/>
+            <Label x:Name="label" Content="Label" Canvas.Left="560" Canvas.Top="120"/>
         </Canvas>
 
     </Grid>
