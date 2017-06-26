@@ -5,18 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="UIInputItem" Height="469.492" Width="946.61">
+        Title="Tilføj Udstyr" Height="366.95" Width="946.61">
     <Grid>
         <ComboBox HorizontalAlignment="Left" Margin="36,25,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox HorizontalAlignment="Left" Margin="36,71,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox HorizontalAlignment="Left" Margin="36,117,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="36,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="36,223,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="36,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <ListView HorizontalAlignment="Left" Height="403" Margin="296,25,0,0" VerticalAlignment="Top" Width="619">
+        <TextBox x:Name="textBoxID" HorizontalAlignment="Left" Height="23" Margin="36,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBoxSerialNumber" HorizontalAlignment="Left" Height="23" Margin="36,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBoxItemMifare" HorizontalAlignment="Left" Height="23" Margin="36,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ListView HorizontalAlignment="Left" Height="280" Margin="296,25,0,0" VerticalAlignment="Top" Width="619">
             <ListView.View>
                 <GridView ColumnHeaderStringFormat="Type"/>
             </ListView.View>
         </ListView>
+        <Label Content="ID" HorizontalAlignment="Left" Margin="32,157,0,0" VerticalAlignment="Top"/>
+        <Label Content="Serie Nummer" HorizontalAlignment="Left" Margin="31,208,0,0" VerticalAlignment="Top"/>
+        <Label Content="Mifare" HorizontalAlignment="Left" Margin="31,260,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
