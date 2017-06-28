@@ -44,9 +44,9 @@ namespace UdlaanSystem
             inputItembox.ShowDialog();
         }
 
-        private string ButtonUser_Click(object sender, RoutedEventArgs e)
+        /*private string ButtonUser_Click(object sender, RoutedEventArgs e)
         {
             UIInputUser inputUserBox = new UIInputUser();
-        }
+        }*/
     }
 }
