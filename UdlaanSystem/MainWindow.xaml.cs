@@ -27,9 +27,9 @@ namespace UdlaanSystem
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonItem_Click(object sender, RoutedEventArgs e)
         {
-            LabelNameResult.Content = "sovs";
+
         }
     }
 }
