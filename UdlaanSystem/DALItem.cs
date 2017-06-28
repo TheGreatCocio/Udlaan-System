@@ -8,6 +8,6 @@ namespace UdlaanSystem
 {
     class DALItem
     {
-        // PISPISPISPISPIS
+        // PISLORT
     }
 }
