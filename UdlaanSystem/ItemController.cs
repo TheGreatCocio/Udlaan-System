@@ -8,5 +8,23 @@ namespace UdlaanSystem
 {
     class ItemController
     {
+        public ItemController()
+        {
+        }
+        private static ItemController instance;
+
+        public static ItemController Instance
+        {
+            get
+            {
+                if (instance == null)
+                { instance = new ItemController(); }
+                return instance;
+            }
+        }
+        public List<string[]> GetItemTypes()
+        {
+            return DALItem.Instance.GetItemTypes();
+        }
     }
 }

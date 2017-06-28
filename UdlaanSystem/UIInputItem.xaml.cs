@@ -22,6 +22,19 @@ namespace UdlaanSystem
         public UIInputItem()
         {
             InitializeComponent();
+
+
+        }
+
+        public void CreateTypeList()
+        {
+            ComboBoxTypes.SelectedValue = "FISK";
+            ItemController.Instance.GetItemTypes();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
