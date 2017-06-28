@@ -27,9 +27,26 @@ namespace UdlaanSystem
             
         }
 
+        private void onMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
+        {
+            if (TextBoxMain.IsFocused) // checks if the maintextbox is focused
+            {
+                if (e.Key == Key.Return) // checks if its the enter button that has been pressed
+                {
+                }
+            }
+        }
+
+
         private void ButtonItem_Click(object sender, RoutedEventArgs e)
         {
+            UIInputItem inputItembox = new UIInputItem();
+            inputItembox.ShowDialog();
+        }
 
+        private string ButtonUser_Click(object sender, RoutedEventArgs e)
+        {
+            UIInputUser inputUserBox = new UIInputUser();
         }
     }
 }

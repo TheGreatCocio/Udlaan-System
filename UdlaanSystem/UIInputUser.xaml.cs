@@ -17,6 +17,7 @@ namespace UdlaanSystem
     /// <summary>
     /// Interaction logic for UIInputUser.xaml
     /// </summary>
+
     public partial class UIInputUser : Window
     {
         public UIInputUser()
