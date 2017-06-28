@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="514.224" Width="748.447">
+        Title="MainWindow" Height="560.505" Width="977.277" ResizeMode="NoResize" >
     <Grid>
-        <TextBox x:Name="MainBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Margin="10,10,0,0"/>
-        <Button x:Name="UserButton" Content="Opret/Rediger Bruger" HorizontalAlignment="Left" Margin="158,11,0,0" VerticalAlignment="Top" Width="131" Click="Button_Click"/>
-        <Button x:Name="ItemButton" Content="Opret/Tilføj Produkter" HorizontalAlignment="Left" Margin="306,11,0,0" VerticalAlignment="Top" Width="131"/>
-        <ListView x:Name="ListWiewItems" HorizontalAlignment="Left" Height="213" Margin="10,258,0,0" VerticalAlignment="Top" Width="713" RenderTransformOrigin="0.5,0.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="447*"/>
+            <ColumnDefinition Width="524*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="TextBoxMain" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Margin="10,9,0,0"/>
+        <Button x:Name="ButtonUser" Content="Opret/Rediger Bruger" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top" Width="131" Click="Button_Click"/>
+        <Button x:Name="ButtonItem" Content="Tilføj Produkter" HorizontalAlignment="Left" Margin="306,10,0,0" VerticalAlignment="Top" Width="131"/>
+        <ListView x:Name="ListWiewItems" HorizontalAlignment="Left" Height="213" Margin="11,309,0,0" VerticalAlignment="Top" Width="947" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -21,22 +25,40 @@
             </ListView.RenderTransform>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding Manufacturer}" />
+                    <GridViewColumn Header="Model" Width="130" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="ID" Width="56" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Serie Nummer" Width="150" DisplayMemberBinding="{Binding SerialNumber}" />
+                    <GridViewColumn Header="Udlånt Dato" Width="180" DisplayMemberBinding="{Binding LendDate}" />
+                    <GridViewColumn Header="Afleverings Dato" Width="180" DisplayMemberBinding="{Binding ReturnDate}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Canvas x:Name="CanvasPanelUserInfo" HorizontalAlignment="Left" Height="191" Margin="10,55,0,0" VerticalAlignment="Top" Width="720">
-            <Label x:Name="LabelName" Content="Navn:" Canvas.Left="10" Canvas.Top="20"/>
-            <Label x:Name="LabelZbc" Content="ZBC ID:" Canvas.Left="10" Canvas.Top="89"/>
-            <Label x:Name="LabelMifare" Content="Mifare:" Canvas.Left="10" Canvas.Top="153"/>
-            <Label x:Name="LabelPhone" Content="Telefon Nr.:" Canvas.Left="322" Canvas.Top="20"/>
-            <Label x:Name="LabelIsTeacher" Content="Ansat:" Canvas.Left="322" Canvas.Top="89"/>
-            <Label x:Name="LabelNameResult" Content="Label" Canvas.Left="82" Canvas.Top="20"/>
-            <Label x:Name="LabelZbcName" Content="Label" Canvas.Left="82" Canvas.Top="89"/>
-            <Label x:Name="LabelMifareResult" Content="Label" Canvas.Left="82" Canvas.Top="153"/>
-            <Label x:Name="LabelPhoneResult" Content="Label" Canvas.Left="392" Canvas.Top="20"/>
-            <Label x:Name="LabelTeacherResult" Content="Label" Canvas.Left="392" Canvas.Top="89"/>
+        <Canvas x:Name="CanvasPanelUserInfo" HorizontalAlignment="Left" Height="215" Margin="10,67,0,0" VerticalAlignment="Top" Width="427">
+            <Label x:Name="LabelName" Content="Navn:" Canvas.Left="10" Canvas.Top="43"/>
+            <Label x:Name="LabelZbc" Content="ZBC ID:" Canvas.Left="10" Canvas.Top="112"/>
+            <Label x:Name="LabelMifare" Content="Mifare:" Canvas.Left="10" Canvas.Top="176"/>
+            <Label x:Name="LabelPhone" Content="Telefon Nr.:" Canvas.Left="219" Canvas.Top="43"/>
+            <Label x:Name="LabelIsTeacher" Content="Ansat:" Canvas.Left="219" Canvas.Top="112"/>
+            <Label x:Name="LabelNameResult" Content="Label" Canvas.Left="82" Canvas.Top="43"/>
+            <Label x:Name="LabelZbcName" Content="Label" Canvas.Left="82" Canvas.Top="112"/>
+            <Label x:Name="LabelMifareResult" Content="Label" Canvas.Left="82" Canvas.Top="176"/>
+            <Label x:Name="LabelPhoneResult" Content="Label" Canvas.Left="297" Canvas.Top="43"/>
+            <Label x:Name="LabelTeacherResult" Content="Label" Canvas.Left="297" Canvas.Top="112"/>
+            <Label Content="Person Information" Canvas.Left="116" FontSize="16"/>
         </Canvas>
+        <ListView x:Name="ListViewLend" HorizontalAlignment="Left" Height="236" Margin="13,64,0,0" VerticalAlignment="Top" Width="498" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding Manufacturer}" />
+                    <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="Afleverings Dato" Width="150" DisplayMemberBinding="{Binding ReturnDate}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="ButtonStat" Content="Vis Statestik" HorizontalAlignment="Left" Margin="380,12,0,0" VerticalAlignment="Top" Width="131" Grid.Column="1"/>
 
     </Grid>
 </Window>
