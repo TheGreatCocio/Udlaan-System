@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="UIStat" Height="300" Width="300">
+        Title="UIStat" Height="370.822" Width="837.93">
     <Grid>
-        
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="280" Margin="10,50,0,0" VerticalAlignment="Top" Width="400">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Model" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="ZBCnavn" Width="74" DisplayMemberBinding="{Binding Type}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="listView_Copy" HorizontalAlignment="Left" Height="280" Margin="420,50,0,0" VerticalAlignment="Top" Width="400">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Model" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="ZBCnavn" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Afleveringsdato" Width="95" DisplayMemberBinding="{Binding Type}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="label" Content="Ting Der Skal Afleveres I Dag" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Ting Der Ikke Er Afleveret Til Tiden" HorizontalAlignment="Left" Margin="420,19,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

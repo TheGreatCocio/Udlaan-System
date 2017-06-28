@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="UIStatDetail" Height="300" Width="300">
+        Title="UIStatDetail" Height="160.743" Width="614.325">
     <Grid>
-        
+        <Button x:Name="button" Content="OK" HorizontalAlignment="Left" Margin="520,100,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="labelZbcname" Content="LabelZbcnavn" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelFname" Content="LabelFornavn" HorizontalAlignment="Left" Margin="114,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelLname" Content="LabelEfternavn" HorizontalAlignment="Left" Margin="221,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelPhoneNumber" Content="LabelTelefonNummer" HorizontalAlignment="Left" Margin="339,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelIsTeacher" Content="LabelErIkkeLærer" HorizontalAlignment="Left" Margin="485,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelType" Content="LabelType" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelManufacturer" Content="LabelProducent" HorizontalAlignment="Left" Margin="114,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelModel" Content="LabelModel" HorizontalAlignment="Left" Margin="221,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelID" Content="LabelID" HorizontalAlignment="Left" Margin="339,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelSerialNumber" Content="LabelSerialNumber" HorizontalAlignment="Left" Margin="485,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelLendDate" Content="LabelLendDate" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelDueDate" Content="LabelAfleveringsDato" HorizontalAlignment="Left" Margin="114,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+
     </Grid>
 </Window>
