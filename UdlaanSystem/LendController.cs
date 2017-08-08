@@ -23,8 +23,10 @@ namespace UdlaanSystem
             }
         }
 
-        public LendedObject GetLendedUserData (string mifare) {
 
+        public LendedObject GetLendedUserData (string userMifare) {
+
+            return null;
         }
     }
 }

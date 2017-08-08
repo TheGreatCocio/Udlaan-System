@@ -8,5 +8,6 @@ namespace UdlaanSystem
 {
     class DALLend
     {
+
     }
 }
