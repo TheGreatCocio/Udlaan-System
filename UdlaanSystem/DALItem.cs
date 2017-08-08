@@ -42,14 +42,14 @@ namespace UdlaanSystem
             }
             catch(Exception ex)
             {
-                Debug.WriteLine("###Failed to connect to sql server: " + ex);
+                Debug.WriteLine("####################Failed to connect to sql server: " + ex);
             }
         }
 
+        //Gets the list of types from the database
         public List<string[]> GetItemTypes()
         {
-            List<string[]> types = null;
-            string[] type = null;
+            List<string[]> types = new List<string[]>();
 
             try
             {
@@ -58,10 +58,17 @@ namespace UdlaanSystem
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    type[1] = rdr.GetString(0);
-                    type[2] = rdr.GetString(1);
+                    string[] type = new string[2];
+                    type[0] = rdr.GetInt32(0).ToString();
+                    type[1] = rdr.GetString(1);
                     types.Add(type);
+                    Debug.WriteLine("############################ Success!");
                 }
+            }
+            catch(Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
             }
             finally
             {
