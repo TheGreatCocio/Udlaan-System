@@ -22,6 +22,13 @@ namespace UdlaanSystem
                 return instance;
             }
         }
+
+        public ItemObject CheckIfMifareIsItem(string mifare)
+        {
+            return DALItem.Instance.GetItemByMifare(mifare);
+        }
+
+
         public List<string[]> GetItemTypes()
         {
             return DALItem.Instance.GetItemTypes();
