@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,19 +23,22 @@ namespace UdlaanSystem
         public UIInputItem()
         {
             InitializeComponent();
-
+            CreateTypeList();
 
         }
 
         public void CreateTypeList()
         {
-            ComboBoxTypes.SelectedValue = "FISK";
-            ItemController.Instance.GetItemTypes();
+            List<string[]> types = ItemController.Instance.GetItemTypes();
+            foreach (string[] arrayStr in types)
+            {
+                ComboBoxTypes.Items.Add(arrayStr[1]);
+                Debug.WriteLine("############################: " + arrayStr[1]);
+            }
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
     }
 }
