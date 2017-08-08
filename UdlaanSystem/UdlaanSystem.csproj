@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ItemObject.cs" />
+    <Compile Include="LendController.cs" />
     <Compile Include="LendedObject.cs" />
     <Compile Include="LendObject.cs" />
     <Compile Include="SmsController.cs" />

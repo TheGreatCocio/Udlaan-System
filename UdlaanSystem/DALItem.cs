@@ -46,6 +46,33 @@ namespace UdlaanSystem
             }
         }
 
+        public ItemObject GetItemByMifare(string mifare)
+        {
+            ItemObject item = null;
+
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT items.item_mifare, types.type_name, models.model_name, manufacturers.manufacturer_name, items.item_id, items.item_serialnumber FROM items JOIN types ON items.item_type = types.type_id JOIN manufacturers ON items.item_manufacturer = manufacturers.manufacturer_id JOIN models ON items.item_model = models.model_id WHERE items.item_mifare = '" + mifare +  "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    item = new ItemObject(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt16(4), rdr.GetString(5));
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return item;
+        }
+
         public List<string[]> GetItemTypes()
         {
             List<string[]> types = new List<string[]>();

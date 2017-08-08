@@ -36,12 +36,14 @@ namespace UdlaanSystem
                     ItemObject item = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
 
                     List<ItemObject> items = new List<ItemObject>();
-                    items.Add(new ItemObject() { type = item.type, manufacturer = item.manufacturer, model = item.model, ID = 0, serialNumber = "asdf" });
+                    items.Add(new ItemObject() { itemMifare = item.itemMifare, type = item.type, manufacturer = item.manufacturer, model = item.model, ID = 0, serialNumber = "asdf" });
                     items.Add(new User() { Name = "Jane Doe", Age = 39 });
                     items.Add(new User() { Name = "Sammy Doe", Age = 13 });
 
 
                     //ListViewItems.ItemsSource
+
+
                 }
             }
         }
