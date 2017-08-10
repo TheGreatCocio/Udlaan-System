@@ -9,6 +9,17 @@ namespace UdlaanSystem
 {
     class DALUser
     {
+        public void hejsa()
+        {
+            if (true)
+            {
+                Debug.WriteLine("Hej");
+            }
+            else
+            {
+                Debug.WriteLine("Farvel");
+            }
+        }
         public void GetLendedUserData()
         {
             //Mark er en hest der spiller lol!!
