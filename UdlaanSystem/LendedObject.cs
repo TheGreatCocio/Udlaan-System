@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UdlaanSystem
 {
-    class LendedObject
+    public class LendedObject
     {
         public LendedObject(UserObject UserObject, List<LendObject> LendedObjects)
         {
