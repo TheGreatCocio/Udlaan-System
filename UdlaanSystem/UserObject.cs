@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UdlaanSystem
 {
-    class UserObject
+    public class UserObject
     {
         public UserObject(string fName, string lName, string zbcName, string userMifare, int phoneNumber, bool isTeacher, bool hasPC, bool isDisabled)
         {
