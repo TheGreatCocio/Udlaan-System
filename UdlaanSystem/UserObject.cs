@@ -10,14 +10,14 @@ namespace UdlaanSystem
     {
         public UserObject(string fName, string lName, string zbcName, string userMifare, int phoneNumber, bool isTeacher, bool hasPC, bool isDisabled)
         {
-            fName = this.fName;
-            lName = this.lName;
-            zbcName = this.zbcName;
-            userMifare = this.userMifare;
-            phoneNumber = this.phoneNumber;
-            isTeacher = this.isTeacher;
-            hasPC = this.hasPC;
-            isDisabled = this.isDisabled;
+            this.fName = fName;
+            this.lName = lName;
+            this.zbcName = zbcName;
+            this.userMifare = userMifare;
+            this.phoneNumber = phoneNumber;
+            this.isTeacher = isTeacher;
+            this.hasPC = hasPC;
+            this.isDisabled = isDisabled;
 
         }
 

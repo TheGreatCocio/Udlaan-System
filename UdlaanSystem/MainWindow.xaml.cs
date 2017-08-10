@@ -35,7 +35,7 @@ namespace UdlaanSystem
                 {
                     ItemObject item = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
 
-                    if (item.itemMifare == null)
+                    if (item == null)
                     {
                         LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text);
                         if (lendedObject.UserObject == null)
@@ -102,6 +102,14 @@ namespace UdlaanSystem
 
             LabelIsDisabledResult.Content = lendedObject.UserObject.isDisabled;
             LabelIsDisabledResult.Visibility = Visibility;
+
+            foreach (LendObject lendObject in lendedObject.LendObjects)
+            {
+                this.ListViewLend.Items.Add(lendObject.itemObject);
+                this.ListViewLend.Items.Add(lendObject.returnDate);
+            }
+
+            
         }
 
         private void ButtonItem_Click(object sender, RoutedEventArgs e)

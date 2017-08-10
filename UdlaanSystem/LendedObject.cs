@@ -8,13 +8,13 @@ namespace UdlaanSystem
 {
     public class LendedObject
     {
-        public LendedObject(UserObject UserObject, List<LendObject> LendedObjects)
+        public LendedObject(UserObject UserObject, List<LendObject> LendObjects)
         {
-            UserObject = this.UserObject;
-            LendedObjects = this.LendedObjects;
+            this.UserObject = UserObject;
+            this.LendObjects = LendObjects;
         }
 
         public UserObject UserObject { get; set; }
-        public List<LendObject> LendedObjects { get; set; }
+        public List<LendObject> LendObjects { get; set; }
     }
 }

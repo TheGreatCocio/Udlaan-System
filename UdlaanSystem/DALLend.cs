@@ -30,7 +30,7 @@ namespace UdlaanSystem
 
         private void ConnectMySql()
         {
-            sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules; integrated security=false";
+            sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules;integrated security=false";
 
             if (MysqlConnection == null)
             {

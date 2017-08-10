@@ -25,13 +25,13 @@
             </ListView.RenderTransform>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}" />
-                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding Manufacturer}" />
-                    <GridViewColumn Header="Model" Width="130" DisplayMemberBinding="{Binding Model}" />
-                    <GridViewColumn Header="ID" Width="56" DisplayMemberBinding="{Binding ID}" />
-                    <GridViewColumn Header="Serie Nummer" Width="150" DisplayMemberBinding="{Binding SerialNumber}" />
-                    <GridViewColumn Header="Udlånt Dato" Width="180" DisplayMemberBinding="{Binding LendDate}" />
-                    <GridViewColumn Header="Afleverings Dato" Width="180" DisplayMemberBinding="{Binding ReturnDate}"/>
+                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
+                    <GridViewColumn Header="Model" Width="130" DisplayMemberBinding="{Binding model}" />
+                    <GridViewColumn Header="ID" Width="56" DisplayMemberBinding="{Binding id}" />
+                    <GridViewColumn Header="Serie Nummer" Width="150" DisplayMemberBinding="{Binding serialNumber}" />
+                    <GridViewColumn Header="Udlånt Dato" Width="180" DisplayMemberBinding="{Binding lendDate}" />
+                    <GridViewColumn Header="Afleverings Dato" Width="180" DisplayMemberBinding="{Binding returnDate}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -53,10 +53,10 @@
         <ListView x:Name="ListViewLend" HorizontalAlignment="Left" Height="218" Margin="13,64,0,0" VerticalAlignment="Top" Width="498" Grid.Column="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
-                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding Manufacturer}" />
-                    <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
-                    <GridViewColumn Header="Afleverings Dato" Width="150" DisplayMemberBinding="{Binding ReturnDate}" />
+                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
+                    <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding model}" />
+                    <GridViewColumn Header="Afleverings Dato" Width="150"  />
                 </GridView>
             </ListView.View>
         </ListView>
