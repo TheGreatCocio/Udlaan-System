@@ -31,10 +31,11 @@ namespace UdlaanSystem
 
         }
 
-        public void GetLendedUserData (string userMifare) {
-            UserObject uerObject = UserController.Instance.GetUserObject(userMifare);
+        public LendedObject GetLendedUserData (string userMifare) {
+            UserObject userObject = UserController.Instance.GetUserObject(userMifare);
             List<LendObject> lendObjectList = DALLend.Instance.GetLendedByUserMifare(userMifare).Concat(DALLend.Instance.GetArchiveByUserMifare(userMifare)).ToList();
-            
+            LendedObject lendedObject = new LendedObject(userObject, lendObjectList);
+            return lendedObject;
         }
     }
 }
