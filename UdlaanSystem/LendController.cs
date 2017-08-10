@@ -25,7 +25,9 @@ namespace UdlaanSystem
 
         public string CheckIfLended (string itemMifare) {
 
-            string userMifare = DALLend.Instance.GetLendedByItemMifare(itemMifare);  
+            string userMifare = DALLend.Instance.GetLendedByItemMifare(itemMifare);
+
+            return userMifare;
 
         }
 

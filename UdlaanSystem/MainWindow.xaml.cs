@@ -26,6 +26,7 @@ namespace UdlaanSystem
 
             
         }
+        
 
         private void onMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {
@@ -33,17 +34,18 @@ namespace UdlaanSystem
             {
                 if (e.Key == Key.Return) // checks if its the enter button that has been pressed
                 {
-                    ItemObject item = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
+                    ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
+                    /*ItemObject item = 
 
-                    List<ItemObject> items = new List<ItemObject>();
-                    items.Add(new ItemObject() { itemMifare = item.itemMifare, type = item.type, manufacturer = item.manufacturer, model = item.model, ID = 0, serialNumber = "asdf" });
-                    items.Add(new User() { Name = "Jane Doe", Age = 39 });
-                    items.Add(new User() { Name = "Sammy Doe", Age = 13 });
-
-
-                    //ListViewItems.ItemsSource
+                        List<ItemObject> items = new List<ItemObject>();
+                        items.Add(new ItemObject() { itemMifare = item.itemMifare, type = item.type, manufacturer = item.manufacturer, model = item.model, ID = 0, serialNumber = "asdf" });
+                        items.Add(new User() { Name = "Jane Doe", Age = 39 });
+                        items.Add(new User() { Name = "Sammy Doe", Age = 13 });
 
 
+                        //ListViewItems.ItemsSource
+
+                        */
                 }
             }
         }

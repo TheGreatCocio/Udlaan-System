@@ -48,7 +48,29 @@ namespace UdlaanSystem
 
         public string GetLendedByItemMifare (string itemMifare)
         {
-            
+            string userMifare = "";
+
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT lend.lend_usermifare FROM lend WHERE lend.lend_itemmifare = '" + itemMifare + "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    userMifare = rdr.GetString(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return userMifare;
         }
     }
 

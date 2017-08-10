@@ -8,7 +8,7 @@ namespace UdlaanSystem
 {
     class LendObject
     {
-        public LendObject(ItemObject itemObject, DateTime lendDate, DateTime returnDate, DateTime returnedDate)
+        public LendObject(ItemObject itemObject, DateTime lendDate, DateTime returnDate, DateTime? returnedDate)
         {
             itemObject = this.itemObject;
             lendDate = this.lendDate;
@@ -19,6 +19,6 @@ namespace UdlaanSystem
         public ItemObject itemObject { get; set; }
         public DateTime lendDate { get; set; }
         public DateTime returnDate { get; set; }
-        public DateTime returnedDate { get; set; }
+        public DateTime? returnedDate { get; set; }
     }
 }

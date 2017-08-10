@@ -23,21 +23,25 @@ namespace UdlaanSystem
             }
         }
 
-        public ItemObject CheckIfMifareIsItem(string mifare)
+        public void CheckIfMifareIsItem(string itemMifare)
         {
-            ItemObject item = DALItem.Instance.GetItemByMifare(mifare);
+            ItemObject item = DALItem.Instance.GetItemByMifare(itemMifare);
 
             if (item == null )
             {
-                LendController.Instance.GetLendedUserData(mifare);
+                LendController.Instance.GetLendedUserData(itemMifare);
+
             }
             else
             {
+                string userMifare = LendController.Instance.CheckIfLended(itemMifare);
 
+                if (userMifare == "")
+                {
+                    
+                }
             }
             
-            
-            return item;
         }
 
 
