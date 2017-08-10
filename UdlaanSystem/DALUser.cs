@@ -24,6 +24,10 @@ namespace UdlaanSystem
         {
             //Mark er en hest der spiller lol!!
             Debug.WriteLine("Heysaa");
+            //aaasdasdasd
+            //asdasdasdasd
+            //adsasdas
+            //adsadadsasda
         }
     }
 }
