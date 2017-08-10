@@ -31,7 +31,7 @@ namespace UdlaanSystem
 
         }
 
-        public LendedObject GetLendedUserData (string userMifare) {
+        public LendedObject GetUserData (string userMifare) {
             UserObject userObject = UserController.Instance.GetUserObject(userMifare);
             List<LendObject> lendObjectList = DALLend.Instance.GetLendedByUserMifare(userMifare).Concat(DALLend.Instance.GetArchiveByUserMifare(userMifare)).ToList();
             LendedObject lendedObject = new LendedObject(userObject, lendObjectList);

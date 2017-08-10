@@ -38,7 +38,7 @@ namespace UdlaanSystem
 
                     if (item == null)
                     {
-                        LendedObject user = LendController.Instance.GetLendedUserData(TextBoxMain.Text);
+                        LendedObject user = LendController.Instance.GetUserData(TextBoxMain.Text);
 
                     }
                     else
@@ -65,6 +65,27 @@ namespace UdlaanSystem
             }
         }
 
+
+        public void PrintUserData(LendedObject lendedObject)
+        {
+            LabelNameResult.Content = lendedObject.UserObject.fName + " " + lendedObject.UserObject.lName;
+            LabelNameResult.Visibility = Visibility;
+
+            LabelZbcNameResult.Content = lendedObject.UserObject.zbcName;
+            LabelZbcNameResult.Visibility = Visibility;
+
+            LabelMifareResult.Content = lendedObject.UserObject.userMifare;
+            LabelMifareResult.Visibility = Visibility;
+
+            LabelPhoneResult.Content = lendedObject.UserObject.phoneNumber;
+            LabelPhoneResult.Visibility = Visibility;
+
+            LabelTeacherResult.Content = lendedObject.UserObject.isTeacher;
+            LabelTeacherResult.Visibility = Visibility;
+
+            LabelIsDisabledResult.Content = lendedObject.UserObject.isDisabled;
+            LabelIsDisabledResult.Visibility = Visibility;
+        }
 
         private void ButtonItem_Click(object sender, RoutedEventArgs e)
         {

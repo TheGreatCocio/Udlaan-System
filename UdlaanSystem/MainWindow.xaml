@@ -37,15 +37,17 @@
         </ListView>
         <Canvas x:Name="CanvasPanelUserInfo" HorizontalAlignment="Left" Height="215" Margin="10,67,0,0" VerticalAlignment="Top" Width="427">
             <Label x:Name="LabelName" Content="Navn:" Canvas.Left="10" Canvas.Top="43"/>
-            <Label x:Name="LabelZbc" Content="ZBC ID:" Canvas.Left="10" Canvas.Top="112"/>
+            <Label x:Name="LabelZbcName" Content="ZBC Navn:" Canvas.Left="10" Canvas.Top="112"/>
             <Label x:Name="LabelMifare" Content="Mifare:" Canvas.Left="10" Canvas.Top="176"/>
             <Label x:Name="LabelPhone" Content="Telefon Nr.:" Canvas.Left="219" Canvas.Top="43"/>
             <Label x:Name="LabelIsTeacher" Content="Ansat:" Canvas.Left="219" Canvas.Top="112"/>
+            <Label x:Name="LabelIsDisabled" Content="IsDisabled:" Canvas.Left="219" Canvas.Top="176"/>
             <Label x:Name="LabelNameResult" Content="Label" Canvas.Left="82" Canvas.Top="43" Visibility="Hidden"/>
-            <Label x:Name="LabelZbcName" Content="Label" Canvas.Left="82" Canvas.Top="112" Visibility="Hidden"/>
+            <Label x:Name="LabelZbcNameResult" Content="Label" Canvas.Left="82" Canvas.Top="112" Visibility="Hidden"/>
             <Label x:Name="LabelMifareResult" Content="Label" Canvas.Left="82" Canvas.Top="176" Visibility="Hidden"/>
             <Label x:Name="LabelPhoneResult" Content="Label" Canvas.Left="297" Canvas.Top="43" Visibility="Hidden"/>
             <Label x:Name="LabelTeacherResult" Content="Label" Canvas.Left="297" Canvas.Top="112" Visibility="Hidden"/>
+            <Label x:Name="LabelIsDisabledResult" Content="Label" Canvas.Left="291" Canvas.Top="176" Visibility="Hidden"/>
             <Label Content="Person Information" Canvas.Left="116" FontSize="16"/>
         </Canvas>
         <ListView x:Name="ListViewLend" HorizontalAlignment="Left" Height="218" Margin="13,64,0,0" VerticalAlignment="Top" Width="498" Grid.Column="1">
