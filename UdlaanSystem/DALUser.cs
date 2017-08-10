@@ -23,7 +23,7 @@ namespace UdlaanSystem
         public void GetLendedUserData()
         {
             //Mark er en hest der spiller lol!!
-            Debug.WriteLine("Hey");
+            Debug.WriteLine("Heysaa");
         }
     }
 }
