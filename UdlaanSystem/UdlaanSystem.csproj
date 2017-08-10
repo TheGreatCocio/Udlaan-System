@@ -59,6 +59,7 @@
     <Compile Include="LendController.cs" />
     <Compile Include="LendedObject.cs" />
     <Compile Include="LendObject.cs" />
+    <Compile Include="ListViewObject.cs" />
     <Compile Include="SmsController.cs" />
     <Compile Include="UIInputItem.xaml.cs">
       <DependentUpon>UIInputItem.xaml</DependentUpon>

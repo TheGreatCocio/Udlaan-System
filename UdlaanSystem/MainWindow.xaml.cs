@@ -52,14 +52,19 @@ namespace UdlaanSystem
                     {
                         string userMifare = LendController.Instance.CheckIfLended(item.itemMifare);
 
-                        if (userMifare == "")
+                        LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
+
+                        foreach (LendObject lendObject in lendedObject.LendObjects)
                         {
-                            PrintItemToList(item);
+                            if (lendObject.itemObject.itemMifare == item.itemMifare)
+                            {
+                                PrintItemToList(lendObject);
+                            }
                         }
-                        else
+
+                        if (userMifare != "")
                         {
-                            LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
-                            PrintItemToList(item);
+                            PrintUserData(lendedObject);
                         }
                     }
                     /*ItemObject item = 
@@ -77,10 +82,12 @@ namespace UdlaanSystem
             }
         }
 
-        private void PrintItemToList(ItemObject item)
+        private void PrintItemToList(LendObject lendObject)
         {
-            this.ListViewItems.Items.Add(item);
+            this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate));
         }
+
+        
 
 
         public void PrintUserData(LendedObject lendedObject)
@@ -103,10 +110,12 @@ namespace UdlaanSystem
             LabelIsDisabledResult.Content = lendedObject.UserObject.isDisabled;
             LabelIsDisabledResult.Visibility = Visibility;
 
+
+            this.ListViewLend.Items.Clear();
+
             foreach (LendObject lendObject in lendedObject.LendObjects)
             {
-                this.ListViewLend.Items.Add(lendObject.itemObject);
-                this.ListViewLend.Items.Add(lendObject.returnDate);
+                this.ListViewLend.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate));
             }
 
             

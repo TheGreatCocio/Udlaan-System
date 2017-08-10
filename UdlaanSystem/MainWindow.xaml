@@ -56,7 +56,7 @@
                     <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
                     <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
                     <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding model}" />
-                    <GridViewColumn Header="Afleverings Dato" Width="150"  />
+                    <GridViewColumn Header="Afleverings Dato" Width="150" DisplayMemberBinding="{Binding returnDate}" />
                 </GridView>
             </ListView.View>
         </ListView>
