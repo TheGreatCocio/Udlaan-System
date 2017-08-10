@@ -26,10 +26,16 @@ namespace UdlaanSystem
         public ItemObject CheckIfMifareIsItem(string mifare)
         {
             ItemObject item = DALItem.Instance.GetItemByMifare(mifare);
-            if (item == null)
+
+            if (item == null )
             {
                 LendController.Instance.GetLendedUserData(mifare);
             }
+            else
+            {
+
+            }
+            
             
             return item;
         }

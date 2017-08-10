@@ -23,7 +23,13 @@ namespace UdlaanSystem
             }
         }
 
-        public LendedObject GetLendedUserData (string mifare) {
+        public string CheckIfLended (string itemMifare) {
+
+            string userMifare = DALLend.Instance.GetLendedByItemMifare(itemMifare);  
+
+        }
+
+        public LendedObject GetLendedUserData (string userMifare) {
 
         }
     }
