@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UdlaanSystem
 {
-    class LendObject
+    public class LendObject
     {
         public LendObject(ItemObject itemObject, DateTime lendDate, DateTime returnDate, DateTime? returnedDate)
         {

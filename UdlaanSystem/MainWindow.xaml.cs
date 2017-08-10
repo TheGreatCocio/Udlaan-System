@@ -37,15 +37,14 @@ namespace UdlaanSystem
 
                     if (item == null)
                     {
-                        LendedObject user = LendController.Instance.GetUserData(TextBoxMain.Text);
-                        LendedObject lendedObject = LendController.Instance.GetLendedUserData(TextBoxMain.Text);
+                        LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text);
                         if (lendedObject.UserObject == null)
                         {
                             MessageBox.Show("Findes Ikke I Databasen!!");
                         }
                         else
                         {
-                            //PrintUserData(lendedObject);
+                            PrintUserData(lendedObject);
                         }
 
                     }
@@ -59,7 +58,7 @@ namespace UdlaanSystem
                         }
                         else
                         {
-                            LendedObject lendedObject = LendController.Instance.GetLendedUserData(userMifare);
+                            LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
                             PrintItemToList(item);
                         }
                     }
