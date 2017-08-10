@@ -34,7 +34,22 @@ namespace UdlaanSystem
             {
                 if (e.Key == Key.Return) // checks if its the enter button that has been pressed
                 {
-                    ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
+                    ItemObject item = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
+
+                    if (item == null)
+                    {
+                        LendedObject user = LendController.Instance.GetLendedUserData(TextBoxMain.Text);
+
+                    }
+                    else
+                    {
+                        string userMifare = LendController.Instance.CheckIfLended(itemMifare);
+
+                        if (userMifare == "")
+                        {
+
+                        }
+                    }
                     /*ItemObject item = 
 
                         List<ItemObject> items = new List<ItemObject>();
