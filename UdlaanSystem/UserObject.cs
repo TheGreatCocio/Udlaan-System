@@ -8,7 +8,7 @@ namespace UdlaanSystem
 {
     class UserObject
     {
-        public UserObject(string fName, string lName, string zbcName, string userMifare, int phoneNumber, bool isTeacher, bool hasPC, bool isDisabled)
+        public UserObject(string fName, string lName, string zbcName, string userMifare, int phoneNumber, bool isTeacher, bool? hasPC, bool isDisabled)
         {
             fName = this.fName;
             lName = this.lName;
@@ -27,7 +27,7 @@ namespace UdlaanSystem
         public string userMifare { get; set; }
         public int phoneNumber { get; set; }
         public bool isTeacher { get; set; }
-        public bool hasPC { get; set; }
+        public bool? hasPC { get; set; }
         public bool isDisabled { get; set; }
     }
 }

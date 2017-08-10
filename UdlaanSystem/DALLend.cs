@@ -50,6 +50,56 @@ namespace UdlaanSystem
         {
             
         }
+
+        public List<LendObject> GetLendedByUserMifare(string userMifare)
+        {
+            List<LendObject> lendObjectList = new List<LendObject>();
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT lend.lend_itemmifare, lend.lend_usermifare, lend.lend_lenddate, lend.lend_returndate, types.type_name, models.model_name, manufacturers.manufacturer_name, items.item_id, items.item_serialnumber FROM lend JOIN items ON lend.lend_itemmifare = items.item_mifare JOIN types ON items.item_type = types.type_id JOIN manufacturers ON items.item_manufacturer = manufacturers.manufacturer_id JOIN models ON items.item_model = models.model_id WHERE lend.lend_usermifare = '" + userMifare + "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    lendObjectList.Add(new LendObject(new ItemObject(rdr.GetString(0), rdr.GetString(4), rdr.GetString(6), rdr.GetString(5), rdr.GetInt16(7), rdr.GetString(8)), rdr.GetDateTime(2), rdr.GetDateTime(3), null));
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+            return lendObjectList;
+        }
+
+        public List<LendObject> GetArchiveByUserMifare(string userMifare)
+        {
+            List<LendObject> lendObjectList = new List<LendObject>();
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT archive.archive_itemmifare, archive.archive_usermifare, archive.archive_lenddate, archive.archive_returndate, types.type_name, models.model_name, manufacturers.manufacturer_name, items.item_id, items.item_serialnumber, archive.archive_returneddate FROM archive JOIN items ON archive.archive_itemmifare = items.item_mifare JOIN types ON items.item_type = types.type_id JOIN manufacturers ON items.item_manufacturer = manufacturers.manufacturer_id JOIN models ON items.item_model = models.model_id WHERE archive.archive_usermifare = '" + userMifare + "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    lendObjectList.Add(new LendObject(new ItemObject(rdr.GetString(0), rdr.GetString(4), rdr.GetString(6), rdr.GetString(5), rdr.GetInt16(7), rdr.GetString(8)), rdr.GetDateTime(2), rdr.GetDateTime(3), rdr.GetDateTime(9)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+            return lendObjectList;
+        }
     }
 
 }
