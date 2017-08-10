@@ -26,7 +26,6 @@ namespace UdlaanSystem
 
             
         }
-        
 
         private void onMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {
@@ -38,16 +37,29 @@ namespace UdlaanSystem
 
                     if (item == null)
                     {
-                        LendedObject user = LendController.Instance.GetLendedUserData(TextBoxMain.Text);
+                        LendedObject lendedObject = LendController.Instance.GetLendedUserData(TextBoxMain.Text);
+                        if (lendedObject.UserObject == null)
+                        {
+                            MessageBox.Show("Findes Ikke I Databasen!!");
+                        }
+                        else
+                        {
+                            //PrintUserData(lendedObject);
+                        }
 
                     }
                     else
                     {
-                        string userMifare = LendController.Instance.CheckIfLended(itemMifare);
+                        string userMifare = LendController.Instance.CheckIfLended(item.itemMifare);
 
                         if (userMifare == "")
                         {
-
+                            PrintItemToList(item);
+                        }
+                        else
+                        {
+                            LendedObject lendedObject = LendController.Instance.GetLendedUserData(userMifare);
+                            PrintItemToList(item);
                         }
                     }
                     /*ItemObject item = 
@@ -63,6 +75,11 @@ namespace UdlaanSystem
                         */
                 }
             }
+        }
+
+        private void PrintItemToList(ItemObject item)
+        {
+            this.ListViewItems.Items.Add(item);
         }
 
 

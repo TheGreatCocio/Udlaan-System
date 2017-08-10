@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UdlaanSystem
 {
-    class ItemObject
+    public class ItemObject
     {
         public ItemObject(string itemMifare, string type, string manufacturer, string model, int ID , string serialNumber)
         {
