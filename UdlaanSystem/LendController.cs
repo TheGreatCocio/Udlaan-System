@@ -31,6 +31,7 @@ namespace UdlaanSystem
 
         public LendedObject GetLendedUserData (string userMifare) {
 
+            return null;
         }
     }
 }
