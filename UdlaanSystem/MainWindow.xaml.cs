@@ -27,6 +27,9 @@ namespace UdlaanSystem
             
         }
 
+        private List<LendObject> scannedItems = new List<LendObject>();
+        private UserObject scannedUser = null;
+
         private void onMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {
             if (TextBoxMain.IsFocused) // checks if the maintextbox is focused
@@ -44,6 +47,7 @@ namespace UdlaanSystem
                         }
                         else
                         {
+                            scannedUser = lendedObject.UserObject;
                             PrintUserData(lendedObject);
                         }
 
@@ -52,20 +56,27 @@ namespace UdlaanSystem
                     {
                         string userMifare = LendController.Instance.CheckIfLended(item.itemMifare);
 
-                        LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
-
-                        foreach (LendObject lendObject in lendedObject.LendObjects)
-                        {
-                            if (lendObject.itemObject.itemMifare == item.itemMifare)
-                            {
-                                PrintItemToList(lendObject);
-                            }
-                        }
-
                         if (userMifare != "")
                         {
+                            LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
+
+                            foreach (LendObject lendObject in lendedObject.LendObjects)
+                            {
+                                if (lendObject.itemObject.itemMifare == item.itemMifare)
+                                {
+                                    PrintItemToList(lendObject);
+                                }
+                            }
+
                             PrintUserData(lendedObject);
                         }
+                        else
+                        {
+                            LendObject lendObject = new LendObject(item, DateTime.Now, DateTime.Now.AddDays(1), null);
+                            PrintItemToList(lendObject);
+                        }
+
+                        
                     }
                     /*ItemObject item = 
 
@@ -84,6 +95,7 @@ namespace UdlaanSystem
 
         private void PrintItemToList(LendObject lendObject)
         {
+            scannedItems.Add(lendObject);
             this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate));
         }
 
@@ -125,6 +137,18 @@ namespace UdlaanSystem
         {
             UIInputItem inputItembox = new UIInputItem();
             inputItembox.ShowDialog();
+        }
+
+        private void ButtonUdlaan_Click(object sender, RoutedEventArgs e)
+        {
+            if (LendController.Instance.GenLendedObject(scannedUser, scannedItems) == false)
+            {
+                MessageBox.Show("FAILED TO INSERT LENDS TO DATABASE");
+            }
+            else
+            {
+                MessageBox.Show("SUCCESS");
+            }
         }
 
         /*private string ButtonUser_Click(object sender, RoutedEventArgs e)
