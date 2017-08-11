@@ -122,6 +122,42 @@ namespace UdlaanSystem
             }
             return lendObjectList;
         }
+
+        public bool AddLendedObjectToLend(LendedObject lendedObjectToAddToDB)
+        {
+            bool success = false;
+            foreach (LendObject lendObject in lendedObjectToAddToDB.LendObjects)
+            {
+                try
+                {
+                    ConnectMySql();
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO lend (lend_itemmifare, lend_usermifare, lend_lenddate, lend_returndate) VALUES ('" + lendObject.itemObject.itemMifare + "', '" + lendedObjectToAddToDB.UserObject.userMifare + "', '" + FormatDateBackEnd(lendObject.lendDate.ToString()) + "', '" + FormatDateBackEnd(lendObject.returnDate.ToString()) + "')", MysqlConnection);
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                    
+                    }
+                    success = true;
+                }
+                catch (Exception ex)
+                {
+                    MysqlConnection.Close();
+                    Debug.WriteLine("############################FAILED: " + ex);
+                    success = false;
+                }
+                finally
+                {
+                    MysqlConnection.Close();
+                }
+            }
+            return success;
+        }
+
+        private string FormatDateBackEnd(string date)
+        {
+            DateTime temp = Convert.ToDateTime(date);
+            return temp.ToString("yyyy-MM-dd HH:mm:ss");
+        }
     }
 
 }

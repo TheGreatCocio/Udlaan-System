@@ -37,5 +37,11 @@ namespace UdlaanSystem
             LendedObject lendedObject = new LendedObject(userObject, lendObjectList);
             return lendedObject;
         }
+
+        public bool GenLendedObject(UserObject scannedUser, List<LendObject> scannedItems)
+        {
+            LendedObject lendedObjectToAddToDB = new LendedObject(scannedUser, scannedItems);
+            return DALLend.Instance.AddLendedObjectToLend(lendedObjectToAddToDB);
+        }
     }
 }
