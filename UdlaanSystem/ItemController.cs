@@ -36,5 +36,15 @@ namespace UdlaanSystem
         {
             return DALItem.Instance.GetItemTypes();
         }
+
+        public List<string[]> GetItemManufacturers(int typeID)
+        {
+            return DALItem.Instance.getItemManufacturers(typeID);
+        }
+
+        public List<string[]> GetItemModels(int manufacturerID, int typeID)
+        {
+            return DALItem.Instance.getItemModels(manufacturerID, typeID);
+        }
     }
 }

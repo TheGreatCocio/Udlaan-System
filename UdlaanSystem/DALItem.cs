@@ -103,5 +103,67 @@ namespace UdlaanSystem
 
             return types;
         }
+
+        public List<string[]> getItemManufacturers(int typeID)
+        {
+            List<string[]> manufacturers = new List<string[]>();
+
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM manufacturers WHERE manufacturer_selected_type = '" + typeID + "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    string[] manufacturer = new string[2];
+                    manufacturer[0] = rdr.GetInt32(0).ToString();
+                    manufacturer[1] = rdr.GetString(1);
+                    manufacturers.Add(manufacturer);
+                    Debug.WriteLine("############################ Success!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return manufacturers;
+        }
+
+        public List<string[]> getItemModels(int manufacturerID, int typeID)
+        {
+            List<string[]> models = new List<string[]>();
+
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM models WHERE model_selected_type = '" + typeID + "' AND model_selected_manufacturer = '" + manufacturerID + "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    string[] model = new string[2];
+                    model[0] = rdr.GetInt32(0).ToString();
+                    model[1] = rdr.GetString(1);
+                    models.Add(model);
+                    Debug.WriteLine("############################ Success!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return models;
+        }
     }
 }
