@@ -19,9 +19,16 @@ namespace UdlaanSystem
     /// </summary>
     public partial class UIShowID : Window
     {
-        public UIShowID()
+        public UIShowID(int ID)
         {
             InitializeComponent();
+
+            LabelIDLarge.Content = ID;
+        }
+
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

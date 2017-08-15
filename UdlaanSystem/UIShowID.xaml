@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="ID Nummeret" Height="299.785" Width="460.766">
-    <Grid>
+        Title="ID Nummeret" Height="316.44" Width="473.8">
+    <Grid Margin="0,0,2,0">
         <Label x:Name="LabelIDLarge" Content="Label" HorizontalAlignment="Left" Margin="137,102,0,0" VerticalAlignment="Top" FontSize="72"/>
         <Label Content="Skriv Dette Ind I Bogen!" HorizontalAlignment="Left" Margin="129,47,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="368,239,0,0" VerticalAlignment="Top" Width="75" Background="#FF575757" Foreground="White">
+        <Button x:Name="btnOK" Content="OK" HorizontalAlignment="Left" Margin="368,239,0,0" VerticalAlignment="Top" Width="75" Background="#FF575757" Foreground="White" Click="btnOK_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="4" Color="#FF7A7A7A"/>
             </Button.Effect>

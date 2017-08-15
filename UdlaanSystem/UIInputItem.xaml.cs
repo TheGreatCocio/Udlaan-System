@@ -140,8 +140,15 @@ namespace UdlaanSystem
             if (ComboBoxTypes.SelectedItem.Equals("Computer"))
             {
                 itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text);
-                this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text));
-                itemsToInsert.Add(itemToAdd);
+                if (!itemsToInsert.Contains(itemToAdd))
+                {
+                    this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text));
+                    itemsToInsert.Add(itemToAdd);
+                }
+                else
+                {
+                    MessageBox.Show("Dette Mifare Er Allerede I Brug!");
+                }
             }
             else
             {
@@ -152,21 +159,59 @@ namespace UdlaanSystem
                         listOfIds.Add(item.id);
                     }
                 }
-                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedTypeID, selectedManufacturerID, selectedModelID, listOfIds) , textBoxSerialNumber.Text);
-                this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(),itemToAdd.id, ""));
-                itemsToInsert.Add(itemToAdd);
+                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedTypeID, selectedManufacturerID, selectedModelID, listOfIds), textBoxSerialNumber.Text);
+                if (!itemsToInsert.Contains(itemToAdd))
+                {
+                    UIShowID bigIdBox = new UIShowID(itemToAdd.id);
+                    bigIdBox.ShowDialog();
+                    this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), itemToAdd.id, ""));
+                    itemsToInsert.Add(itemToAdd);
+                }
+                else
+                {
+                    MessageBox.Show("Dette Mifare Er Allerede I Brug!");
+                }
+
             }
+        
+
+            /*else
+            {
+                if (ComboBoxTypes.SelectedItem.Equals("Computer"))
+                {
+                    itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text);
+                    this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text));
+                    itemsToInsert.Add(itemToAdd);
+                }
+                else
+                {
+                    foreach (ItemObject item in itemsToInsert)
+                    {
+                        if (!listOfIds.Contains(item.id) || item.model == ComboBoxModels.SelectedItem.ToString())
+                        {
+                            listOfIds.Add(item.id);
+                        }
+                    }
+                    itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedTypeID, selectedManufacturerID, selectedModelID, listOfIds), textBoxSerialNumber.Text);
+                    UIShowID bigIdBox = new UIShowID(itemToAdd.id);
+                    bigIdBox.ShowDialog();
+                    this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), itemToAdd.id, ""));
+                    itemsToInsert.Add(itemToAdd);
+                }
+            }*/
+            
         }
 
         private void btnAddAllItemsToDB_Click(object sender, RoutedEventArgs e)
         {
             if (ItemController.Instance.InsertItems(itemsToInsert))
             {
-                MessageBox.Show("Success!!");
+                MessageBox.Show("Det Lykkedes!");
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Fuck!!");
+                MessageBox.Show("Der Skete En Fejl, Kontakt Venligst IT-Afdelingen");
             }
         }
     }
