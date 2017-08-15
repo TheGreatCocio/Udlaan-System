@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Windows;
 
 namespace UdlaanSystem
 {
@@ -132,11 +133,8 @@ namespace UdlaanSystem
                 {
                     ConnectMySql();
                     MySqlCommand cmd = new MySqlCommand("INSERT INTO lend (lend_itemmifare, lend_usermifare, lend_lenddate, lend_returndate) VALUES ('" + lendObject.itemObject.itemMifare + "', '" + lendedObjectToAddToDB.UserObject.userMifare + "', '" + FormatDateBackEnd(lendObject.lendDate.ToString()) + "', '" + FormatDateBackEnd(lendObject.returnDate.ToString()) + "')", MysqlConnection);
-                    MySqlDataReader rdr = cmd.ExecuteReader();
-                    while (rdr.Read())
-                    {
-                    
-                    }
+                    cmd.ExecuteNonQuery();
+                    //MySqlDataReader rdr = cmd.ExecuteReader();
                     success = true;
                 }
                 catch (Exception ex)
@@ -153,11 +151,34 @@ namespace UdlaanSystem
             return success;
         }
 
+        public void MoveLendedIntoArchive(List<LendObject> lendObjectsToReturn)
+        {
+            try
+            {
+                ConnectMySql();
+
+                foreach (LendObject lendObjectToReturn in lendObjectsToReturn)
+                {
+                    MySqlCommand cmd = new MySqlCommand("CALL removeLend('" + lendObjectToReturn.itemObject.itemMifare + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')", MysqlConnection);
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("YEAH BISHES");
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("BOOOOOOOOOOOOOOOOOOOOOOOM");
+                throw;
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+        }
+
         private string FormatDateBackEnd(string date)
         {
             DateTime temp = Convert.ToDateTime(date);
             return temp.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
-
 }

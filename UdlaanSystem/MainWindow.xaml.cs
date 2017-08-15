@@ -151,6 +151,11 @@ namespace UdlaanSystem
             }
         }
 
+        private void ButtonAflever_Click(object sender, RoutedEventArgs e)
+        {
+            DALLend.Instance.MoveLendedIntoArchive(scannedItems);
+        }
+
         /*private string ButtonUser_Click(object sender, RoutedEventArgs e)
         {
             UIInputUser inputUserBox = new UIInputUser();
