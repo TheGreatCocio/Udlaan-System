@@ -12,7 +12,7 @@
             <ColumnDefinition Width="524*"/>
         </Grid.ColumnDefinitions>
         <TextBox x:Name="TextBoxMain" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Margin="10,9,0,0" KeyDown="onMyfareScanned"/>
-        <Button x:Name="ButtonUser" Content="Opret/Rediger Bruger" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top" Width="131" />
+        <Button x:Name="ButtonUser" Content="Opret/Rediger Bruger" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top" Width="131" Click="ButtonUser_Click" />
         <Button x:Name="ButtonItem" Content="Tilføj Produkter" HorizontalAlignment="Left" Margin="306,10,0,0" VerticalAlignment="Top" Width="131" Click="ButtonItem_Click"/>
         <ListView x:Name="ListViewItems" HorizontalAlignment="Left" Height="202" Margin="11,320,0,0" VerticalAlignment="Top" Width="947" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <ListView.RenderTransform>
@@ -64,7 +64,7 @@
         <Label Content="Scannede Produkter" HorizontalAlignment="Left" Margin="371,287,0,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2"/>
         <Label Content="Udlån / Arkiv" Grid.Column="1" HorizontalAlignment="Left" Margin="207,29,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="ButtonUdlaan" Content="Udlån" Grid.Column="1" HorizontalAlignment="Left" Margin="436,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonUdlaan_Click"/>
-        <Button x:Name="ButtonAflever" Content="Aflever" Grid.Column="1" HorizontalAlignment="Left" Margin="356,294,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="ButtonAflever" Content="Aflever" Grid.Column="1" HorizontalAlignment="Left" Margin="356,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonAflever_Click"/>
 
     </Grid>
 </Window>
