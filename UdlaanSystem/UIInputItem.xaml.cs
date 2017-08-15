@@ -29,6 +29,10 @@ namespace UdlaanSystem
         List<string[]> models = new List<string[]>();
         int selectedModelID;
 
+        List<ItemObject> itemsToInsert = new List<ItemObject>();
+        List<int> listOfIds = new List<int>();
+        List<string[]> typesOnItemsToInsert = new List<string[]>();
+
 
         public UIInputItem()
         {
@@ -131,7 +135,39 @@ namespace UdlaanSystem
 
         private void BtnAddItem_Click(object sender, RoutedEventArgs e)
         {
-            
+            ItemObject itemToAdd = null;
+
+            if (ComboBoxTypes.SelectedItem.Equals("Computer"))
+            {
+                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text);
+                this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text));
+                itemsToInsert.Add(itemToAdd);
+            }
+            else
+            {
+                foreach (ItemObject item in itemsToInsert)
+                {
+                    if (!listOfIds.Contains(item.id) || item.model == ComboBoxModels.SelectedItem.ToString())
+                    {
+                        listOfIds.Add(item.id);
+                    }
+                }
+                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedTypeID, selectedManufacturerID, selectedModelID, listOfIds) , textBoxSerialNumber.Text);
+                this.ListViewAddItems.Items.Add(itemToAdd);
+                itemsToInsert.Add(itemToAdd);
+            }
+        }
+
+        private void btnAddAllItemsToDB_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemController.Instance.InsertItems(itemsToInsert))
+            {
+                MessageBox.Show("Success!!");
+            }
+            else
+            {
+                MessageBox.Show("Fuck!!");
+            }
         }
     }
 }

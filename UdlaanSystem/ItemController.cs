@@ -46,5 +46,32 @@ namespace UdlaanSystem
         {
             return DALItem.Instance.getItemModels(manufacturerID, typeID);
         }
+
+        public int CalculateNextID (int type, int manufacturer, int model, List<int> listOfIds) 
+        {
+            List<int> retrievedIds = DALItem.Instance.RetrieveIdInformation(type, manufacturer, model);
+
+            int oldID = 0;
+
+            foreach (int ID in retrievedIds)
+            {
+                if (ID > oldID +1)
+                {
+                    if (!listOfIds.Contains(oldID + 1))
+                    {
+                        break;
+                    }    
+                }
+                oldID = ID;
+            }
+                
+            
+            return oldID + 1;
+        }
+
+        public bool InsertItems(List<ItemObject> itemsToBeInsert)
+        {
+            return DALItem.Instance.InsertItemsIntoDB(itemsToBeInsert);
+        }
     }
 }

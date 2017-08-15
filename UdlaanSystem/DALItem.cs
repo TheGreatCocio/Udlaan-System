@@ -165,5 +165,55 @@ namespace UdlaanSystem
 
             return models;
         }
+
+        public List<int> RetrieveIdInformation (int type, int manufacturer, int model)
+        {
+            List<int> id = new List<int>();    
+
+            try
+            {
+                ConnectMySql();
+
+                MySqlCommand cmd = new MySqlCommand("SELECT item_id FROM items WHERE item_type = '" + type + "' AND item_manufacturer = '" + manufacturer + "' AND item_model = '" + model + "' ORDER BY `items`.`item_id` ASC", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    id.Add(rdr.GetInt16(0));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+            return id;
+        }
+
+        public bool InsertItemsIntoDB(List<ItemObject> itemsToInsert) 
+        {
+            try
+            {
+                ConnectMySql();
+                foreach (ItemObject item in itemsToInsert)
+                {
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO items (item_mifare, item_type, item_manufacturer, item_model, item_id, item_serialnumber) VALUES ('" + item.itemMifare + "', '" + Convert.ToInt16(item.type) + "', '" + Convert.ToInt16(item.manufacturer) + "', '" + Convert.ToInt16(item.model) + "', '" + item.id + "', '" + item.serialNumber + "')", MysqlConnection);
+                    Debug.WriteLine(cmd.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("############################FAILED: " + ex);
+                return false;
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+            return true;
+        }
     }
 }
