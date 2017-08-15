@@ -50,23 +50,15 @@ namespace UdlaanSystem
         public int CalculateNextID (int type, int manufacturer, int model, List<int> listOfIds) 
         {
             List<int> retrievedIds = DALItem.Instance.RetrieveIdInformation(type, manufacturer, model);
-
-            int oldID = 0;
-
-            foreach (int ID in retrievedIds)
-            {
-                if (ID > oldID +1)
+            int newID = 0;
+            while (true){
+                newID++;
+                if (!retrievedIds.Contains(newID) && !listOfIds.Contains(newID))
                 {
-                    if (!listOfIds.Contains(oldID + 1))
-                    {
-                        break;
-                    }    
+                    break;
                 }
-                oldID = ID;
             }
-                
-            
-            return oldID + 1;
+            return newID;
         }
 
         public bool InsertItems(List<ItemObject> itemsToBeInsert)

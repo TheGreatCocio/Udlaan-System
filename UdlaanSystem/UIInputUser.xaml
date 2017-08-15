@@ -10,14 +10,16 @@
         <TextBox x:Name="textBoxZbcName" HorizontalAlignment="Left" Height="23" Margin="27,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxZbcName_TextChanged"/>
         <TextBox x:Name="textBoxUserMifare" HorizontalAlignment="Left" Height="23" Margin="27,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxUserMifare_TextChanged"/>
         <TextBox x:Name="textBoxPhoneNumber" HorizontalAlignment="Left" Height="23" Margin="27,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxPhoneNumber_TextChanged"/>
-        <Label x:Name="LabelFName" Content="Fornavn" HorizontalAlignment="Left" Margin="27,176,0,0" VerticalAlignment="Top" Width="56"/>
-        <Label x:Name="LabelLName" Content="Efternavn" HorizontalAlignment="Left" Margin="27,207,0,0" VerticalAlignment="Top" Width="62"/>
-        <Button x:Name="ButtonCreateOrUpdate" Content="Button" HorizontalAlignment="Left" Margin="191,233,0,0" VerticalAlignment="Top" Width="84" Click="ButtonCreateOrUpdate_Click" IsEnabled="False"/>
+        <Label x:Name="LabelFName" Content="Fornavn:" HorizontalAlignment="Left" Margin="27,169,0,0" VerticalAlignment="Top" Width="56"/>
+        <Label x:Name="LabelLName" Content="Efternavn:" HorizontalAlignment="Left" Margin="27,200,0,0" VerticalAlignment="Top" Width="62"/>
+        <Button x:Name="ButtonCreateOrUpdate" Content="Tilføj Bruger" HorizontalAlignment="Left" Margin="189,231,0,0" VerticalAlignment="Top" Width="84" Click="ButtonCreateOrUpdate_Click" IsEnabled="False"/>
         <Label x:Name="LabelSearch" Content="Søg(Zbc Navn)" HorizontalAlignment="Left" Margin="23,5,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelUserMifare" Content="Mifare" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelPhoneNumber" Content="Mobil Nr." HorizontalAlignment="Left" Margin="23,113,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LabelFNameResult" Content="" HorizontalAlignment="Left" Margin="88,176,0,0" VerticalAlignment="Top" Width="178"/>
-        <Label x:Name="LabelLNameResult" Content="" HorizontalAlignment="Left" Margin="94,207,0,0" VerticalAlignment="Top" Width="172"/>
+        <Label x:Name="LabelFNameResult" Content="" HorizontalAlignment="Left" Margin="83,169,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="LabelLNameResult" Content="" HorizontalAlignment="Left" Margin="91,200,0,0" VerticalAlignment="Top" Width="172"/>
+        <CheckBox x:Name="checkBoxIsTeacher" Content="" HorizontalAlignment="Left" Margin="91,237,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelIsTeacher" Content="Is Teacher:" HorizontalAlignment="Left" Margin="27,231,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
