@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.DirectoryServices;
+using System.DirectoryServices.ActiveDirectory;
+using System.DirectoryServices.AccountManagement;
 
 namespace UdlaanSystem
 {
@@ -62,7 +65,6 @@ namespace UdlaanSystem
             }
             catch (Exception ex)
             {
-                MysqlConnection.Close();
                 Debug.WriteLine("############################FAILED: " + ex);
             }
             finally
@@ -71,6 +73,48 @@ namespace UdlaanSystem
             }
 
             return userObject;
+        }
+
+        public string[] GetUserByZbcNameAD(string zbcName)
+        {
+            string[] temp = new string[2];
+            try
+            {
+                DirectoryContext con = new DirectoryContext(DirectoryContextType.Domain, "efif.dk", "zbc-maskinnavn", "Zorro.b.c");
+                DomainController dc = DomainController.FindOne(con);
+                DirectorySearcher sercher = dc.GetDirectorySearcher();
+                sercher.Filter = "(&(objectCategory=person)(CN=" + zbcName + "))";
+                SearchResult findUser = sercher.FindOne();
+                DirectoryEntry user = findUser.GetDirectoryEntry();
+                temp[0] = (String)user.Properties["givenName"].Value;
+                temp[1] = (String)user.Properties["sn"].Value;
+            }
+            catch (Exception)
+            {
+                temp[0] = "";
+                temp[1] = "";
+                return temp;
+                //System.Diagnostics.Debug.WriteLine(ex);
+            }
+            return temp;
+        }
+
+        public void AddUserInDB(UserObject userObject)
+        {
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO users (user_mifare, user_fname, user_lname, user_zbcname, user_phonenumber, user_isdisabled, user_isteacher) VALUES ('" + userObject.userMifare + "', '" + userObject.fName + "', '" + userObject.lName + "', '" + userObject.zbcName + "', '" + userObject.phoneNumber + "', '" + userObject.isDisabled + "', '" + userObject.isTeacher + "')", MysqlConnection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("############################FAILED TO ADD USER IN DB: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
         }
     }
 }

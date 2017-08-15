@@ -27,5 +27,16 @@ namespace UdlaanSystem
         {
             return DALUser.Instance.GetUserByMifare(userMifare);
         }
+
+        public string[] CheckIfUserExist(string zbcName)
+        {
+            return DALUser.Instance.GetUserByZbcNameAD(zbcName);
+        }
+
+        public void CreateUserObjectToAddInDB(string userMifare, string fName, string lName, string zbcName, int phoneNumber, bool isDisabled, bool isTeacher)
+        {
+            UserObject userObject = new UserObject(fName, lName, zbcName, userMifare, phoneNumber, isDisabled, false, isTeacher);
+            DALUser.Instance.AddUserInDB(userObject);
+        }
     }
 }

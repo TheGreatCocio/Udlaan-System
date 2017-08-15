@@ -139,6 +139,12 @@ namespace UdlaanSystem
             inputItembox.ShowDialog();
         }
 
+        private void ButtonUser_Click(object sender, RoutedEventArgs e)
+        {
+            UIInputUser inputUserbox = new UIInputUser();
+            inputUserbox.ShowDialog();
+        }
+
         private void ButtonUdlaan_Click(object sender, RoutedEventArgs e)
         {
             if (LendController.Instance.GenLendedObject(scannedUser, scannedItems) == false)
