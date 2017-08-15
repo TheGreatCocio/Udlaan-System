@@ -12,7 +12,7 @@
         <TextBox x:Name="textBoxPhoneNumber" HorizontalAlignment="Left" Height="23" Margin="27,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxPhoneNumber_TextChanged"/>
         <Label x:Name="LabelFName" Content="Fornavn:" HorizontalAlignment="Left" Margin="27,169,0,0" VerticalAlignment="Top" Width="56"/>
         <Label x:Name="LabelLName" Content="Efternavn:" HorizontalAlignment="Left" Margin="27,200,0,0" VerticalAlignment="Top" Width="62"/>
-        <Button x:Name="ButtonCreateOrUpdate" Content="Tilføj Bruger" HorizontalAlignment="Left" Margin="189,231,0,0" VerticalAlignment="Top" Width="84" Click="ButtonCreateOrUpdate_Click" IsEnabled="False"/>
+        <Button x:Name="ButtonCreateOrUpdate" Content="Tilføj Bruger" HorizontalAlignment="Left" Margin="173,231,0,0" VerticalAlignment="Top" Width="100" Click="ButtonCreateOrUpdate_Click" IsEnabled="False"/>
         <Label x:Name="LabelSearch" Content="Søg(Zbc Navn)" HorizontalAlignment="Left" Margin="23,5,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelUserMifare" Content="Mifare" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelPhoneNumber" Content="Mobil Nr." HorizontalAlignment="Left" Margin="23,113,0,0" VerticalAlignment="Top"/>

@@ -27,18 +27,41 @@ namespace UdlaanSystem
 
         public void TextBoxZbcName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string[] userInfoFromAD = UserController.Instance.CheckIfUserExist(textBoxZbcName.Text);
-            LabelFNameResult.Content = userInfoFromAD[0];
-            LabelLNameResult.Content = userInfoFromAD[1];
+            UserObject userObject = null;
+            userObject = UserController.Instance.CheckIfUserExist(textBoxZbcName.Text);
 
-            if (LabelFNameResult.Content.ToString() == "" || textBoxUserMifare.Text == "" || textBoxPhoneNumber.Text == "")
+            textBoxUserMifare.Text = "";
+            textBoxPhoneNumber.Text = "";
+            LabelFNameResult.Content = "";
+            LabelLNameResult.Content = "";
+            checkBoxIsTeacher.IsChecked = false;
+
+            if (userObject == null)
             {
-                ButtonCreateOrUpdate.IsEnabled = false;
+                ButtonCreateOrUpdate.Content = "Tilføj Bruger";
+                string[] userInfo = UserController.Instance.CheckIfUserExistInAD(textBoxZbcName.Text);
+                LabelFNameResult.Content = userInfo[0];
+                LabelLNameResult.Content = userInfo[1];
+
+                if (LabelFNameResult.Content.ToString() == "" || textBoxUserMifare.Text == "" || textBoxPhoneNumber.Text == "")
+                {
+                    ButtonCreateOrUpdate.IsEnabled = false;
+                }
+                else
+                {
+                    ButtonCreateOrUpdate.IsEnabled = true;
+                }
             }
             else
             {
-                ButtonCreateOrUpdate.IsEnabled = true;
+                ButtonCreateOrUpdate.Content = "Opdater Bruger";
+                textBoxUserMifare.Text = userObject.userMifare;
+                textBoxPhoneNumber.Text = userObject.phoneNumber.ToString();
+                LabelFNameResult.Content = userObject.fName;
+                LabelLNameResult.Content = userObject.lName;
+                checkBoxIsTeacher.IsChecked = userObject.isTeacher;
             }
+            
         }
 
         public void TextBoxUserMifare_TextChanged(object sender, TextChangedEventArgs e)
@@ -67,7 +90,14 @@ namespace UdlaanSystem
 
         private void ButtonCreateOrUpdate_Click(object sender, RoutedEventArgs e)
         {
-            UserController.Instance.CreateUserObjectToAddInDB(textBoxUserMifare.Text, LabelFNameResult.Content.ToString(), LabelLNameResult.Content.ToString(), textBoxZbcName.Text, Convert.ToInt32(textBoxPhoneNumber.Text), false, Convert.ToBoolean(checkBoxIsTeacher.Content));
+            if (ButtonCreateOrUpdate.Content.ToString() == "Tilføj Bruger")
+            {
+                UserController.Instance.CreateUserObjectToAddInDB(textBoxUserMifare.Text, LabelFNameResult.Content.ToString(), LabelLNameResult.Content.ToString(), textBoxZbcName.Text, Convert.ToInt32(textBoxPhoneNumber.Text), false, Convert.ToBoolean(checkBoxIsTeacher.IsChecked));
+            }
+            else
+            {
+                UserController.Instance.CreateUserObjectToUpdateInDB(textBoxUserMifare.Text, LabelFNameResult.Content.ToString(), LabelLNameResult.Content.ToString(), textBoxZbcName.Text, Convert.ToInt32(textBoxPhoneNumber.Text), false, Convert.ToBoolean(checkBoxIsTeacher.IsChecked));
+            }
         }
     }
 }

@@ -99,6 +99,30 @@ namespace UdlaanSystem
             return temp;
         }
 
+        public UserObject GetUserByZbcName(string zbcName)
+        {
+            UserObject userObject = null;
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT user_mifare, user_fname, user_lname, user_zbcname, user_phonenumber, user_isdisabled, user_isteacher FROM users WHERE user_zbcname = '" + zbcName + "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    userObject = new UserObject(rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(0), rdr.GetInt32(4), Convert.ToBoolean(rdr.GetInt16(6)), false, Convert.ToBoolean(rdr.GetInt16(5)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+            return userObject;
+        }
+
         public void AddUserInDB(UserObject userObject)
         {
             try
@@ -110,6 +134,24 @@ namespace UdlaanSystem
             catch (Exception ex)
             {
                 Debug.WriteLine("############################FAILED TO ADD USER IN DB: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+        }
+
+        public void UpdateUserInDB(UserObject userObject)
+        {
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("UPDATE users SET user_mifare = '" + userObject.userMifare + "', user_fname = '" + userObject.fName + "', user_lname = '" + userObject.lName + "', user_zbcname = '" + userObject.zbcName + "', user_phonenumber = '" + userObject.phoneNumber + "', user_isdisabled = " + userObject.isDisabled + ", user_isteacher = " + userObject.isTeacher + " WHERE user_zbcname = '" + userObject.zbcName + "'", MysqlConnection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("############################FAILED TO UPDATE USER IN DB: " + ex);
             }
             finally
             {
