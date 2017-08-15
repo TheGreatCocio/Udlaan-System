@@ -51,22 +51,17 @@ namespace UdlaanSystem
         {
             List<int> retrievedIds = DALItem.Instance.RetrieveIdInformation(type, manufacturer, model);
 
-            int oldID = 0;
+            int newID = 0;
 
-            foreach (int ID in retrievedIds)
+            while (true)
             {
-                if (ID > oldID +1)
+                newID++;
+                if (!retrievedIds.Contains(newID) && !listOfIds.Contains(newID))
                 {
-                    if (!listOfIds.Contains(oldID + 1))
-                    {
-                        break;
-                    }    
+                    break;
                 }
-                oldID = ID;
             }
-                
-            
-            return oldID + 1;
+            return newID;
         }
 
         public bool InsertItems(List<ItemObject> itemsToBeInsert)

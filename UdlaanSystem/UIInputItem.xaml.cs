@@ -153,7 +153,7 @@ namespace UdlaanSystem
                     }
                 }
                 itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedTypeID, selectedManufacturerID, selectedModelID, listOfIds) , textBoxSerialNumber.Text);
-                this.ListViewAddItems.Items.Add(itemToAdd);
+                this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(),itemToAdd.id, ""));
                 itemsToInsert.Add(itemToAdd);
             }
         }
