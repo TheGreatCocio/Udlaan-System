@@ -72,6 +72,9 @@
     <Compile Include="UIShowID.xaml.cs">
       <DependentUpon>UIShowID.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UISmsInput.xaml.cs">
+      <DependentUpon>UISmsInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UIStat.xaml.cs">
       <DependentUpon>UIStat.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UIShowID.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UISmsInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
