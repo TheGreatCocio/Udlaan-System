@@ -162,6 +162,11 @@ namespace UdlaanSystem
             DALLend.Instance.MoveLendedIntoArchive(scannedItems);
         }
 
+        private void ButtonStat_Click(object sender, RoutedEventArgs e)
+        {
+            bool test = SmsController.Instance.GenerateVerificationSms(30621451);
+        }
+
         /*private string ButtonUser_Click(object sender, RoutedEventArgs e)
         {
             UIInputUser inputUserBox = new UIInputUser();
