@@ -151,7 +151,7 @@ namespace UdlaanSystem
             return success;
         }
 
-        public void MoveLendedIntoArchive(List<LendObject> lendObjectsToReturn)
+        public bool MoveLendedIntoArchive(List<LendObject> lendObjectsToReturn)
         {
             try
             {
@@ -162,11 +162,12 @@ namespace UdlaanSystem
                     MySqlCommand cmd = new MySqlCommand("CALL removeLend('" + lendObjectToReturn.itemObject.itemMifare + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')", MysqlConnection);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("YEAH BISHES");
+                return true;
             }
             catch (Exception)
             {
                 Debug.WriteLine("BOOOOOOOOOOOOOOOOOOOOOOOM");
+                return false;
                 throw;
             }
             finally

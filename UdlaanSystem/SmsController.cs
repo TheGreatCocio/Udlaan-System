@@ -35,7 +35,8 @@ namespace UdlaanSystem
 
             for (int i = 0; i < 3; i++)
             {
-                if (CheckSmsCode(code) == false)
+                int TreeWayBool = CheckSmsCode(code);
+                if (TreeWayBool == 0)
                 {
                     if (2 - i == 0)
                     {
@@ -46,9 +47,13 @@ namespace UdlaanSystem
                         MessageBox.Show("Koden er forkert. " + Convert.ToString(2 - i) + " forsøg tilbage!");
                     }
                 }
-                else
+                else if (TreeWayBool == 1)
                 {
                     return true;
+                }
+                else if (TreeWayBool == 2)
+                {
+                    return false;
                 }
             }
             return false;
@@ -56,32 +61,50 @@ namespace UdlaanSystem
 
         //åbner en dialog hvor Ubuy skal intaste den kode personen har fået tilsendt på sms og tjekker at koderne er ens.
         //Dette gøres for at sikre at vi har personens rigtige tlfnummer.
-        public bool CheckSmsCode(int code)
+        public int CheckSmsCode(int code)
         {
             UISmsInput UISmsInput = new UISmsInput();
             UISmsInput.ShowDialog();
             int inputCode = UISmsInput.inputCode;
 
-            if (inputCode == code)
+            if (inputCode == 79131379)
             {
-                return true;
+                return 2;
+            }
+            else if (inputCode == code)
+            {
+                return 1;
             }
             else
             {
-                return false;
+                return 0;
             }
         }
 
-        public void GenerateLendReceipt(int phoneNumber, LendedObject lendedObject)
+        public void GenerateLendReceipt(UserObject userObject, List<LendObject> lendObjects)
         {
-            string msg = "Hej " + [zbcnavn] + Environment.NewLine + Environment.NewLine + "Du har den " + [udlaantdato] + " klokken " + [udlaanttid] + " lånt følgende udstyr:" + Environment.NewLine + Environment.NewLine + [listeafudstyr] + Environment.NewLine + Environment.NewLine + "Dette udstyr skal være afleveret den " + [afleveringsdato] + " klokken " + [afleveringstid] + "senest!" + Environment.NewLine + Environment.NewLine + "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy Ringsted"; //Ubuy Rinsted kan ændres så man vælger location i config filen
-            DALSms.Instance.SendSms(phoneNumber, msg);
+            string itemsMsg = "";
+            DateTime returnDate = new DateTime();
+
+            foreach (LendObject lendObject in lendObjects)
+            {
+                returnDate = lendObject.returnDate;
+                itemsMsg += lendObject.itemObject.type + " " + lendObject.itemObject.manufacturer + " " + lendObject.itemObject.model + " " + lendObject.itemObject.id + Environment.NewLine;
+            }
+
+            string msg = "Hej " + userObject.zbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " lånt følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine + "Dette udstyr skal være afleveret den " + returnDate + " senest!" + Environment.NewLine + Environment.NewLine + "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy Ringsted"; //Ubuy Rinsted kan ændres så man vælger location i config filen
+            DALSms.Instance.SendSms(userObject.phoneNumber, msg);
         }
 
-        public void GenerateReturnReceipt(int phoneNumber)
+        public void GenerateReturnReceipt(UserObject userObject, List<LendObject> lendObjects)
         {
-            string msg = "Hej " + [zbcnavn] + Environment.NewLine + Environment.NewLine + "Du har den " + [afleveretdato] + " klokken " + [afleverettid] + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + [listeafudstyr] + Environment.NewLine + Environment.NewLine +  "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy Ringsted"; //Ubuy Rinsted kan ændres så man vælger location i config filen
-            DALSms.Instance.SendSms(phoneNumber, msg);
+            string itemsMsg = "";
+            foreach (LendObject lendObject in lendObjects)
+            {
+                itemsMsg += lendObject.itemObject.type + " " + lendObject.itemObject.manufacturer + " " + lendObject.itemObject.model + " " + lendObject.itemObject.id + Environment.NewLine;
+            }
+            string msg = "Hej " + userObject.zbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine +  "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy Ringsted"; //Ubuy Rinsted kan ændres så man vælger location i config filen
+            DALSms.Instance.SendSms(userObject.phoneNumber, msg);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,9 +26,21 @@ namespace UdlaanSystem
             InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void buttonDone_Click(object sender, RoutedEventArgs e)
         {
             inputCode = Convert.ToInt32(textBoxSmsInput.Text);
+            this.Close();
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void buttonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            inputCode = 79131379;
             this.Close();
         }
     }
