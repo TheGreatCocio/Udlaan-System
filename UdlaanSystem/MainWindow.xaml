@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:System="clr-namespaceTongue Tiedystem;assembly=mscorlib"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
         Title="MainWindow" Height="560.505" Width="977.277" ResizeMode="NoResize" >
@@ -51,6 +53,20 @@
             <Label Content="Person Information" Canvas.Left="116" FontSize="16"/>
         </Canvas>
         <ListView x:Name="ListViewLend" HorizontalAlignment="Left" Height="218" Margin="13,64,0,0" VerticalAlignment="Top" Width="498" Grid.Column="1">
+            <ListView.ItemContainerStyle>
+            <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding isOverdue}" Value="true">
+                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding isOverdue}" Value="false">
+                            <Setter Property="Background" Value="Green"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
@@ -65,6 +81,7 @@
         <Label Content="Udlån / Arkiv" Grid.Column="1" HorizontalAlignment="Left" Margin="207,29,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="ButtonUdlaan" Content="Udlån" Grid.Column="1" HorizontalAlignment="Left" Margin="436,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonUdlaan_Click"/>
         <Button x:Name="ButtonAflever" Content="Aflever" Grid.Column="1" HorizontalAlignment="Left" Margin="356,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonAflever_Click"/>
+        <TextBlock x:Name="date" Grid.Column="1" HorizontalAlignment="Left" Margin="42,38,0,0" TextWrapping="Wrap" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat=dd/MM/yyyy}" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

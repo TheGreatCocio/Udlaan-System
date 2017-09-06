@@ -96,7 +96,7 @@ namespace UdlaanSystem
         private void PrintItemToList(LendObject lendObject)
         {
             scannedItems.Add(lendObject);
-            this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate));
+            this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
         }
 
         
@@ -127,10 +127,18 @@ namespace UdlaanSystem
 
             foreach (LendObject lendObject in lendedObject.LendObjects)
             {
-                this.ListViewLend.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate));
-            }
+                bool? isOverdue = null;
 
-            
+                if (lendObject.returnDate <= DateTime.Now && lendObject.returnedDate == null)
+                {
+                    isOverdue = true;
+                }
+                else if (lendObject.returnDate > DateTime.Now && lendObject.returnedDate == null)
+                {
+                    isOverdue = false;
+                }
+                this.ListViewLend.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, isOverdue));
+            }
         }
 
         private void ButtonItem_Click(object sender, RoutedEventArgs e)

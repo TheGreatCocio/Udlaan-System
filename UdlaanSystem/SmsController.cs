@@ -72,7 +72,7 @@ namespace UdlaanSystem
             }
         }
 
-        public void GenerateLendReceipt(int phoneNumber, LendedObject lendedObject)
+        /*public void GenerateLendReceipt(int phoneNumber, LendedObject lendedObject)
         {
             string msg = "Hej " + [zbcnavn] + Environment.NewLine + Environment.NewLine + "Du har den " + [udlaantdato] + " klokken " + [udlaanttid] + " lånt følgende udstyr:" + Environment.NewLine + Environment.NewLine + [listeafudstyr] + Environment.NewLine + Environment.NewLine + "Dette udstyr skal være afleveret den " + [afleveringsdato] + " klokken " + [afleveringstid] + "senest!" + Environment.NewLine + Environment.NewLine + "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy Ringsted"; //Ubuy Rinsted kan ændres så man vælger location i config filen
             DALSms.Instance.SendSms(phoneNumber, msg);
@@ -82,6 +82,6 @@ namespace UdlaanSystem
         {
             string msg = "Hej " + [zbcnavn] + Environment.NewLine + Environment.NewLine + "Du har den " + [afleveretdato] + " klokken " + [afleverettid] + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + [listeafudstyr] + Environment.NewLine + Environment.NewLine +  "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy Ringsted"; //Ubuy Rinsted kan ændres så man vælger location i config filen
             DALSms.Instance.SendSms(phoneNumber, msg);
-        }
+        }*/
     }
 }

@@ -8,7 +8,7 @@ namespace UdlaanSystem
 {
     class ListViewObject
     {
-        public ListViewObject(string itemMifare, string type, string manufacturer, string model, int id, string serialNumber, DateTime lendDate, DateTime returnDate, DateTime? returnedDate)
+        public ListViewObject(string itemMifare, string type, string manufacturer, string model, int id, string serialNumber, DateTime lendDate, DateTime returnDate, DateTime? returnedDate, bool? isOverdue)
         {
             this.itemMifare = itemMifare;
             this.type = type;
@@ -19,7 +19,7 @@ namespace UdlaanSystem
             this.lendDate = lendDate;
             this.returnDate = returnDate;
             this.returnedDate = returnedDate;
-
+            this.isOverdue = isOverdue;
         }
 
         public string itemMifare { get; set; }
@@ -31,5 +31,6 @@ namespace UdlaanSystem
         public DateTime lendDate { get; set; }
         public DateTime returnDate { get; set; }
         public DateTime? returnedDate { get; set; }
+        public bool? isOverdue { get; set; }
     }
 }
