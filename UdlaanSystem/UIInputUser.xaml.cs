@@ -90,14 +90,38 @@ namespace UdlaanSystem
 
         private void ButtonCreateOrUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (ButtonCreateOrUpdate.Content.ToString() == "Tilføj Bruger")
+            if (SmsController.Instance.GenerateVerificationSms(Convert.ToInt32(textBoxPhoneNumber.Text)))
             {
-                UserController.Instance.CreateUserObjectToAddInDB(textBoxUserMifare.Text, LabelFNameResult.Content.ToString(), LabelLNameResult.Content.ToString(), textBoxZbcName.Text, Convert.ToInt32(textBoxPhoneNumber.Text), false, Convert.ToBoolean(checkBoxIsTeacher.IsChecked));
+                if (ButtonCreateOrUpdate.Content.ToString() == "Tilføj Bruger")
+                {
+                    try
+                    {
+                        UserController.Instance.CreateUserObjectToAddInDB(textBoxUserMifare.Text, LabelFNameResult.Content.ToString(), LabelLNameResult.Content.ToString(), textBoxZbcName.Text, Convert.ToInt32(textBoxPhoneNumber.Text), false, Convert.ToBoolean(checkBoxIsTeacher.IsChecked));
+                        MessageBox.Show("Brugeren er nu tilføjet");
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Brugeren blev ikke tilføjet");
+                        throw;
+                    }
+                    
+                }
+                else
+                {
+                    try
+                    {
+                        UserController.Instance.CreateUserObjectToUpdateInDB(textBoxUserMifare.Text, LabelFNameResult.Content.ToString(), LabelLNameResult.Content.ToString(), textBoxZbcName.Text, Convert.ToInt32(textBoxPhoneNumber.Text), false, Convert.ToBoolean(checkBoxIsTeacher.IsChecked));
+                        MessageBox.Show("Brugeren er nu opdateret");
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Brugeren blev ikke opdateret");
+                        throw;
+                    }
+                    
+                }
             }
-            else
-            {
-                UserController.Instance.CreateUserObjectToUpdateInDB(textBoxUserMifare.Text, LabelFNameResult.Content.ToString(), LabelLNameResult.Content.ToString(), textBoxZbcName.Text, Convert.ToInt32(textBoxPhoneNumber.Text), false, Convert.ToBoolean(checkBoxIsTeacher.IsChecked));
-            }
+            this.Close();
         }
     }
 }

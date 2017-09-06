@@ -33,7 +33,22 @@ namespace UdlaanSystem
 
         private void ConnectMySql()
         {
-            sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules; integrated security=false";
+            if (Settings1.Default.LocationNæstved == true)
+            {
+
+            }
+            else if (Settings1.Default.LocationRingsted == true)
+            {
+                sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules; integrated security=false";
+            }
+            else if (Settings1.Default.LocationRoskilde == true)
+            {
+
+            }
+            else if (Settings1.Default.LocationVordingborg == true)
+            {
+
+            }
 
             if (MysqlConnection == null)
             {

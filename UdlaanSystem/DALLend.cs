@@ -31,7 +31,22 @@ namespace UdlaanSystem
 
         private void ConnectMySql()
         {
-            sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules;integrated security=false";
+            if (Settings1.Default.LocationNæstved == true)
+            {
+
+            }
+            else if (Settings1.Default.LocationRingsted == true)
+            {
+                sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules; integrated security=false";
+            }
+            else if (Settings1.Default.LocationRoskilde == true)
+            {
+
+            }
+            else if (Settings1.Default.LocationVordingborg == true)
+            {
+
+            }
 
             if (MysqlConnection == null)
             {
@@ -151,7 +166,7 @@ namespace UdlaanSystem
             return success;
         }
 
-        public void MoveLendedIntoArchive(List<LendObject> lendObjectsToReturn)
+        public bool MoveLendedIntoArchive(List<LendObject> lendObjectsToReturn)
         {
             try
             {
@@ -162,11 +177,12 @@ namespace UdlaanSystem
                     MySqlCommand cmd = new MySqlCommand("CALL removeLend('" + lendObjectToReturn.itemObject.itemMifare + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')", MysqlConnection);
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show("YEAH BISHES");
+                return true;
             }
             catch (Exception)
             {
                 Debug.WriteLine("BOOOOOOOOOOOOOOOOOOOOOOOM");
+                return false;
                 throw;
             }
             finally

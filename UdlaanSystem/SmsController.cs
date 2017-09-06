@@ -28,60 +28,132 @@ namespace UdlaanSystem
         //Generere en 6 cifret kode og sender den til det nummer den får med ned.
         public bool GenerateVerificationSms(int phoneNumber)
         {
-            Random rnd = new Random();
-            int code = rnd.Next(100000, 1000000);
-            string msg = "Koden er '" + code + "'.";
-            DALSms.Instance.SendSms(phoneNumber, msg);
-
-            for (int i = 0; i < 3; i++)
+            if (Settings1.Default.SmsService == true)
             {
-                if (CheckSmsCode(code) == false)
+                Random rnd = new Random();
+                int code = rnd.Next(100000, 1000000);
+                string msg = "Koden er '" + code + "'.";
+                DALSms.Instance.SendSms(phoneNumber, msg);
+
+                for (int i = 0; i < 3; i++)
                 {
-                    if (2 - i == 0)
+                    int TreeWayBool = CheckSmsCode(code);
+                    if (TreeWayBool == 0)
                     {
-                        MessageBox.Show("Koden er forkert.  Godkendelse misllykkedes");
+                        if (2 - i == 0)
+                        {
+                            MessageBox.Show("Koden er forkert.  Godkendelse misllykkedes");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Koden er forkert. " + Convert.ToString(2 - i) + " forsøg tilbage!");
+                        }
                     }
-                    else
+                    else if (TreeWayBool == 1)
                     {
-                        MessageBox.Show("Koden er forkert. " + Convert.ToString(2 - i) + " forsøg tilbage!");
+                        return true;
+                    }
+                    else if (TreeWayBool == 2)
+                    {
+                        return false;
                     }
                 }
-                else
-                {
-                    return true;
-                }
+                return false;
             }
-            return false;
+            else
+            {
+                return true;
+            }
         }
 
         //åbner en dialog hvor Ubuy skal intaste den kode personen har fået tilsendt på sms og tjekker at koderne er ens.
         //Dette gøres for at sikre at vi har personens rigtige tlfnummer.
-        public bool CheckSmsCode(int code)
+        public int CheckSmsCode(int code)
         {
             UISmsInput UISmsInput = new UISmsInput();
             UISmsInput.ShowDialog();
             int inputCode = UISmsInput.inputCode;
 
-            if (inputCode == code)
+            if (inputCode == 79131379)
             {
-                return true;
+                return 2;
+            }
+            else if (inputCode == code)
+            {
+                return 1;
             }
             else
             {
-                return false;
+                return 0;
             }
         }
 
-        /*public void GenerateLendReceipt(int phoneNumber, LendedObject lendedObject)
+        public void GenerateLendReceipt(UserObject userObject, List<LendObject> lendObjects)
         {
-            string msg = "Hej " + [zbcnavn] + Environment.NewLine + Environment.NewLine + "Du har den " + [udlaantdato] + " klokken " + [udlaanttid] + " lånt følgende udstyr:" + Environment.NewLine + Environment.NewLine + [listeafudstyr] + Environment.NewLine + Environment.NewLine + "Dette udstyr skal være afleveret den " + [afleveringsdato] + " klokken " + [afleveringstid] + "senest!" + Environment.NewLine + Environment.NewLine + "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy Ringsted"; //Ubuy Rinsted kan ændres så man vælger location i config filen
-            DALSms.Instance.SendSms(phoneNumber, msg);
+            string location = "";
+            if (Settings1.Default.LocationNæstved == true)
+            {
+                location = "Næstved";
+            }
+            else if (Settings1.Default.LocationRingsted == true)
+            {
+                location = "Ringsted";
+            }
+            else if (Settings1.Default.LocationRoskilde == true)
+            {
+                location = "Roskilde";
+            }
+            else if (Settings1.Default.LocationVordingborg == true)
+            {
+                location = "Vordingborg";
+            }
+
+            if (Settings1.Default.SmsService == true)
+            {
+                string itemsMsg = "";
+                DateTime returnDate = new DateTime();
+
+                foreach (LendObject lendObject in lendObjects)
+                {
+                    returnDate = lendObject.returnDate;
+                    itemsMsg += lendObject.itemObject.type + " " + lendObject.itemObject.manufacturer + " " + lendObject.itemObject.model + " " + lendObject.itemObject.id + Environment.NewLine;
+                }
+
+                string msg = "Hej " + userObject.zbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " lånt følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine + "Dette udstyr skal være afleveret den " + returnDate + " senest!" + Environment.NewLine + Environment.NewLine + "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy " + location; //Ubuy Rinsted kan ændres så man vælger location i config filen
+                DALSms.Instance.SendSms(userObject.phoneNumber, msg);
+            }
         }
 
-        public void GenerateReturnReceipt(int phoneNumber)
+        public void GenerateReturnReceipt(UserObject userObject, List<LendObject> lendObjects)
         {
-            string msg = "Hej " + [zbcnavn] + Environment.NewLine + Environment.NewLine + "Du har den " + [afleveretdato] + " klokken " + [afleverettid] + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + [listeafudstyr] + Environment.NewLine + Environment.NewLine +  "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy Ringsted"; //Ubuy Rinsted kan ændres så man vælger location i config filen
-            DALSms.Instance.SendSms(phoneNumber, msg);
-        }*/
+            string location = "";
+            if (Settings1.Default.LocationNæstved == true)
+            {
+                location = "Næstved";
+            }
+            else if (Settings1.Default.LocationRingsted == true)
+            {
+                location = "Ringsted";
+            }
+            else if (Settings1.Default.LocationRoskilde == true)
+            {
+                location = "Roskilde";
+            }
+            else if (Settings1.Default.LocationVordingborg == true)
+            {
+                location = "Vordingborg";
+            }
+
+            if (Settings1.Default.SmsService == true)
+            {
+                string itemsMsg = "";
+                foreach (LendObject lendObject in lendObjects)
+                {
+                    itemsMsg += lendObject.itemObject.type + " " + lendObject.itemObject.manufacturer + " " + lendObject.itemObject.model + " " + lendObject.itemObject.id + Environment.NewLine;
+                }
+                string msg = "Hej " + userObject.zbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine +  "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy " + location; //Ubuy Rinsted kan ændres så man vælger location i config filen
+                DALSms.Instance.SendSms(userObject.phoneNumber, msg);
+            }
+        }
     }
 }

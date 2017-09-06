@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="UISmsInput" Height="151.23" Width="234.836">
+        Title="UISmsInput" Height="132.173" Width="234.836">
     <Grid>
         <Label x:Name="label" Content="Indtast Koden Der Er Sendt Med SMS" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxSmsInput" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="207"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Width="207" Click="button_Click"/>
+        <TextBox x:Name="textBoxSmsInput" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207" PreviewTextInput="NumberValidationTextBox"/>
+        <Button x:Name="buttonDone" Content="Udfør" HorizontalAlignment="Left" Margin="115,69,0,0" VerticalAlignment="Top" Width="102" Click="buttonDone_Click"/>
+        <Button x:Name="buttonCancel" Content="Afbryd" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Width="100" Click="buttonCancel_Click"/>
 
     </Grid>
 </Window>

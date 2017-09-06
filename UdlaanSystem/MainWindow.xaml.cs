@@ -67,7 +67,7 @@ namespace UdlaanSystem
                                     PrintItemToList(lendObject);
                                 }
                             }
-
+                            scannedUser = lendedObject.UserObject;
                             PrintUserData(lendedObject);
                         }
                         else
@@ -153,21 +153,46 @@ namespace UdlaanSystem
             inputUserbox.ShowDialog();
         }
 
-        private void ButtonUdlaan_Click(object sender, RoutedEventArgs e)
+        private void ButtonLend_Click(object sender, RoutedEventArgs e)
         {
-            if (LendController.Instance.GenLendedObject(scannedUser, scannedItems) == false)
+            if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
             {
-                MessageBox.Show("FAILED TO INSERT LENDS TO DATABASE");
-            }
-            else
-            {
-                MessageBox.Show("SUCCESS");
+
+
+                if (LendController.Instance.GenLendedObject(scannedUser, scannedItems))
+                {
+                    SmsController.Instance.GenerateLendReceipt(scannedUser, scannedItems);
+                    MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
+                }
+                else
+                {
+                    MessageBox.Show("FAILED TO INSERT LENDS TO DATABASE");
+                }
             }
         }
 
-        private void ButtonAflever_Click(object sender, RoutedEventArgs e)
+        private void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
-            DALLend.Instance.MoveLendedIntoArchive(scannedItems);
+            if (scannedUser != null)
+            {
+                if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
+                {
+                    if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
+                    {
+                        SmsController.Instance.GenerateReturnReceipt(scannedUser, scannedItems);
+                        MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
+                    }
+                    else
+                    {
+                        MessageBox.Show("FAILED TO MOVE LENDS TO ARCHIVE");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Brugeren SKAL scannes for at kunne aflevere sit udstyr!");
+            }
+            
         }
 
         private void ButtonStat_Click(object sender, RoutedEventArgs e)
