@@ -164,7 +164,7 @@ namespace UdlaanSystem
 
         private void ButtonStat_Click(object sender, RoutedEventArgs e)
         {
-            bool test = SmsController.Instance.GenerateSmsCode(30621451);
+            bool test = SmsController.Instance.GenerateVerificationSms(30621451);
         }
 
         /*private string ButtonUser_Click(object sender, RoutedEventArgs e)

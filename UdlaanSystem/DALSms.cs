@@ -30,10 +30,10 @@ namespace UdlaanSystem
             }
         }
 
-        public void SendVerificationSms(int receiver, int code)
+        public void SendSms(int receiver, string msg)
         {
             
-            var json = new WebClient().DownloadString("https://data.efif.dk/JSON/SMS.ashx?key=" + key + "&receivers=" + receiver + "&message=Koden er '" + code + "'.");
+            var json = new WebClient().DownloadString("https://data.efif.dk/JSON/SMS.ashx?key=" + key + "&receivers=" + receiver + "&message=" + msg + "");
 
             Debug.WriteLine(json);
         }
