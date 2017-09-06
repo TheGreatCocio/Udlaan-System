@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using MySql.Data;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
