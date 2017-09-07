@@ -5,14 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="Opret/Redigere Bruger" Height="300" Width="300">
+        Title="Opret/Redigere Bruger" Height="300" Width="300" Background="#FFEEEEEE">
     <Grid>
         <TextBox x:Name="textBoxZbcName" HorizontalAlignment="Left" Height="23" Margin="27,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxZbcName_TextChanged"/>
         <TextBox x:Name="textBoxUserMifare" HorizontalAlignment="Left" Height="23" Margin="27,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxUserMifare_TextChanged"/>
         <TextBox x:Name="textBoxPhoneNumber" HorizontalAlignment="Left" Height="23" Margin="27,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxPhoneNumber_TextChanged"/>
         <Label x:Name="LabelFName" Content="Fornavn:" HorizontalAlignment="Left" Margin="27,169,0,0" VerticalAlignment="Top" Width="56"/>
         <Label x:Name="LabelLName" Content="Efternavn:" HorizontalAlignment="Left" Margin="27,200,0,0" VerticalAlignment="Top" Width="62"/>
-        <Button x:Name="ButtonCreateOrUpdate" Content="Tilføj Bruger" HorizontalAlignment="Left" Margin="173,231,0,0" VerticalAlignment="Top" Width="100" Click="ButtonCreateOrUpdate_Click" IsEnabled="False"/>
+        <Button x:Name="ButtonCreateOrUpdate" Content="Tilføj Bruger" HorizontalAlignment="Left" Margin="173,231,0,0" VerticalAlignment="Top" Width="100" Click="ButtonCreateOrUpdate_Click" IsEnabled="False" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Label x:Name="LabelSearch" Content="Søg(Zbc Navn)" HorizontalAlignment="Left" Margin="23,5,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelUserMifare" Content="Mifare" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelPhoneNumber" Content="Mobil Nr." HorizontalAlignment="Left" Margin="23,113,0,0" VerticalAlignment="Top"/>

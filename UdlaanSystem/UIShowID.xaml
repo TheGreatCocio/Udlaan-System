@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="ID Nummeret" Height="316.44" Width="473.8">
+        Title="ID Nummeret" Height="316.44" Width="473.8" Background="#FFEEEEEE">
     <Grid Margin="0,0,2,0">
         <Label x:Name="LabelIDLarge" Content="Label" HorizontalAlignment="Left" Margin="137,102,0,0" VerticalAlignment="Top" FontSize="72"/>
         <Label Content="Skriv Dette Ind I Bogen!" HorizontalAlignment="Left" Margin="129,47,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <Button x:Name="btnOK" Content="OK" HorizontalAlignment="Left" Margin="368,239,0,0" VerticalAlignment="Top" Width="75" Background="#FF575757" Foreground="White" Click="btnOK_Click">
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="4" Color="#FF7A7A7A"/>
-            </Button.Effect>
+        <Button x:Name="btnOK" Content="OK" HorizontalAlignment="Left" Margin="368,239,0,0" VerticalAlignment="Top" Width="75" Click="btnOK_Click" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
         </Button>
 
     </Grid>

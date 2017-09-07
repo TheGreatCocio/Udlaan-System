@@ -34,8 +34,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="ButtonUser" Content="Opret/Rediger Bruger" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top" Width="131" Click="ButtonUser_Click"/>
-        <Button x:Name="ButtonItem" Content="Tilføj Produkter" HorizontalAlignment="Left" Margin="306,10,0,0" VerticalAlignment="Top" Width="131" Click="ButtonItem_Click"/>
         <ListView x:Name="ListViewItems" HorizontalAlignment="Left" Height="202" Margin="11,320,0,0" VerticalAlignment="Top" Width="947" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <ListView.RenderTransform>
                 <TransformGroup>
@@ -96,11 +94,38 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="ButtonStat" Content="Vis Statestik" HorizontalAlignment="Left" Margin="380,12,0,0" VerticalAlignment="Top" Width="131" Grid.Column="1" Click="ButtonStat_Click"/>
+        <Button x:Name="ButtonStat" Content="Vis Statestik" HorizontalAlignment="Left" Margin="380,12,0,0" VerticalAlignment="Top" Width="131" Grid.Column="1" Click="ButtonStat_Click" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Label Content="Scannede Produkter" HorizontalAlignment="Left" Margin="371,287,0,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2"/>
         <Label Content="Udlån / Arkiv" Grid.Column="1" HorizontalAlignment="Left" Margin="207,29,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="ButtonLend" Content="Udlån" Grid.Column="1" HorizontalAlignment="Left" Margin="436,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonLend_Click"/>
-        <Button x:Name="ButtonReturn" Content="Aflever" Grid.Column="1" HorizontalAlignment="Left" Margin="356,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonReturn_Click"/>
+        <Button x:Name="ButtonLend" Content="Udlån" Grid.Column="1" HorizontalAlignment="Left" Margin="436,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonLend_Click" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="ButtonReturn" Content="Aflever" Grid.Column="1" HorizontalAlignment="Left" Margin="356,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonReturn_Click" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="249,292,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded"/>
 
     </Grid>

@@ -5,12 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="UISmsInput" Height="132.173" Width="234.836">
+        Title="UISmsInput" Height="132.173" Width="234.836" Background="#FFEEEEEE">
     <Grid>
         <Label x:Name="label" Content="Indtast Koden Der Er Sendt Med SMS" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxSmsInput" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207" PreviewTextInput="NumberValidationTextBox"/>
-        <Button x:Name="buttonDone" Content="Udfør" HorizontalAlignment="Left" Margin="115,69,0,0" VerticalAlignment="Top" Width="102" Click="buttonDone_Click"/>
-        <Button x:Name="buttonCancel" Content="Afbryd" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Width="100" Click="buttonCancel_Click"/>
+        <Button x:Name="buttonDone" Content="Udfør" HorizontalAlignment="Left" Margin="115,69,0,0" VerticalAlignment="Top" Width="102" Click="buttonDone_Click" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="buttonCancel" Content="Afbryd" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Width="100" Click="buttonCancel_Click" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
