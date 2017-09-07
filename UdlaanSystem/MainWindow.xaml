@@ -7,14 +7,14 @@
         xmlns:System="clr-namespaceTongue Tiedystem;assembly=mscorlib"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="560.505" Width="977.277" ResizeMode="NoResize" >
+        Title="Ubuy Ringsted" Height="560.505" Width="977.277" ResizeMode="NoResize" Background="#FFEEEEEE" BorderBrush="Black" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="447*"/>
             <ColumnDefinition Width="524*"/>
         </Grid.ColumnDefinitions>
         <TextBox x:Name="TextBoxMain" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Margin="10,9,0,0" KeyDown="onMyfareScanned"/>
-        <Button x:Name="ButtonUser" Content="Opret/Rediger Bruger" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top" Width="131" Click="ButtonUser_Click" />
+        <Button x:Name="ButtonUser" Content="Opret/Rediger Bruger" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top" Width="131" Click="ButtonUser_Click"/>
         <Button x:Name="ButtonItem" Content="Tilføj Produkter" HorizontalAlignment="Left" Margin="306,10,0,0" VerticalAlignment="Top" Width="131" Click="ButtonItem_Click"/>
         <ListView x:Name="ListViewItems" HorizontalAlignment="Left" Height="202" Margin="11,320,0,0" VerticalAlignment="Top" Width="947" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <ListView.RenderTransform>
@@ -54,7 +54,7 @@
         </Canvas>
         <ListView x:Name="ListViewLend" HorizontalAlignment="Left" Height="218" Margin="13,64,0,0" VerticalAlignment="Top" Width="498" Grid.Column="1">
             <ListView.ItemContainerStyle>
-            <Style TargetType="{x:Type ListViewItem}">
+                <Style TargetType="{x:Type ListViewItem}">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding isOverdue}" Value="true">
                             <Setter Property="Background" Value="Red"/>
@@ -81,6 +81,7 @@
         <Label Content="Udlån / Arkiv" Grid.Column="1" HorizontalAlignment="Left" Margin="207,29,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="ButtonLend" Content="Udlån" Grid.Column="1" HorizontalAlignment="Left" Margin="436,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonLend_Click"/>
         <Button x:Name="ButtonReturn" Content="Aflever" Grid.Column="1" HorizontalAlignment="Left" Margin="356,294,0,0" VerticalAlignment="Top" Width="75" Click="ButtonReturn_Click"/>
+        <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="249,292,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded"/>
 
     </Grid>
 </Window>

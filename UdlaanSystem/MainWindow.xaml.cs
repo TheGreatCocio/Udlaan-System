@@ -72,23 +72,17 @@ namespace UdlaanSystem
                         }
                         else
                         {
-                            LendObject lendObject = new LendObject(item, DateTime.Now, DateTime.Now.AddDays(1), null);
-                            PrintItemToList(lendObject);
+                            try
+                            {
+                                LendObject lendObject = new LendObject(item, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
+                                PrintItemToList(lendObject);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Vælg venligst en dato");
+                            }
                         }
-
-                        
                     }
-                    /*ItemObject item = 
-
-                        List<ItemObject> items = new List<ItemObject>();
-                        items.Add(new ItemObject() { itemMifare = item.itemMifare, type = item.type, manufacturer = item.manufacturer, model = item.model, ID = 0, serialNumber = "asdf" });
-                        items.Add(new User() { Name = "Jane Doe", Age = 39 });
-                        items.Add(new User() { Name = "Sammy Doe", Age = 13 });
-
-
-                        //ListViewItems.ItemsSource
-
-                        */
                 }
             }
         }
@@ -197,12 +191,13 @@ namespace UdlaanSystem
 
         private void ButtonStat_Click(object sender, RoutedEventArgs e)
         {
-            bool test = SmsController.Instance.GenerateVerificationSms(30621451);
+            //bool test = SmsController.Instance.GenerateVerificationSms(30621451);
         }
 
-        /*private string ButtonUser_Click(object sender, RoutedEventArgs e)
+        //Når Datepickeren bliver loaded bliver dens valgte værdi sat til i morgen.
+        private void DatePickerReturn_Loaded(object sender, RoutedEventArgs e)
         {
-            UIInputUser inputUserBox = new UIInputUser();
-        }*/
+            datePickerReturn.SelectedDate = DateTime.Now.AddDays(1);
+        }
     }
 }
