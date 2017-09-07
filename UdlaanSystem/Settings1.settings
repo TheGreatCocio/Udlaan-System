@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="SmsService" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LocationNæstved" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
