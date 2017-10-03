@@ -155,7 +155,7 @@ namespace UdlaanSystem
                         MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
 
                         ClearUI();
-                    }
+                }
                     else
                     {
                         MessageBox.Show("FAILED TO INSERT LENDS TO DATABASE");
