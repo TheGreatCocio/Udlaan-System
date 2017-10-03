@@ -71,11 +71,11 @@ namespace UdlaanSystem
             try
             {
                 ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT user_mifare, user_fname, user_lname, user_zbcname, user_phonenumber, user_isdisabled, user_isteacher FROM users WHERE user_mifare = '" + userMifare + "'", MysqlConnection);
+                MySqlCommand cmd = new MySqlCommand("SELECT user_mifare, user_fname, user_lname, user_zbcname, user_phonenumber, user_isdisabled, user_isteacher, user_comment FROM users WHERE user_mifare = '" + userMifare + "'", MysqlConnection);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    userObject = new UserObject(rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(0), rdr.GetInt32(4), Convert.ToBoolean(rdr.GetInt16(6)), false, Convert.ToBoolean(rdr.GetInt16(5)));
+                    userObject = new UserObject(rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(0), rdr.GetInt32(4), Convert.ToBoolean(rdr.GetInt16(6)), false, Convert.ToBoolean(rdr.GetInt16(5)), rdr.GetString(7));
                 }
             }
             catch (Exception ex)
@@ -120,11 +120,11 @@ namespace UdlaanSystem
             try
             {
                 ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT user_mifare, user_fname, user_lname, user_zbcname, user_phonenumber, user_isdisabled, user_isteacher FROM users WHERE user_zbcname = '" + zbcName + "'", MysqlConnection);
+                MySqlCommand cmd = new MySqlCommand("SELECT user_mifare, user_fname, user_lname, user_zbcname, user_phonenumber, user_isdisabled, user_isteacher, user_comment FROM users WHERE user_zbcname = '" + zbcName + "'", MysqlConnection);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    userObject = new UserObject(rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(0), rdr.GetInt32(4), Convert.ToBoolean(rdr.GetInt16(6)), false, Convert.ToBoolean(rdr.GetInt16(5)));
+                    userObject = new UserObject(rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(0), rdr.GetInt32(4), Convert.ToBoolean(rdr.GetInt16(6)), false, Convert.ToBoolean(rdr.GetInt16(5)), rdr.GetString(7));
                 }
             }
             catch (Exception ex)

@@ -157,7 +157,7 @@ namespace UdlaanSystem
                         MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
 
                         ClearUI();
-                    }
+                }
                     else
                     {
                         MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
