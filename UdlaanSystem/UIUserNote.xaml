@@ -9,7 +9,16 @@
     <Grid>
         <TextBox x:Name="textBoxUserNote" HorizontalAlignment="Left" Height="193" Margin="10,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="472" TextChanged="TextBoxUserNote_TextChanged"/>
         <Label x:Name="label" Content="Her kan i skrive en note om brugeren der vil poppe op fremover når i scanner personen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="buttonConfirmUserNote" Content="OK" HorizontalAlignment="Left" Margin="407,239,0,0" VerticalAlignment="Top" Width="75" Click="ButtonConfirmUserNote_Click"/>
+        <Button x:Name="buttonConfirmUserNote" Content="OK" HorizontalAlignment="Left" Margin="407,239,0,0" VerticalAlignment="Top" Width="75" Click="ButtonConfirmUserNote_Click" Foreground="White">
+        <Button.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                <GradientStop Color="#FF9E9EA2"/>
+                <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+            </LinearGradientBrush>
+        </Button.Background>
+        </Button>
         <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.266,-0.098" Height="25"/>
 
     </Grid>
