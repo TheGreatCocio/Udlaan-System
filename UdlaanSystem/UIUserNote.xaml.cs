@@ -24,6 +24,8 @@ namespace UdlaanSystem
             InitializeComponent();
         }
 
+        private bool firstRun = true;
+
         private void ButtonConfirmUserNote_Click(object sender, RoutedEventArgs e)
         {
 
@@ -31,7 +33,6 @@ namespace UdlaanSystem
 
         private void TextBoxUserNote_TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool firstRun = true;
             label1.Content = textBoxUserNote.Text.Length + " / 400 tegn";
 
             if (textBoxUserNote.Text.Length > 400)
