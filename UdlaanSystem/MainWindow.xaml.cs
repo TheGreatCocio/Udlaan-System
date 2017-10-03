@@ -36,9 +36,9 @@ namespace UdlaanSystem
             {
                 if (e.Key == Key.Return) // checks if its the enter button that has been pressed
                 {
-                    ItemObject item = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
+                    ItemObject scannedItem = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
 
-                    if (item == null)
+                    if (scannedItem == null)
                     {
                         LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text);
                         if (lendedObject.UserObject == null)
@@ -54,19 +54,14 @@ namespace UdlaanSystem
                     }
                     else
                     {
-                        string userMifare = LendController.Instance.CheckIfLended(item.itemMifare);
+                        string userMifare = LendController.Instance.CheckIfLended(scannedItem.itemMifare);
+                        LendObject scannedLendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
 
                         if (userMifare != "")
                         {
                             LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
+                            PrintItemToList(scannedLendObject);
 
-                            foreach (LendObject lendObject in lendedObject.LendObjects)
-                            {
-                                if (lendObject.itemObject.itemMifare == item.itemMifare)
-                                {
-                                    PrintItemToList(lendObject);
-                                }
-                            }
                             scannedUser = lendedObject.UserObject;
                             PrintUserData(lendedObject);
                         }
@@ -74,8 +69,7 @@ namespace UdlaanSystem
                         {
                             try
                             {
-                                LendObject lendObject = new LendObject(item, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
-                                PrintItemToList(lendObject);
+                                PrintItemToList(scannedLendObject);
                             }
                             catch (Exception)
                             {
@@ -91,8 +85,8 @@ namespace UdlaanSystem
 
         private void PrintItemToList(LendObject lendObject)
         {
-            scannedItems.Add(lendObject);
-            this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
+                scannedItems.Add(lendObject);
+                this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
         }
 
         
