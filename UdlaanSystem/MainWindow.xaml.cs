@@ -29,6 +29,7 @@ namespace UdlaanSystem
 
         private List<LendObject> scannedItems = new List<LendObject>();
         private UserObject scannedUser = null;
+        private bool isUserScanned = false;
 
         private void OnMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {
@@ -47,6 +48,7 @@ namespace UdlaanSystem
                         }
                         else
                         {
+                            isUserScanned = true;
                             scannedUser = lendedObject.UserObject;
                             PrintUserData(lendedObject);
                         }
@@ -158,7 +160,7 @@ namespace UdlaanSystem
                     }
                     else
                     {
-                        MessageBox.Show("FAILED TO INSERT LENDS TO DATABASE");
+                        MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
                     }
                 }
             }
@@ -170,7 +172,7 @@ namespace UdlaanSystem
 
         private void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
-            if (scannedUser != null)
+            if (isUserScanned == true)
             {
                 if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
                 {
@@ -183,7 +185,7 @@ namespace UdlaanSystem
                     }
                     else
                     {
-                        MessageBox.Show("FAILED TO MOVE LENDS TO ARCHIVE");
+                        MessageBox.Show("OPS, udstyret blev IKKE afleveret! Hvis dette fortsætter, kontakt IT.");
                     }
                 }
             }
@@ -225,6 +227,8 @@ namespace UdlaanSystem
             this.ListViewItems.Items.Clear();
 
             this.datePickerReturn.SelectedDate = DateTime.Now;
+
+            isUserScanned = false;
         }
     }
 }

@@ -110,6 +110,9 @@
     <Compile Include="UIStatDetail.xaml.cs">
       <DependentUpon>UIStatDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UIUserNote.xaml.cs">
+      <DependentUpon>UIUserNote.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserController.cs" />
     <Compile Include="UserObject.cs" />
     <Page Include="MainWindow.xaml">
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UIStatDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UIUserNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
