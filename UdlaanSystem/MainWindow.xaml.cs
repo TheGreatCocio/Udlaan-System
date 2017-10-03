@@ -60,9 +60,8 @@ namespace UdlaanSystem
                         if (userMifare != "")
                         {
                             LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
-                            
-                            LendObject lendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
-                            PrintItemToList(lendObject);
+                            PrintItemToList(scannedLendObject);
+
                             scannedUser = lendedObject.UserObject;
                             PrintUserData(lendedObject);
                         }
@@ -70,8 +69,7 @@ namespace UdlaanSystem
                         {
                             try
                             {
-                                LendObject lendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
-                                PrintItemToList(lendObject);
+                                PrintItemToList(scannedLendObject);
                             }
                             catch (Exception)
                             {
@@ -87,8 +85,8 @@ namespace UdlaanSystem
 
         private void PrintItemToList(LendObject lendObject)
         {
-            scannedItems.Add(lendObject);
-            this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
+                scannedItems.Add(lendObject);
+                this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
         }
 
         
