@@ -230,5 +230,11 @@ namespace UdlaanSystem
 
             isUserScanned = false;
         }
+
+        private void ButtonComment_Click(object sender, RoutedEventArgs e)
+        {
+            UIUserNote uiUserNote = new UIUserNote();
+            uiUserNote.ShowDialog();
+        }
     }
 }
