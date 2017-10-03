@@ -30,15 +30,15 @@ namespace UdlaanSystem
         private List<LendObject> scannedItems = new List<LendObject>();
         private UserObject scannedUser = null;
 
-        private void onMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
+        private void OnMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {
             if (TextBoxMain.IsFocused) // checks if the maintextbox is focused
             {
                 if (e.Key == Key.Return) // checks if its the enter button that has been pressed
                 {
-                    ItemObject item = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
+                    ItemObject scannedItem = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
 
-                    if (item == null)
+                    if (scannedItem == null)
                     {
                         LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text);
                         if (lendedObject.UserObject == null)
@@ -54,19 +54,15 @@ namespace UdlaanSystem
                     }
                     else
                     {
-                        string userMifare = LendController.Instance.CheckIfLended(item.itemMifare);
+                        string userMifare = LendController.Instance.CheckIfLended(scannedItem.itemMifare);
+                        LendObject scannedLendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
 
                         if (userMifare != "")
                         {
                             LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
-
-                            foreach (LendObject lendObject in lendedObject.LendObjects)
-                            {
-                                if (lendObject.itemObject.itemMifare == item.itemMifare)
-                                {
-                                    PrintItemToList(lendObject);
-                                }
-                            }
+                            
+                            LendObject lendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
+                            PrintItemToList(lendObject);
                             scannedUser = lendedObject.UserObject;
                             PrintUserData(lendedObject);
                         }
@@ -74,7 +70,7 @@ namespace UdlaanSystem
                         {
                             try
                             {
-                                LendObject lendObject = new LendObject(item, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
+                                LendObject lendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
                                 PrintItemToList(lendObject);
                             }
                             catch (Exception)

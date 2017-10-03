@@ -13,7 +13,7 @@
             <ColumnDefinition Width="447*"/>
             <ColumnDefinition Width="524*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="TextBoxMain" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Margin="10,9,0,0" KeyDown="onMyfareScanned"/>
+        <TextBox x:Name="TextBoxMain" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" Margin="10,9,0,0" KeyDown="OnMyfareScanned"/>
         <Button x:Name="ButtonUser" Content="Opret/Rediger Bruger" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top" Width="131" Click="ButtonUser_Click" Foreground="White" Height="22" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
