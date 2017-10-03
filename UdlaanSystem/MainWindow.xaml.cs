@@ -95,22 +95,22 @@ namespace UdlaanSystem
         public void PrintUserData(LendedObject lendedObject)
         {
             LabelNameResult.Content = lendedObject.UserObject.fName + " " + lendedObject.UserObject.lName;
-            LabelNameResult.Visibility = Visibility;
+            LabelNameResult.Visibility = Visibility.Visible;
 
             LabelZbcNameResult.Content = lendedObject.UserObject.zbcName;
-            LabelZbcNameResult.Visibility = Visibility;
+            LabelZbcNameResult.Visibility = Visibility.Visible;
 
             LabelMifareResult.Content = lendedObject.UserObject.userMifare;
-            LabelMifareResult.Visibility = Visibility;
+            LabelMifareResult.Visibility = Visibility.Visible;
 
             LabelPhoneResult.Content = lendedObject.UserObject.phoneNumber;
-            LabelPhoneResult.Visibility = Visibility;
+            LabelPhoneResult.Visibility = Visibility.Visible;
 
             LabelTeacherResult.Content = lendedObject.UserObject.isTeacher;
-            LabelTeacherResult.Visibility = Visibility;
+            LabelTeacherResult.Visibility = Visibility.Visible;
 
             LabelIsDisabledResult.Content = lendedObject.UserObject.isDisabled;
-            LabelIsDisabledResult.Visibility = Visibility;
+            LabelIsDisabledResult.Visibility = Visibility.Visible;
 
 
             this.ListViewLend.Items.Clear();
@@ -145,22 +145,26 @@ namespace UdlaanSystem
 
         private void ButtonLend_Click(object sender, RoutedEventArgs e)
         {
-            if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
+            if (scannedUser != null)
             {
-
-
-                if (LendController.Instance.GenLendedObject(scannedUser, scannedItems))
+                if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
                 {
-                    SmsController.Instance.GenerateLendReceipt(scannedUser, scannedItems);
-                    MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
-                   
-                    /*System.Diagnostics.Process.Start("C:\\Users\\shino\\Desktop\\Udlaan System\\UdlaanSystem\\bin\\Debug\\UdlaanSystem.exe"); // to start new instance of application
-                    this.Close();*/
+                    if (LendController.Instance.GenLendedObject(scannedUser, scannedItems))
+                    {
+                        SmsController.Instance.GenerateLendReceipt(scannedUser, scannedItems);
+                        MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
+
+                        ClearUI();
+                    }
+                    else
+                    {
+                        MessageBox.Show("FAILED TO INSERT LENDS TO DATABASE");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("FAILED TO INSERT LENDS TO DATABASE");
-                }
+            }
+            else
+            {
+                MessageBox.Show("Du Skal Scanne En Bruger");
             }
         }
 
@@ -174,6 +178,8 @@ namespace UdlaanSystem
                     {
                         SmsController.Instance.GenerateReturnReceipt(scannedUser, scannedItems);
                         MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
+
+                        ClearUI();
                     }
                     else
                     {
@@ -185,7 +191,6 @@ namespace UdlaanSystem
             {
                 MessageBox.Show("Brugeren SKAL scannes for at kunne aflevere sit udstyr!");
             }
-            
         }
 
         private void ButtonStat_Click(object sender, RoutedEventArgs e)
@@ -197,6 +202,29 @@ namespace UdlaanSystem
         private void DatePickerReturn_Loaded(object sender, RoutedEventArgs e)
         {
             datePickerReturn.SelectedDate = DateTime.Now.AddDays(1);
+        }
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearUI();
+        }
+
+        private void ClearUI()
+        {
+            scannedItems = new List<LendObject>();
+            scannedUser = null;
+
+            LabelNameResult.Visibility = Visibility.Hidden;
+            LabelZbcNameResult.Visibility = Visibility.Hidden;
+            LabelMifareResult.Visibility = Visibility.Hidden;
+            LabelPhoneResult.Visibility = Visibility.Hidden;
+            LabelTeacherResult.Visibility = Visibility.Hidden;
+            LabelIsDisabledResult.Visibility = Visibility.Hidden;
+
+            this.ListViewLend.Items.Clear();
+            this.ListViewItems.Items.Clear();
+
+            this.datePickerReturn.SelectedDate = DateTime.Now;
         }
     }
 }

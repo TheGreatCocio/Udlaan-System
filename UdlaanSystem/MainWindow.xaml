@@ -127,6 +127,16 @@
             </Button.Background>
         </Button>
         <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="249,292,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded"/>
+        <Button x:Name="ButtonClear" Content="Ryd" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="61" Click="ButtonClear_Click" Foreground="White" Height="22" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>
