@@ -83,6 +83,8 @@ namespace UdlaanSystem
                             }
                         }
                     }
+                    TextBoxMain.Text = "";
+                    TextBoxMain.Focus();
                 }
             }
         }
@@ -157,6 +159,9 @@ namespace UdlaanSystem
                 {
                     SmsController.Instance.GenerateLendReceipt(scannedUser, scannedItems);
                     MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
+                   
+                    /*System.Diagnostics.Process.Start("C:\\Users\\shino\\Desktop\\Udlaan System\\UdlaanSystem\\bin\\Debug\\UdlaanSystem.exe"); // to start new instance of application
+                    this.Close();*/
                 }
                 else
                 {

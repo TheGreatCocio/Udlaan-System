@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
         Title="Ubuy Ringsted" Height="560.505" Width="977.277" ResizeMode="NoResize" Background="#FFEEEEEE" BorderBrush="Black" >
-    <Grid>
+    <Grid x:Name="grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="447*"/>
             <ColumnDefinition Width="524*"/>
