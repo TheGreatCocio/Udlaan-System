@@ -51,6 +51,10 @@ namespace UdlaanSystem
                             isUserScanned = true;
                             scannedUser = lendedObject.UserObject;
                             PrintUserData(lendedObject);
+                            if (lendedObject.UserObject.comment != "")
+                            {
+                                MessageBox.Show(lendedObject.UserObject.comment);
+                            }
                         }
 
                     }
@@ -66,6 +70,10 @@ namespace UdlaanSystem
 
                             scannedUser = lendedObject.UserObject;
                             PrintUserData(lendedObject);
+                            if (lendedObject.UserObject.comment != "")
+                            {
+                                MessageBox.Show(lendedObject.UserObject.comment);
+                            }
                         }
                         else
                         {
