@@ -38,7 +38,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListView x:Name="ListViewItems" HorizontalAlignment="Left" Height="202" Margin="6,25,0,0" VerticalAlignment="Top" Width="1062" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="1" IsSynchronizedWithCurrentItem="False" >
+        <ListView x:Name="ListViewItems" HorizontalAlignment="Left" Height="202" Margin="6,25,0,0" VerticalAlignment="Top" Width="1062" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="1" IsSynchronizedWithCurrentItem="False" SelectionMode="Multiple" >
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -133,7 +133,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="249,378,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded" Grid.RowSpan="2"/>
+        <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="249,378,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded" Grid.RowSpan="2" SelectedDateChanged="datePickerReturn_SelectedDateChanged"/>
         <Button x:Name="ButtonClear" Content="Ryd" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="61" Click="ButtonClear_Click" Foreground="White" Height="22" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -154,7 +154,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="ButtonDeleteItems" Content="Fjern Valgt Udstyr" Grid.Column="1" HorizontalAlignment="Left" Margin="115,380,0,0" VerticalAlignment="Top" Width="129" Foreground="White" Click="ButtonDeleteItems_Click">
+        <Button x:Name="ButtonDeleteItems" Content="Fjern Valgt Udstyr" Grid.Column="1" HorizontalAlignment="Left" Margin="115,380,0,0" VerticalAlignment="Top" Width="129" Foreground="White" Click="ButtonDeleteItems_Click" Height="20" Grid.RowSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
