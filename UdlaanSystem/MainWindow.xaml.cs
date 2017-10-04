@@ -95,8 +95,8 @@ namespace UdlaanSystem
 
         private void PrintItemToList(LendObject lendObject)
         {
-                scannedItems.Add(lendObject);
-                this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
+            scannedItems.Add(lendObject);
+            this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
         }
 
         
@@ -243,6 +243,30 @@ namespace UdlaanSystem
         {
             UIUserNote uiUserNote = new UIUserNote(scannedUser);
             uiUserNote.ShowDialog();
+        }
+
+        private void ButtonDeleteItems_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (ListViewObject listViewObject in ListViewItems.SelectedItems)
+            {
+                foreach (LendObject lendObject in scannedItems.ToList())
+                {
+                    if (lendObject.itemObject.itemMifare == listViewObject.itemMifare)
+                    {
+                        scannedItems.Remove(lendObject);
+                    }
+                }
+            }
+            RefreshListViewItems();
+        }
+
+        private void RefreshListViewItems()
+        {
+            this.ListViewItems.Items.Clear();
+            foreach (LendObject lendObject in scannedItems)
+            {
+                this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
+            }
         }
     }
 }

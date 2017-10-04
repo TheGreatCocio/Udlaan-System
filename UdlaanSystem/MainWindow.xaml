@@ -34,7 +34,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListView x:Name="ListViewItems" HorizontalAlignment="Left" Height="202" Margin="10,413,0,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" >
+        <ListView x:Name="ListViewItems" ItemsSource="{Binding ListViewObject}" HorizontalAlignment="Left" Height="202" Margin="10,413,0,0" VerticalAlignment="Top" Width="1067" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" SelectionMode="Multiple" >
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -141,6 +141,16 @@
             </Button.Background>
         </Button>
         <Button x:Name="ButtonComment" Content="Skriv En Kommentar" HorizontalAlignment="Left" Margin="233,311,0,0" VerticalAlignment="Top" Width="121" Foreground="White" Height="22" Click="ButtonComment_Click" >
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="ButtonDeleteItems" Content="Fjern Valgt Udstyr" Grid.Column="1" HorizontalAlignment="Left" Margin="115,380,0,0" VerticalAlignment="Top" Width="129" Foreground="White" Click="ButtonDeleteItems_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
