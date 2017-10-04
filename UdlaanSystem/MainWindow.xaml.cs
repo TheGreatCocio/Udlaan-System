@@ -23,8 +23,6 @@ namespace UdlaanSystem
         public MainWindow()
         {
             InitializeComponent();
-
-            
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
@@ -49,12 +47,12 @@ namespace UdlaanSystem
                         else
                         {
                             isUserScanned = true;
+
                             scannedUser = lendedObject.UserObject;
+
                             PrintUserData(lendedObject);
-                            if (lendedObject.UserObject.comment != "")
-                            {
-                                MessageBox.Show(lendedObject.UserObject.comment);
-                            }
+
+                            CommentCheck(lendedObject);
                         }
 
                     }
@@ -69,17 +67,30 @@ namespace UdlaanSystem
                             PrintItemToList(scannedLendObject);
 
                             scannedUser = lendedObject.UserObject;
+
                             PrintUserData(lendedObject);
-                            if (lendedObject.UserObject.comment != "")
-                            {
-                                MessageBox.Show(lendedObject.UserObject.comment);
-                            }
+
+                            CommentCheck(lendedObject);
                         }
                         else
                         {
                             try
                             {
-                                PrintItemToList(scannedLendObject);
+                                if (scannedUser != null)
+                                {
+                                    if (scannedUser.hasPC && !scannedUser.isTeacher && scannedLendObject.itemObject.type == "Computer")
+                                    {
+                                        MessageBox.Show("Denne Bruger Har Allerede 1 Computer Og Er Ikke Lærer");
+                                    }
+                                    else
+                                    {
+                                        PrintItemToList(scannedLendObject);
+                                    }
+                                }
+                                else
+                                {
+                                    PrintItemToList(scannedLendObject);
+                                }
                             }
                             catch (Exception)
                             {
@@ -116,11 +127,41 @@ namespace UdlaanSystem
             LabelPhoneResult.Content = lendedObject.UserObject.phoneNumber;
             LabelPhoneResult.Visibility = Visibility.Visible;
 
-            LabelTeacherResult.Content = lendedObject.UserObject.isTeacher;
-            LabelTeacherResult.Visibility = Visibility.Visible;
+            if (lendedObject.UserObject.isTeacher)
+            {
+                LabelTeacherResult.Content = "Ja";
+            }
+            else
+            {
+                LabelTeacherResult.Content = "Nej";
+            }
 
-            LabelIsDisabledResult.Content = lendedObject.UserObject.isDisabled;
+            if (scannedUser.isDisabled)
+            {
+                LabelIsDisabledResult.Content = "Ja";
+                LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                LabelIsDisabledResult.Content = "Nej";
+                LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Green);
+            }
+
+            if (isUserScanned)
+            {
+                LabelIsScannedResult.Content = "Ja";
+                LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                LabelIsScannedResult.Content = "Nej";
+                LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Red);
+            }
+
+            LabelTeacherResult.Visibility = Visibility.Visible;
             LabelIsDisabledResult.Visibility = Visibility.Visible;
+            LabelIsScannedResult.Visibility = Visibility.Visible;
+            
 
 
             this.ListViewLend.Items.Clear();
@@ -157,18 +198,38 @@ namespace UdlaanSystem
         {
             if (scannedUser != null)
             {
-                if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
-                {
-                    if (LendController.Instance.GenLendedObject(scannedUser, scannedItems))
-                    {
-                        SmsController.Instance.GenerateLendReceipt(scannedUser, scannedItems);
-                        MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
+                int scannedItemsContainsComputer = 0;
 
-                        ClearUI();
-                }
-                    else
+                foreach (LendObject scannedItem in scannedItems)
+                {
+                    if (scannedItem.itemObject.type == "Computer")
                     {
-                        MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
+                        scannedItemsContainsComputer++;
+                    }
+                }
+                if (!scannedUser.isTeacher && scannedUser.hasPC && scannedItemsContainsComputer > 0)
+                {
+                    MessageBox.Show("OPS, udstyret blev IKKE udlånt! Brugeren har i forvejen 1 computer og denne bruger er ikke lærer");
+                }
+                else if(!scannedUser.isTeacher && !scannedUser.hasPC && scannedItemsContainsComputer > 1)
+                {
+                    MessageBox.Show("OPS, udstyret blev IKKE udlånt! Der er scannet mere end 1 computer og denne bruger er ikke lærer");
+                }
+                else
+                {
+                    if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
+                    {
+                        if (LendController.Instance.GenLendedObject(scannedUser, scannedItems))
+                        {
+                            SmsController.Instance.GenerateLendReceipt(scannedUser, scannedItems);
+                            MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
+
+                            ClearUI();
+                        }
+                        else
+                        {
+                            MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
+                        }
                     }
                 }
             }
@@ -230,6 +291,7 @@ namespace UdlaanSystem
             LabelPhoneResult.Visibility = Visibility.Hidden;
             LabelTeacherResult.Visibility = Visibility.Hidden;
             LabelIsDisabledResult.Visibility = Visibility.Hidden;
+            LabelIsScannedResult.Visibility = Visibility.Hidden;
 
             this.ListViewLend.Items.Clear();
             this.ListViewItems.Items.Clear();
@@ -243,6 +305,14 @@ namespace UdlaanSystem
         {
             UIUserNote uiUserNote = new UIUserNote(scannedUser);
             uiUserNote.ShowDialog();
+        }
+
+        private void CommentCheck(LendedObject lendedObject)
+        {
+            if (lendedObject.UserObject.comment != "")
+            {
+                MessageBox.Show(lendedObject.UserObject.comment);
+            }
         }
     }
 }
