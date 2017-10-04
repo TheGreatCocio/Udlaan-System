@@ -233,7 +233,7 @@ namespace UdlaanSystem
 
         private void ButtonComment_Click(object sender, RoutedEventArgs e)
         {
-            UIUserNote uiUserNote = new UIUserNote();
+            UIUserNote uiUserNote = new UIUserNote(scannedUser);
             uiUserNote.ShowDialog();
         }
     }

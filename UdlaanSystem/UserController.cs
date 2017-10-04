@@ -49,5 +49,10 @@ namespace UdlaanSystem
             UserObject userObject = new UserObject(fName, lName, zbcName, userMifare, phoneNumber, isDisabled, false, isTeacher, "");
             DALUser.Instance.UpdateUserInDB(userObject);
         }
+
+        public void UpdateUserNote (string note, string mifare)
+        {
+            DALUser.Instance.UpdateUserNote(note, mifare);
+        }
     }
 }
