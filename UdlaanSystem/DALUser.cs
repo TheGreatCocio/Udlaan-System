@@ -173,5 +173,22 @@ namespace UdlaanSystem
                 MysqlConnection.Close();
             }
         }
+        public void UpdateUserNote (string note, string mifare)
+        {
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("UPDATE users SET user_comment = '" + note +  "' WHERE user_mifare = '" + mifare + "'", MysqlConnection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("############################FAILED TO UPDATE USER IN DB: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+        }
     }
 }

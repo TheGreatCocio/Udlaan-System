@@ -19,16 +19,26 @@ namespace UdlaanSystem
     /// </summary>
     public partial class UIUserNote : Window
     {
+        private UserObject scannedUser = null;    
+
         public UIUserNote()
         {
             InitializeComponent();
+        }
+        public UIUserNote(UserObject currentUser)
+        {
+            InitializeComponent();
+            scannedUser = currentUser;
+            textBoxUserNote.Text = scannedUser.comment.ToString();
         }
 
         private bool firstRun = true;
 
         private void ButtonConfirmUserNote_Click(object sender, RoutedEventArgs e)
         {
-
+            UserController.Instance.UpdateUserNote(textBoxUserNote.Text, scannedUser.userMifare);
+            MessageBox.Show("Note Gemt");
+            this.Close();
         }
 
         private void TextBoxUserNote_TextChanged(object sender, TextChangedEventArgs e)
