@@ -53,7 +53,7 @@ namespace UdlaanSystem
                             PrintUserData(lendedObject);
                             if (lendedObject.UserObject.comment != "")
                             {
-                                MessageBox.Show(lendedObject.UserObject.comment);
+                                MessageBox.Show("Note Ubuy tidligere har skrevet om brugeren:" + Environment.NewLine + Environment.NewLine + lendedObject.UserObject.comment);
                             }
                         }
 
@@ -72,7 +72,7 @@ namespace UdlaanSystem
                             PrintUserData(lendedObject);
                             if (lendedObject.UserObject.comment != "")
                             {
-                                MessageBox.Show(lendedObject.UserObject.comment);
+                                MessageBox.Show("Note Ubuy tidligere har skrevet om brugeren:" + Environment.NewLine + Environment.NewLine + lendedObject.UserObject.comment);
                             }
                         }
                         else
