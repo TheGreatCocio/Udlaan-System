@@ -25,9 +25,6 @@ namespace UdlaanSystem
         {
             InitializeComponent();
             TextBoxMain.Focus();
-
-            ButtonReturn.IsEnabled = false;
-            ButtonLend.IsEnabled = false;
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
