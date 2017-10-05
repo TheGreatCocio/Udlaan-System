@@ -24,6 +24,7 @@ namespace UdlaanSystem
         public MainWindow()
         {
             InitializeComponent();
+            TextBoxMain.Focus();
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
@@ -220,18 +221,21 @@ namespace UdlaanSystem
                 }
                 this.ListViewLend.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, isOverdue, ""));
             }
+            TextBoxMain.Focus();
         }
 
         private void ButtonItem_Click(object sender, RoutedEventArgs e)
         {
             UIInputItem inputItembox = new UIInputItem();
             inputItembox.ShowDialog();
+            TextBoxMain.Focus();
         }
 
         private void ButtonUser_Click(object sender, RoutedEventArgs e)
         {
             UIInputUser inputUserbox = new UIInputUser();
             inputUserbox.ShowDialog();
+            TextBoxMain.Focus();
         }
 
         private void ButtonLend_Click(object sender, RoutedEventArgs e)
@@ -306,7 +310,8 @@ namespace UdlaanSystem
 
         private void ButtonStat_Click(object sender, RoutedEventArgs e)
         {
-
+            UIStat uiUserNote = new UIStat();
+            uiUserNote.ShowDialog();
         }
 
         //Når Datepickeren bliver loaded bliver dens valgte værdi sat til i morgen.
@@ -323,6 +328,7 @@ namespace UdlaanSystem
         private void ClearUI()
         {
             scannedItems = new List<LendObject>();
+            ScannedItemMifares = new List<string>();
             scannedUser = null;
 
             LabelNameResult.Visibility = Visibility.Hidden;
@@ -342,19 +348,22 @@ namespace UdlaanSystem
 
             isUserScanned = false;
             isItemsLended = null;
+
+            TextBoxMain.Focus();
         }
 
         private void ButtonComment_Click(object sender, RoutedEventArgs e)
         {
             UIUserNote uiUserNote = new UIUserNote(scannedUser);
             uiUserNote.ShowDialog();
+            TextBoxMain.Focus();
         }
 
         private void CommentCheck(LendedObject lendedObject)
         {
             if (lendedObject.UserObject.comment != "")
             {
-                MessageBox.Show(lendedObject.UserObject.comment);
+                MessageBox.Show(scannedUser.comment);
             }
         }
 
@@ -367,10 +376,12 @@ namespace UdlaanSystem
                     if (lendObject.itemObject.itemMifare == listViewObject.itemMifare)
                     {
                         scannedItems.Remove(lendObject);
+                        ScannedItemMifares.Remove(lendObject.itemObject.itemMifare);
                     }
                 }
             }
             RefreshListViewItems();
+            TextBoxMain.Focus();
         }
 
         private void RefreshListViewItems()
@@ -398,6 +409,7 @@ namespace UdlaanSystem
                 }
                 RefreshListViewItems();
             }
+            TextBoxMain.Focus();
         }
 
         public static bool CheckForInternetConnection()

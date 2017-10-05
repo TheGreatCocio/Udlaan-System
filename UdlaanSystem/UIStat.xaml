@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="UIStat" Height="370.822" Width="837.93" Background="#FFEEEEEE">
+        Title="UIStat" Height="382.048" Width="844.448" Background="#FFEEEEEE">
     <Grid>
         <ListView x:Name="listViewStatToday" HorizontalAlignment="Left" Height="280" Margin="10,50,0,0" VerticalAlignment="Top" Width="400">
             <ListView.View>
