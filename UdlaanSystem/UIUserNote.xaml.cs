@@ -29,7 +29,7 @@ namespace UdlaanSystem
         {
             InitializeComponent();
             scannedUser = currentUser;
-            textBoxUserNote.Text = scannedUser.comment.ToString();
+            textBoxUserNote.Text = UserController.Instance.GetUserNote(scannedUser.userMifare);
         }
 
         private bool firstRun = true;

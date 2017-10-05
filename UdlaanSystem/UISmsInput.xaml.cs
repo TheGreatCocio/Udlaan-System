@@ -24,6 +24,16 @@ namespace UdlaanSystem
         public UISmsInput()
         {
             InitializeComponent();
+            textBoxSmsInput.Focus();
+        }
+
+        private void textBoxSmsInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                inputCode = Convert.ToInt32(textBoxSmsInput.Text);
+                this.Close();
+            }
         }
 
         private void buttonDone_Click(object sender, RoutedEventArgs e)

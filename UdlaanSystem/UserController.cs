@@ -46,13 +46,18 @@ namespace UdlaanSystem
 
         public void CreateUserObjectToUpdateInDB(string userMifare, string fName, string lName, string zbcName, int phoneNumber, bool isDisabled, bool isTeacher)
         {
-            UserObject userObject = new UserObject(fName, lName, zbcName, userMifare, phoneNumber, isDisabled, false, isTeacher, "");
+            UserObject userObject = new UserObject(fName, lName, zbcName, userMifare, phoneNumber, isTeacher, false, isDisabled, "");
             DALUser.Instance.UpdateUserInDB(userObject);
         }
 
         public void UpdateUserNote (string note, string mifare)
         {
             DALUser.Instance.UpdateUserNote(note, mifare);
+        }
+
+        public string GetUserNote(string mifare)
+        {
+            return DALUser.Instance.GetUserNote(mifare);
         }
     }
 }

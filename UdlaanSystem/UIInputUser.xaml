@@ -27,8 +27,8 @@
         <Label x:Name="LabelPhoneNumber" Content="Mobil Nr." HorizontalAlignment="Left" Margin="23,113,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelFNameResult" Content="" HorizontalAlignment="Left" Margin="83,169,0,0" VerticalAlignment="Top" Width="180"/>
         <Label x:Name="LabelLNameResult" Content="" HorizontalAlignment="Left" Margin="91,200,0,0" VerticalAlignment="Top" Width="172"/>
-        <CheckBox x:Name="checkBoxIsTeacher" Content="" HorizontalAlignment="Left" Margin="91,237,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labelIsTeacher" Content="Is Teacher:" HorizontalAlignment="Left" Margin="27,231,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBoxIsTeacher" Content="" HorizontalAlignment="Left" Margin="78,237,0,0" VerticalAlignment="Top" Click="checkBoxIsTeacher_CheckedChanged"/>
+        <Label x:Name="labelIsTeacher" Content="Lærer:" HorizontalAlignment="Left" Margin="27,231,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

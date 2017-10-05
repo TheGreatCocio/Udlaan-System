@@ -23,6 +23,7 @@ namespace UdlaanSystem
         public UIInputUser()
         {
             InitializeComponent();
+            textBoxZbcName.Focus();
         }
 
         public void TextBoxZbcName_TextChanged(object sender, TextChangedEventArgs e)
@@ -61,7 +62,6 @@ namespace UdlaanSystem
                 LabelLNameResult.Content = userObject.lName;
                 checkBoxIsTeacher.IsChecked = userObject.isTeacher;
             }
-            
         }
 
         public void TextBoxUserMifare_TextChanged(object sender, TextChangedEventArgs e)
@@ -77,6 +77,18 @@ namespace UdlaanSystem
         }
 
         public void TextBoxPhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (LabelFNameResult.Content.ToString() == "" || textBoxUserMifare.Text == "" || textBoxPhoneNumber.Text == "")
+            {
+                ButtonCreateOrUpdate.IsEnabled = false;
+            }
+            else
+            {
+                ButtonCreateOrUpdate.IsEnabled = true;
+            }
+        }
+
+        public void checkBoxIsTeacher_CheckedChanged(object sender, EventArgs e)
         {
             if (LabelFNameResult.Content.ToString() == "" || textBoxUserMifare.Text == "" || textBoxPhoneNumber.Text == "")
             {
@@ -104,7 +116,6 @@ namespace UdlaanSystem
                         MessageBox.Show("Brugeren blev ikke tilføjet");
                         throw;
                     }
-                    
                 }
                 else
                 {
@@ -118,7 +129,6 @@ namespace UdlaanSystem
                         MessageBox.Show("Brugeren blev ikke opdateret");
                         throw;
                     }
-                    
                 }
             }
             this.Close();
