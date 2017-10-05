@@ -15,7 +15,7 @@
         <ComboBox Name="ComboBoxManufacturers" HorizontalAlignment="Left" Margin="36,71,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxManufacturer_SelectionChanged"/>
         <ComboBox Name="ComboBoxModels" HorizontalAlignment="Left" Margin="36,117,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxModels_SelectionChanged"/>
         <TextBox x:Name="textBoxID" HorizontalAlignment="Left" Height="23" Margin="36,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBoxSerialNumber" HorizontalAlignment="Left" Height="23" Margin="36,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBoxSerialNumber" CharacterCasing="Upper" HorizontalAlignment="Left" Height="23" Margin="36,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textBoxItemMifare" HorizontalAlignment="Left" Height="23" Margin="36,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ListView x:Name="ListViewAddItems" HorizontalAlignment="Left" Height="280" Margin="108.427,25,0,0" VerticalAlignment="Top" Width="619" Grid.Column="1">
             <ListView.View>

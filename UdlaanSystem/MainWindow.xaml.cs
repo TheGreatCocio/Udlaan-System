@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,7 @@ namespace UdlaanSystem
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
+        private List<string> ScannedItemMifares = new List<string>();
         private UserObject scannedUser = null;
         private bool isUserScanned = false;
 
@@ -42,7 +44,14 @@ namespace UdlaanSystem
                         LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text);
                         if (lendedObject.UserObject == null)
                         {
-                            MessageBox.Show("Findes Ikke I Databasen!!");
+                            if (!CheckForInternetConnection())
+                            {
+                                MessageBox.Show("Der Er Ikke Noget Internet");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Findes Ikke I Databasen!!");
+                            }
                         }
                         else
                         {
@@ -76,11 +85,18 @@ namespace UdlaanSystem
                         {
                             try
                             {
-                                if (scannedUser != null)
+                                if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
                                 {
-                                    if (scannedUser.hasPC && !scannedUser.isTeacher && scannedLendObject.itemObject.type == "Computer")
+                                    if (scannedUser != null)
                                     {
-                                        MessageBox.Show("Denne Bruger Har Allerede 1 Computer Og Er Ikke Lærer");
+                                        if (scannedUser.hasPC && !scannedUser.isTeacher && scannedLendObject.itemObject.type == "Computer")
+                                        {
+                                            MessageBox.Show("Denne Bruger Har Allerede 1 Computer Og Er Ikke Lærer");
+                                        }
+                                        else
+                                        {
+                                            PrintItemToList(scannedLendObject);
+                                        }
                                     }
                                     else
                                     {
@@ -89,12 +105,12 @@ namespace UdlaanSystem
                                 }
                                 else
                                 {
-                                    PrintItemToList(scannedLendObject);
+                                    MessageBox.Show("Du Har Allerede Scannet Dette Produkt");
                                 }
                             }
                             catch (Exception)
                             {
-                                MessageBox.Show("Vælg venligst en dato");
+                                MessageBox.Show("Noget Gik Galt Fejlkode: 10x5");
                             }
                         }
                     }
@@ -107,7 +123,8 @@ namespace UdlaanSystem
         private void PrintItemToList(LendObject lendObject)
         {
             scannedItems.Add(lendObject);
-            this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
+            ScannedItemMifares.Add(lendObject.itemObject.itemMifare);
+            this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null, ""));
         }
 
         
@@ -161,8 +178,8 @@ namespace UdlaanSystem
             LabelTeacherResult.Visibility = Visibility.Visible;
             LabelIsDisabledResult.Visibility = Visibility.Visible;
             LabelIsScannedResult.Visibility = Visibility.Visible;
-            
 
+            ButtonComment.IsEnabled = true;
 
             this.ListViewLend.Items.Clear();
 
@@ -178,7 +195,7 @@ namespace UdlaanSystem
                 {
                     isOverdue = false;
                 }
-                this.ListViewLend.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, isOverdue));
+                this.ListViewLend.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, isOverdue, ""));
             }
         }
 
@@ -266,7 +283,7 @@ namespace UdlaanSystem
 
         private void ButtonStat_Click(object sender, RoutedEventArgs e)
         {
-            //bool test = SmsController.Instance.GenerateVerificationSms(30621451);
+
         }
 
         //Når Datepickeren bliver loaded bliver dens valgte værdi sat til i morgen.
@@ -292,6 +309,8 @@ namespace UdlaanSystem
             LabelTeacherResult.Visibility = Visibility.Hidden;
             LabelIsDisabledResult.Visibility = Visibility.Hidden;
             LabelIsScannedResult.Visibility = Visibility.Hidden;
+
+            ButtonComment.IsEnabled = false;
 
             this.ListViewLend.Items.Clear();
             this.ListViewItems.Items.Clear();
@@ -335,7 +354,7 @@ namespace UdlaanSystem
             this.ListViewItems.Items.Clear();
             foreach (LendObject lendObject in scannedItems)
             {
-                this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null));
+                this.ListViewItems.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, null, ""));
             }
         }
 
@@ -354,6 +373,24 @@ namespace UdlaanSystem
                     }
                 }
                 RefreshListViewItems();
+            }
+        }
+
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (client.OpenRead("http://clients3.google.com/generate_204"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
     }

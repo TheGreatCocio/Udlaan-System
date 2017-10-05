@@ -101,7 +101,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="ButtonStat" Content="Vis Statestik" HorizontalAlignment="Left" Margin="380,12,0,0" VerticalAlignment="Top" Width="131" Grid.Column="1" Click="ButtonStat_Click" Foreground="White" Visibility="Hidden">
+        <Button x:Name="ButtonStat" Content="Vis Statestik" HorizontalAlignment="Left" Margin="437,12,0,0" VerticalAlignment="Top" Width="131" Grid.Column="1" Click="ButtonStat_Click" Foreground="White" Visibility="Visible">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
@@ -144,7 +144,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="ButtonComment" Content="Skriv En Kommentar" HorizontalAlignment="Left" Margin="233,311,0,0" VerticalAlignment="Top" Width="121" Foreground="White" Height="22" Click="ButtonComment_Click" >
+        <Button x:Name="ButtonComment" Content="Skriv En Kommentar" IsEnabled="False" HorizontalAlignment="Left" Margin="233,311,0,0" VerticalAlignment="Top" Width="121" Foreground="White" Height="22" Click="ButtonComment_Click" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
