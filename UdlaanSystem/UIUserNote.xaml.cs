@@ -37,7 +37,14 @@ namespace UdlaanSystem
         private void ButtonConfirmUserNote_Click(object sender, RoutedEventArgs e)
         {
             UserController.Instance.UpdateUserNote(textBoxUserNote.Text, scannedUser.userMifare);
-            MessageBox.Show("Note Gemt");
+            if (textBoxUserNote.Text == "")
+            {
+                MessageBox.Show("Note Slettet");
+            }
+            else
+            {
+                MessageBox.Show("Note Gemt");
+            }
             this.Close();
         }
 
