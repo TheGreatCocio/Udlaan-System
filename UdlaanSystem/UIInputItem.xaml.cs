@@ -189,6 +189,26 @@ namespace UdlaanSystem
             }
         }
 
+        private void BtnDeleteSelectedItems_Click(object sender, RoutedEventArgs e)
+        {
+            for(int i = 0; i < ListViewAddItems.Items.Count; i++)
+            {
+                foreach (ItemObject itemObject in itemsToInsert.ToList())
+                {
+                    ItemObject TESTITEM = ListViewAddItems.Items[i] as ItemObject;
+                    
+                    if (ListViewAddItems.SelectedItems.Contains(TESTITEM))
+                    {
+                        if (itemObject.itemMifare == TESTITEM.itemMifare)
+                        {
+                            itemsToInsert.Remove(itemObject);
+                            ListViewAddItems.Items.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+        }
+
         private void ClearBoxes()
         {
             textBoxSerialNumber.Clear();
