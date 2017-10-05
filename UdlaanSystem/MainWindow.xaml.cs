@@ -30,6 +30,8 @@ namespace UdlaanSystem
         private List<string> ScannedItemMifares = new List<string>();
         private UserObject scannedUser = null;
         private bool isUserScanned = false;
+        private bool? isItemsLended = null;
+
 
         private void OnMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {
@@ -72,26 +74,47 @@ namespace UdlaanSystem
 
                         if (userMifare != "")
                         {
-                            LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
-                            PrintItemToList(scannedLendObject);
+                            //ScannedItem Er Udlånt
+                            if (isItemsLended != false)
+                            {
+                                isItemsLended = true;
+                                if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
+                                {
+                                    LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
+                                    PrintItemToList(scannedLendObject);
 
-                            scannedUser = lendedObject.UserObject;
+                                    scannedUser = lendedObject.UserObject;
 
-                            PrintUserData(lendedObject);
+                                    PrintUserData(lendedObject);
 
-                            CommentCheck(lendedObject);
+                                    CommentCheck(lendedObject);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Du må IKKE scanne udstyr der er udlånt med udstyr der ikke er udlånt!");
+                            }
                         }
                         else
                         {
-                            try
+                            //ScannedItem Er IKKE Udlånt
+                            if (isItemsLended != true)
                             {
-                                if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
+                                isItemsLended = false;
+                                try
                                 {
-                                    if (scannedUser != null)
+                                    if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
                                     {
-                                        if (scannedUser.hasPC && !scannedUser.isTeacher && scannedLendObject.itemObject.type == "Computer")
+                                        if (scannedUser != null)
                                         {
-                                            MessageBox.Show("Denne Bruger Har Allerede 1 Computer Og Er Ikke Lærer");
+                                            if (scannedUser.hasPC && !scannedUser.isTeacher && scannedLendObject.itemObject.type == "Computer")
+                                            {
+                                                MessageBox.Show("Denne Bruger Har Allerede 1 Computer Og Er Ikke Lærer");
+                                            }
+                                            else
+                                            {
+                                                PrintItemToList(scannedLendObject);
+                                            }
                                         }
                                         else
                                         {
@@ -100,17 +123,17 @@ namespace UdlaanSystem
                                     }
                                     else
                                     {
-                                        PrintItemToList(scannedLendObject);
+                                        MessageBox.Show("Du Har Allerede Scannet Dette Produkt");
                                     }
                                 }
-                                else
+                                catch (Exception)
                                 {
-                                    MessageBox.Show("Du Har Allerede Scannet Dette Produkt");
+                                    MessageBox.Show("Noget Gik Galt Fejlkode: 10x5");
                                 }
                             }
-                            catch (Exception)
+                            else
                             {
-                                MessageBox.Show("Noget Gik Galt Fejlkode: 10x5");
+                                MessageBox.Show("Du må IKKE scanne udstyr der ikke er udlånt med udstyr der er udlånt!");
                             }
                         }
                     }
@@ -318,6 +341,7 @@ namespace UdlaanSystem
             this.datePickerReturn.SelectedDate = DateTime.Now;
 
             isUserScanned = false;
+            isItemsLended = null;
         }
 
         private void ButtonComment_Click(object sender, RoutedEventArgs e)

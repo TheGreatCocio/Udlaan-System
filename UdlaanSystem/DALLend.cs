@@ -191,6 +191,27 @@ namespace UdlaanSystem
             }
         }
 
+        public List<LendedObject> GetStatInformation ()
+        {
+            List<LendedObject> statItemList = new List<LendedObject>();
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT", MysqlConnection);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("BOOOOOOOOOOOOOOOOOOOOOOOM");
+                throw;
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+            return statItemList;
+        }
+
         private string FormatDateBackEnd(string date)
         {
             DateTime temp = Convert.ToDateTime(date);
