@@ -17,7 +17,7 @@
         <TextBox x:Name="textBoxID" HorizontalAlignment="Left" Height="23" Margin="36,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textBoxSerialNumber" HorizontalAlignment="Left" Height="23" Margin="36,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textBoxItemMifare" HorizontalAlignment="Left" Height="23" Margin="36,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListView x:Name="ListViewAddItems" HorizontalAlignment="Left" Height="280" Margin="108.427,25,0,0" VerticalAlignment="Top" Width="619" Grid.Column="1">
+        <ListView x:Name="ListViewAddItems" HorizontalAlignment="Left" Height="280" Margin="108.427,25,0,0" VerticalAlignment="Top" Width="619" Grid.Column="1" SelectionMode="Multiple">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
@@ -43,6 +43,16 @@
             </Button.Background>
         </Button>
         <Button x:Name="btnAddAllItemsToDB" Content="Tilføj Til DB" HorizontalAlignment="Left" Margin="651.427,318,0,0" VerticalAlignment="Top" Width="75" Click="btnAddAllItemsToDB_Click" Foreground="White" Grid.Column="1">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnDeleteSelectedItems" Content="Fjern Valgt Udstyr Fra Listen" HorizontalAlignment="Left" Margin="419,318,0,0" VerticalAlignment="Top" Width="170" Foreground="White" Grid.Column="1" Click="BtnDeleteSelectedItems_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>

@@ -339,7 +339,7 @@ namespace UdlaanSystem
             }
         }
 
-        private void datePickerReturn_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void DatePickerReturn_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ListViewItems.SelectedItems.Count != 0)
             {
