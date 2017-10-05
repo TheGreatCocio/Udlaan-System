@@ -70,7 +70,18 @@ namespace UdlaanSystem
                     else
                     {
                         string userMifare = LendController.Instance.CheckIfLended(scannedItem.itemMifare);
-                        LendObject scannedLendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date, null);
+                        TimeSpan timeSpanMonToThur = new TimeSpan(15, 30, 00);
+                        TimeSpan timeSpanFri = new TimeSpan(13, 30, 00);
+                        LendObject scannedLendObject = null;
+                        
+                        if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+                        {
+                            scannedLendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date + timeSpanFri, null);
+                        }
+                        else
+                        {
+                            scannedLendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date + timeSpanMonToThur, null);
+                        }
 
                         if (userMifare != "")
                         {
@@ -210,13 +221,24 @@ namespace UdlaanSystem
             {
                 bool? isOverdue = null;
 
-                if (lendObject.returnDate <= DateTime.Now && lendObject.returnedDate == null)
+                if (lendObject.returnDate.Date < DateTime.Now.Date && lendObject.returnedDate == null)
                 {
                     isOverdue = true;
                 }
-                else if (lendObject.returnDate > DateTime.Now && lendObject.returnedDate == null)
+                else if (lendObject.returnDate.Date > DateTime.Now.Date && lendObject.returnedDate == null)
                 {
                     isOverdue = false;
+                }
+                else if (lendObject.returnDate.Date == DateTime.Now.Date && lendObject.returnedDate == null)
+                {
+                    if (lendObject.returnDate.TimeOfDay < DateTime.Now.TimeOfDay && lendObject.returnedDate == null)
+                    {
+                        isOverdue = true;
+                    }
+                    else if (lendObject.returnDate.TimeOfDay >= DateTime.Now.TimeOfDay && lendObject.returnedDate == null)
+                    {
+                        isOverdue = false;
+                    }
                 }
                 this.ListViewLend.Items.Add(new ListViewObject(lendObject.itemObject.itemMifare, lendObject.itemObject.type, lendObject.itemObject.manufacturer, lendObject.itemObject.model, lendObject.itemObject.id, lendObject.itemObject.serialNumber, lendObject.lendDate, lendObject.returnDate, lendObject.returnedDate, isOverdue, ""));
             }
@@ -312,7 +334,7 @@ namespace UdlaanSystem
         //Når Datepickeren bliver loaded bliver dens valgte værdi sat til i morgen.
         private void DatePickerReturn_Loaded(object sender, RoutedEventArgs e)
         {
-            datePickerReturn.SelectedDate = DateTime.Now.AddDays(1);
+            datePickerReturn.SelectedDate = DateTime.Now;
         }
 
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
@@ -384,19 +406,27 @@ namespace UdlaanSystem
 
         private void DatePickerReturn_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ListViewItems.SelectedItems.Count != 0)
+            if (datePickerReturn.SelectedDate.Value.DayOfWeek == DayOfWeek.Saturday || datePickerReturn.SelectedDate.Value.DayOfWeek == DayOfWeek.Sunday)
             {
-                foreach (ListViewObject listViewObject in ListViewItems.SelectedItems)
+                MessageBox.Show("Du må ikke vælge at afleveringsdatoen skal være i weekenden!");
+                datePickerReturn.SelectedDate = DateTime.Now;
+            }
+            else
+            {
+                if (ListViewItems.SelectedItems.Count != 0)
                 {
-                    foreach (LendObject lendObject in scannedItems.ToList())
+                    foreach (ListViewObject listViewObject in ListViewItems.SelectedItems)
                     {
-                        if (lendObject.itemObject.itemMifare == listViewObject.itemMifare)
+                        foreach (LendObject lendObject in scannedItems.ToList())
                         {
-                            lendObject.returnDate = datePickerReturn.SelectedDate.Value.Date;
+                            if (lendObject.itemObject.itemMifare == listViewObject.itemMifare)
+                            {
+                                lendObject.returnDate = datePickerReturn.SelectedDate.Value.Date;
+                            }
                         }
                     }
+                    RefreshListViewItems();
                 }
-                RefreshListViewItems();
             }
         }
 
