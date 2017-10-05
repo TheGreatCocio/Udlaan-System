@@ -25,6 +25,9 @@ namespace UdlaanSystem
         {
             InitializeComponent();
             TextBoxMain.Focus();
+
+            ButtonReturn.IsEnabled = false;
+            ButtonLend.IsEnabled = false;
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
@@ -151,6 +154,16 @@ namespace UdlaanSystem
                     }
                     TextBoxMain.Text = "";
                     TextBoxMain.Focus();
+                    if (isItemsLended == true)
+                    {
+                        ButtonReturn.IsEnabled = true;
+                        ButtonLend.IsEnabled = false;
+                    }
+                    else
+                    {
+                        ButtonLend.IsEnabled = true;
+                        ButtonReturn.IsEnabled = false;
+                    }
                 }
             }
         }
@@ -372,6 +385,9 @@ namespace UdlaanSystem
             isItemsLended = null;
 
             TextBoxMain.Focus();
+
+            ButtonReturn.IsEnabled = false;
+            ButtonLend.IsEnabled = false;
         }
 
         private void ButtonComment_Click(object sender, RoutedEventArgs e)
