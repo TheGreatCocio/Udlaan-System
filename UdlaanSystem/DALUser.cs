@@ -214,5 +214,32 @@ namespace UdlaanSystem
             }
             return userNote;
         }
+
+        public bool IsUser(string mifare)
+        {
+            bool isUser = false;
+
+                try
+                {
+                    ConnectMySql();
+                    MySqlCommand cmd = new MySqlCommand("SELECT user_mifare FROM users WHERE user_mifare = '" + mifare + "'", MysqlConnection);
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        isUser = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MysqlConnection.Close();
+                    Debug.WriteLine("############################FAILED: " + ex);
+                }
+                finally
+                {
+                    MysqlConnection.Close();
+                }
+
+            return isUser;
+        }
     }
 }
