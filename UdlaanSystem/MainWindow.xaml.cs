@@ -29,6 +29,7 @@ namespace UdlaanSystem
 
         private List<LendObject> scannedItems = new List<LendObject>();
         private List<string> ScannedItemMifares = new List<string>();
+        private UserObject userInUse = null;
         private UserObject scannedUser = null;
         private bool isUserScanned = false;
         private bool? isItemsLended = null;
@@ -42,7 +43,7 @@ namespace UdlaanSystem
                 {
                     ItemObject scannedItem = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
 
-                    if (scannedItem == null)
+                    if (scannedItem == null)//On User Scanned
                     {
                         LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text);
                         if (lendedObject.UserObject == null)
@@ -51,6 +52,10 @@ namespace UdlaanSystem
                             {
                                 MessageBox.Show("Der Er Ikke Noget Internet");
                             }
+                            else if (isItemsLended == true && lendedObject.UserObject.userMifare != userInUse.userMifare)
+                            {
+                                MessageBox.Show("FUCK YEAH");
+                            }
                             else
                             {
                                 MessageBox.Show("Findes Ikke I Databasen!!");
@@ -58,17 +63,24 @@ namespace UdlaanSystem
                         }
                         else
                         {
-                            isUserScanned = true;
+                            if (isItemsLended == true && lendedObject.UserObject.userMifare != userInUse.userMifare)
+                            {
+                                MessageBox.Show("Du kan ikke scanne andre brugere end den udstyret tilhøre!");
+                            }
+                            else
+                            {
+                                isUserScanned = true;
 
-                            scannedUser = lendedObject.UserObject;
+                                userInUse = lendedObject.UserObject;
 
-                            PrintUserData(lendedObject);
+                                PrintUserData(lendedObject);
 
-                            CommentCheck(lendedObject);
+                                CommentCheck(lendedObject);
+                            }
                         }
 
                     }
-                    else
+                    else//On Items Scanned
                     {
                         string userMifare = LendController.Instance.CheckIfLended(scannedItem.itemMifare);
                         TimeSpan timeSpanMonToThur = new TimeSpan(15, 30, 00);
@@ -89,17 +101,34 @@ namespace UdlaanSystem
                             //ScannedItem Er Udlånt
                             if (isItemsLended != false)
                             {
-                                isItemsLended = true;
-                                if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
+                                if (userInUse == null || userMifare == userInUse.userMifare)
                                 {
-                                    LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
-                                    PrintItemToList(scannedLendObject);
+                                    isItemsLended = true;
+                                    if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
+                                    {
+                                        LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
 
-                                    scannedUser = lendedObject.UserObject;
+                                        foreach (LendObject lendObject in lendedObject.LendObjects)
+                                        {
+                                            if (lendObject.itemObject == scannedLendObject.itemObject)
+                                            {
+                                                scannedLendObject.returnDate = lendObject.returnDate;
+                                                scannedLendObject.lendDate = lendObject.lendDate;
+                                            }
+                                        }
 
-                                    PrintUserData(lendedObject);
+                                        PrintItemToList(scannedLendObject);
 
-                                    CommentCheck(lendedObject);
+                                        userInUse = lendedObject.UserObject;
+
+                                        PrintUserData(lendedObject);
+
+                                        CommentCheck(lendedObject);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Du kan kun scanne udstyr er udlånt til samme bruger!");
                                 }
                             }
                             else
@@ -117,9 +146,9 @@ namespace UdlaanSystem
                                 {
                                     if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
                                     {
-                                        if (scannedUser != null)
+                                        if (userInUse != null)
                                         {
-                                            if (scannedUser.hasPC && !scannedUser.isTeacher && scannedLendObject.itemObject.type == "Computer")
+                                            if (userInUse.hasPC && !userInUse.isTeacher && scannedLendObject.itemObject.type == "Computer")
                                             {
                                                 MessageBox.Show("Denne Bruger Har Allerede 1 Computer Og Er Ikke Lærer");
                                             }
@@ -198,7 +227,7 @@ namespace UdlaanSystem
                 LabelTeacherResult.Content = "Nej";
             }
 
-            if (scannedUser.isDisabled)
+            if (userInUse.isDisabled)
             {
                 LabelIsDisabledResult.Content = "Ja";
                 LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Red);
@@ -272,7 +301,7 @@ namespace UdlaanSystem
 
         private void ButtonLend_Click(object sender, RoutedEventArgs e)
         {
-            if (scannedUser != null)
+            if (userInUse != null)
             {
                 int scannedItemsContainsComputer = 0;
 
@@ -283,21 +312,21 @@ namespace UdlaanSystem
                         scannedItemsContainsComputer++;
                     }
                 }
-                if (!scannedUser.isTeacher && scannedUser.hasPC && scannedItemsContainsComputer > 0)
+                if (!userInUse.isTeacher && userInUse.hasPC && scannedItemsContainsComputer > 0)
                 {
                     MessageBox.Show("OPS, udstyret blev IKKE udlånt! Brugeren har i forvejen 1 computer og denne bruger er ikke lærer");
                 }
-                else if(!scannedUser.isTeacher && !scannedUser.hasPC && scannedItemsContainsComputer > 1)
+                else if(!userInUse.isTeacher && !userInUse.hasPC && scannedItemsContainsComputer > 1)
                 {
                     MessageBox.Show("OPS, udstyret blev IKKE udlånt! Der er scannet mere end 1 computer og denne bruger er ikke lærer");
                 }
                 else
                 {
-                    if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
+                    if (SmsController.Instance.GenerateVerificationSms(userInUse.phoneNumber))
                     {
-                        if (LendController.Instance.GenLendedObject(scannedUser, scannedItems))
+                        if (LendController.Instance.GenLendedObject(userInUse, scannedItems))
                         {
-                            SmsController.Instance.GenerateLendReceipt(scannedUser, scannedItems);
+                            SmsController.Instance.GenerateLendReceipt(userInUse, scannedItems);
                             MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
 
                             ClearUI();
@@ -319,11 +348,11 @@ namespace UdlaanSystem
         {
             if (isUserScanned == true)
             {
-                if (SmsController.Instance.GenerateVerificationSms(scannedUser.phoneNumber))
+                if (SmsController.Instance.GenerateVerificationSms(userInUse.phoneNumber))
                 {
                     if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
                     {
-                        SmsController.Instance.GenerateReturnReceipt(scannedUser, scannedItems);
+                        SmsController.Instance.GenerateReturnReceipt(userInUse, scannedItems);
                         MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
 
                         ClearUI();
@@ -361,7 +390,7 @@ namespace UdlaanSystem
         {
             scannedItems = new List<LendObject>();
             ScannedItemMifares = new List<string>();
-            scannedUser = null;
+            userInUse = null;
 
             LabelNameResult.Visibility = Visibility.Hidden;
             LabelZbcNameResult.Visibility = Visibility.Hidden;
@@ -389,7 +418,7 @@ namespace UdlaanSystem
 
         private void ButtonComment_Click(object sender, RoutedEventArgs e)
         {
-            UIUserNote uiUserNote = new UIUserNote(scannedUser);
+            UIUserNote uiUserNote = new UIUserNote(userInUse);
             uiUserNote.ShowDialog();
             TextBoxMain.Focus();
         }
@@ -398,7 +427,7 @@ namespace UdlaanSystem
         {
             if (lendedObject.UserObject.comment != "")
             {
-                MessageBox.Show(scannedUser.comment);
+                MessageBox.Show(userInUse.comment);
             }
         }
 

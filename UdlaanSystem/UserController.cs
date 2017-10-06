@@ -59,5 +59,10 @@ namespace UdlaanSystem
         {
             return DALUser.Instance.GetUserNote(mifare);
         }
+
+        public bool IsUser(string mifare)
+        {
+            return DALUser.Instance.IsUser(mifare);
+        }
     }
 }
