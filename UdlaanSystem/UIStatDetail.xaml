@@ -5,21 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="UIStatDetail" Height="160.743" Width="614.325">
+        Title="UIStatDetail" Height="326.743" Width="614.325">
     <Grid>
-        <Button x:Name="button" Content="OK" HorizontalAlignment="Left" Margin="520,100,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label x:Name="labelZbcname" Content="LabelZbcnavn" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelFname" Content="LabelFornavn" HorizontalAlignment="Left" Margin="114,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelLname" Content="LabelEfternavn" HorizontalAlignment="Left" Margin="221,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelPhoneNumber" Content="LabelTelefonNummer" HorizontalAlignment="Left" Margin="339,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelIsTeacher" Content="LabelErIkkeLærer" HorizontalAlignment="Left" Margin="485,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelType" Content="LabelType" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelManufacturer" Content="LabelProducent" HorizontalAlignment="Left" Margin="114,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelModel" Content="LabelModel" HorizontalAlignment="Left" Margin="221,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelID" Content="LabelID" HorizontalAlignment="Left" Margin="339,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelSerialNumber" Content="LabelSerialNumber" HorizontalAlignment="Left" Margin="485,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelLendDate" Content="LabelLendDate" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
-        <Label x:Name="labelDueDate" Content="LabelAfleveringsDato" HorizontalAlignment="Left" Margin="114,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelZbcname" Content="Zbcnavn :" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelFname" Content="Fornavn :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelLname" Content="Efternavn :" HorizontalAlignment="Left" Margin="229,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelPhoneNumber" Content="Telefon Nummer :" HorizontalAlignment="Left" Margin="229,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelIsTeacher" Content="Ansat :" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelType" Content="Type :" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelManufacturer" Content="Producent :" HorizontalAlignment="Left" Margin="229,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelModel" Content="Model :" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelID" Content="ID :" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelSerialNumber" Content="Serie Nummer :" HorizontalAlignment="Left" Margin="229,155,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelLendDate" Content="Udlåns Dato :" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
+        <Label x:Name="labelReturnDate" Content="Afleverings Dato :" HorizontalAlignment="Left" Margin="229,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303"/>
 
+        <Label x:Name="labelZbcnameResult" Content="LabelZbcnameResult" HorizontalAlignment="Left" Margin="71,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelFnameResult" Content="LabelFnameResult" HorizontalAlignment="Left" Margin="68,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelLnameResult" Content="LabelEnameResult" HorizontalAlignment="Left" Margin="294,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelPhoneNumberResult" Content="LabelPhoneNumberResult" HorizontalAlignment="Left" Margin="333,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelIsTeacherResult" Content="LabelIsTeacherResult" HorizontalAlignment="Left" Margin="55,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelTypeResult" Content="LabelTypeResult" HorizontalAlignment="Left" Margin="51,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelManufacturerResult" Content="LabelManufacturerResult" HorizontalAlignment="Left" Margin="300,124,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelModelResult" Content="LabelModelResult" HorizontalAlignment="Left" Margin="60,155,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelIDResult" Content="LabelIDResult" HorizontalAlignment="Left" Margin="39,186,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelSerialNumberResult" Content="LabelSerialNumberResult" HorizontalAlignment="Left" Margin="322,155,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelLendDateResult" Content="LabelLendDateResult" HorizontalAlignment="Left" Margin="92,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+        <Label x:Name="labelReturnDateResult" Content="LabelAfleveringsDatoResult" HorizontalAlignment="Left" Margin="333,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
+
+        <Button x:Name="button" Content="OK" HorizontalAlignment="Left" Margin="521,266,0,0" VerticalAlignment="Top" Width="75" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

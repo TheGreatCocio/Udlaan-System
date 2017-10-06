@@ -5,31 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="UIStat" Height="382.048" Width="844.448" Background="#FFEEEEEE">
+        Title="Statestikker" Height="382.048" Width="1060" Background="#FFEEEEEE">
     <Grid>
-        <ListView x:Name="listViewStatToday" HorizontalAlignment="Left" Height="280" Margin="10,50,0,0" VerticalAlignment="Top" Width="400">
+        <ListView x:Name="listViewStatToday" HorizontalAlignment="Left" Height="280" Margin="10,50,0,0" VerticalAlignment="Top" Width="430">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
-                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding Manufacturer}" />
-                    <GridViewColumn Header="Model" Width="97" DisplayMemberBinding="{Binding Model}" />
-                    <GridViewColumn Header="ZBCnavn" Width="74" DisplayMemberBinding="{Binding ZbcName}" />
+                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
+                    <GridViewColumn Header="Model" Width="97" DisplayMemberBinding="{Binding model}" />
+                    <GridViewColumn Header="ZBCnavn" Width="99" DisplayMemberBinding="{Binding zbcName}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="listViewStatAllTime" HorizontalAlignment="Left" Height="280" Margin="420,50,0,0" VerticalAlignment="Top" Width="400">
+        <ListView x:Name="listViewStatAllTime" HorizontalAlignment="Left" Height="280" Margin="445,50,0,0" VerticalAlignment="Top" Width="585" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
-                    <GridViewColumn Header="Producent" Width="74" DisplayMemberBinding="{Binding Manufacturer}" />
-                    <GridViewColumn Header="Model" Width="74" DisplayMemberBinding="{Binding Model}" />
-                    <GridViewColumn Header="ZBCnavn" Width="74" DisplayMemberBinding="{Binding ZbcName}" />
-                    <GridViewColumn Header="Afleveringsdato" Width="95" DisplayMemberBinding="{Binding ReturnDate}" />
+                    <GridViewColumn Header="Type" Width="70" DisplayMemberBinding="{Binding type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
+                    <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding model}" />
+                    <GridViewColumn Header="ZBCnavn" Width="100" DisplayMemberBinding="{Binding zbcName}" />
+                    <GridViewColumn Header="Afleveringsdato" Width="105" DisplayMemberBinding="{Binding returnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
                 </GridView>
             </ListView.View>
         </ListView>
         <Label x:Name="label" Content="Ting Der Skal Afleveres I Dag" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Ting Der Ikke Er Afleveret Til Tiden" HorizontalAlignment="Left" Margin="420,19,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Ting Der Ikke Er Afleveret Til Tiden" HorizontalAlignment="Left" Margin="445,19,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

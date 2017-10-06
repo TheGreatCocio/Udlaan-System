@@ -22,8 +22,20 @@ namespace UdlaanSystem
         public UIStat()
         {
             InitializeComponent();
-        }
 
-        
+            List<ListViewObject> statList = LendController.Instance.GetStatInformation();
+
+            foreach (ListViewObject stat in statList)
+            {
+                if (stat.returnDate.Date == DateTime.Now.Date)
+                {
+                    this.listViewStatToday.Items.Add(stat);
+                }
+                else if (stat.returnDate.Date < DateTime.Now.Date)
+                {
+                    this.listViewStatAllTime.Items.Add(stat);
+                }
+            }
+        }
     }
 }

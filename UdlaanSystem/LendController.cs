@@ -55,5 +55,10 @@ namespace UdlaanSystem
         {
             return DALLend.Instance.MoveLendedIntoArchive(lendObjectsToReturn);
         }
+
+        public List<ListViewObject> GetStatInformation()
+        {
+            return DALLend.Instance.GetStatInformation();
+        }
     }
 }
