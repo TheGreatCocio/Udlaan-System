@@ -80,11 +80,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DALMigration.cs" />
     <Compile Include="ItemObject.cs" />
     <Compile Include="LendController.cs" />
     <Compile Include="LendedObject.cs" />
     <Compile Include="LendObject.cs" />
     <Compile Include="ListViewObject.cs" />
+    <Compile Include="MigrationController.cs" />
     <Compile Include="Settings1.cs" />
     <Compile Include="Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
