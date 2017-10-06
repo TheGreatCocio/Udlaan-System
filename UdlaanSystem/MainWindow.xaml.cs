@@ -45,28 +45,31 @@ namespace UdlaanSystem
                     if (scannedItem == null)
                     {
                         LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text);
-                        if (lendedObject.UserObject == null)
-                        {
-                            if (!CheckForInternetConnection())
+
+                            if (lendedObject.UserObject == null)
                             {
-                                MessageBox.Show("Der Er Ikke Noget Internet");
+                                if (!CheckForInternetConnection())
+                                {
+                                    MessageBox.Show("Der Er Ikke Noget Internet");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Findes Ikke I Databasen!!");
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Findes Ikke I Databasen!!");
-                            }
+
+                                isUserScanned = true;
+
+                                scannedUser = lendedObject.UserObject;
+
+                                PrintUserData(lendedObject);
+
+                                CommentCheck(lendedObject);
+
                         }
-                        else
-                        {
-                            isUserScanned = true;
-
-                            scannedUser = lendedObject.UserObject;
-
-                            PrintUserData(lendedObject);
-
-                            CommentCheck(lendedObject);
-                        }
-
+                        
                     }
                     else
                     {
@@ -93,13 +96,20 @@ namespace UdlaanSystem
                                 if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
                                 {
                                     LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
-                                    PrintItemToList(scannedLendObject);
+                                    if (lendedObject.UserObject != scannedUser && scannedUser != null)
+                                    {
+                                        MessageBox.Show("Dette Udstyr Ikke Ulånt Til Samme Bruger");
+                                    }
+                                    else
+                                    {
+                                        PrintItemToList(scannedLendObject);
 
-                                    scannedUser = lendedObject.UserObject;
+                                        scannedUser = lendedObject.UserObject;
 
-                                    PrintUserData(lendedObject);
+                                        PrintUserData(lendedObject);
 
-                                    CommentCheck(lendedObject);
+                                        CommentCheck(lendedObject);
+                                    }
                                 }
                             }
                             else
