@@ -182,7 +182,7 @@ namespace UdlaanSystem
             return models;
         }
 
-        public List<int> RetrieveIdInformation (int type, int manufacturer, int model)
+        public List<int> RetrieveIdInformation (int model)
         {
             List<int> id = new List<int>();    
 
@@ -190,7 +190,7 @@ namespace UdlaanSystem
             {
                 ConnectMySql();
 
-                MySqlCommand cmd = new MySqlCommand("SELECT item_id FROM items WHERE item_type = '" + type + "' AND item_manufacturer = '" + manufacturer + "' AND item_model = '" + model + "' ORDER BY `items`.`item_id` ASC", MysqlConnection);
+                MySqlCommand cmd = new MySqlCommand("SELECT item_id FROM items WHERE item_model = '" + model + "' ORDER BY `items`.`item_id` ASC", MysqlConnection);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -230,6 +230,35 @@ namespace UdlaanSystem
                 MysqlConnection.Close();
             }
             return true;
+        }
+
+        public string GetItemModelName(int modelID)
+        {
+            string modelName = "";
+
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT model_name FROM models WHERE model_id = '" + modelID + "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    modelName = rdr.GetString(0);
+
+                    Debug.WriteLine("############################ Success!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return modelName;
         }
     }
 }

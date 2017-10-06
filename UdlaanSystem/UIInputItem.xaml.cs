@@ -136,7 +136,6 @@ namespace UdlaanSystem
         private void BtnAddItem_Click(object sender, RoutedEventArgs e)
         {
             ItemObject itemToAdd = null;
-            textBoxSerialNumber.CharacterCasing = CharacterCasing.Upper;
 
             if (ComboBoxTypes.SelectedItem.Equals("Computer"))
             {
@@ -155,12 +154,12 @@ namespace UdlaanSystem
             {
                 foreach (ItemObject item in itemsToInsert)
                 {
-                    if (!listOfIds.Contains(item.id) && item.model == ComboBoxModels.SelectedItem.ToString())
+                    if (!listOfIds.Contains(item.id) && ItemController.Instance.GetItemModelName(Convert.ToUInt16(item.model)) == ComboBoxModels.SelectedItem.ToString())
                     {
                         listOfIds.Add(item.id);
                     }
                 }
-                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedTypeID, selectedManufacturerID, selectedModelID, listOfIds), textBoxSerialNumber.Text);
+                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedModelID, listOfIds), textBoxSerialNumber.Text);
                 if (!itemsToInsert.Contains(itemToAdd))
                 {
                     UIShowID bigIdBox = new UIShowID(itemToAdd.id);
@@ -173,6 +172,7 @@ namespace UdlaanSystem
                     MessageBox.Show("Dette Mifare Er Allerede I Brug!");
                 }
                 ClearBoxes();
+                listOfIds.Clear();
             }
         }
 
