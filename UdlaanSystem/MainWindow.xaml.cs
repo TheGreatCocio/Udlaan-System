@@ -54,11 +54,25 @@ namespace UdlaanSystem
                             }
                             else if (isItemsLended == true && lendedObject.UserObject.userMifare != userInUse.userMifare)
                             {
-                                MessageBox.Show("FUCK YEAH");
+                                MessageBox.Show("Du kan ikke scanne udstyr der er udlånt til forskellige brugere!");
                             }
                             else
                             {
-                                MessageBox.Show("Findes Ikke I Databasen!!");
+                                /*
+                                 * 
+                                 * 
+                                 * Denne del af koden er UDELUKKENDE til mmigration så udstyret bliver afleveret i den gamle DB!!!
+                                 * 
+                                 * 
+                                if (MigrationController.Instance.CheckIfItemIsLendedInOldDB(TextBoxMain.Text))
+                                {
+                                    MigrationController.Instance.ReturnItemInOldDB(TextBoxMain.Text);
+                                    MessageBox.Show("Udstyret er afleveret i den gamle databse, men er ikke scannet ind i den nye!" + Environment.NewLine + "Scan det venligst ind når i har tid!");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Findes hverken i den nye eller gamle datebase!!");
+                                }*/
                             }
                         }
                         else
@@ -390,7 +404,7 @@ namespace UdlaanSystem
             userInUse = null;
 
             LabelNameResult.Visibility = Visibility.Hidden;
-            LabelZbcNameResult.Visibility = Visibility.Hidden;            
+            LabelZbcNameResult.Visibility = Visibility.Hidden;
             LabelPhoneResult.Visibility = Visibility.Hidden;
             LabelTeacherResult.Visibility = Visibility.Hidden;
             LabelIsDisabledResult.Visibility = Visibility.Hidden;
