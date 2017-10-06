@@ -7,7 +7,7 @@
         xmlns:System="clr-namespaceTongue Tiedystem;assembly=mscorlib"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="Ubuy Ringsted" Height="665.505" Width="1104.277" ResizeMode="NoResize" Background="#FFEEEEEE" BorderBrush="Black" >
+        Title="Ubuy Ringsted" Height="697.665" Width="1104.277" ResizeMode="NoResize" Background="#FFEEEEEE" BorderBrush="Black" >
     <Grid x:Name="grid1" Margin="10,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="388*"/>
@@ -38,7 +38,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListView x:Name="ListViewItems" HorizontalAlignment="Left" Height="202" Margin="6,25,0,0" VerticalAlignment="Top" Width="1062" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="1" IsSynchronizedWithCurrentItem="False" SelectionMode="Multiple" >
+        <ListView x:Name="ListViewItems" HorizontalAlignment="Left" Height="202" Margin="5,15,0,0" VerticalAlignment="Top" Width="1062" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="1" IsSynchronizedWithCurrentItem="False" SelectionMode="Multiple" >
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -54,26 +54,24 @@
                     <GridViewColumn Header="Model" Width="130" DisplayMemberBinding="{Binding model}" />
                     <GridViewColumn Header="ID" Width="70" DisplayMemberBinding="{Binding id}" />
                     <GridViewColumn Header="Serie Nummer" Width="170" DisplayMemberBinding="{Binding serialNumber}" />
-                    <GridViewColumn Header="Udlånt Dato" Width="200" DisplayMemberBinding="{Binding lendDate}" />
-                    <GridViewColumn Header="Afleverings Dato" Width="192" DisplayMemberBinding="{Binding returnDate}"/>
+                    <GridViewColumn Header="Udlånt Dato" Width="200" DisplayMemberBinding="{Binding lendDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
+                    <GridViewColumn Header="Afleverings Dato" Width="192" DisplayMemberBinding="{Binding returnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"/>
                 </GridView>
             </ListView.View>
         </ListView>
         <Canvas x:Name="CanvasPanelUserInfo" HorizontalAlignment="Left" Height="290" Margin="10,67,0,0" VerticalAlignment="Top" Width="527" Grid.ColumnSpan="2">
             <Label x:Name="LabelName" Content="Navn :" Canvas.Left="30" Canvas.Top="43"/>
             <Label x:Name="LabelZbcName" Content="ZBC Navn :" Canvas.Left="5" Canvas.Top="112"/>
-            <Label x:Name="LabelMifare" Content="Mifare :" Canvas.Left="23" Canvas.Top="178"/>
             <Label x:Name="LabelPhone" Content="Telefon Nr. :" Canvas.Left="317" Canvas.Top="43"/>
             <Label x:Name="LabelIsTeacher" Content="Ansat :" Canvas.Left="345" Canvas.Top="114"/>
             <Label x:Name="LabelIsDisabled" Content="Deaktiveret :" Canvas.Left="314" Canvas.Top="180"/>
-            <Label x:Name="LabelIsScanned" Content="Er Scannet :" Canvas.Left="1" Canvas.Top="240" RenderTransformOrigin="0.127,0.5"/>
+            <Label x:Name="LabelIsScanned" Content="Er Scannet :" Canvas.Left="5" Canvas.Top="180" RenderTransformOrigin="0.127,0.5"/>
             <Label x:Name="LabelNameResult" Content="Label" Canvas.Left="73" Canvas.Top="45" Visibility="Hidden"/>
             <Label x:Name="LabelZbcNameResult" Content="Label" Canvas.Left="73" Canvas.Top="114" Visibility="Hidden"/>
-            <Label x:Name="LabelMifareResult" Content="Label" Canvas.Left="73" Canvas.Top="180" Visibility="Hidden"/>
             <Label x:Name="LabelPhoneResult" Content="Label" Canvas.Left="390" Canvas.Top="43" Visibility="Hidden"/>
             <Label x:Name="LabelTeacherResult" Content="Label" Canvas.Left="390" Canvas.Top="114" Visibility="Hidden"/>
             <Label x:Name="LabelIsDisabledResult" Content="Label" Canvas.Left="390" Canvas.Top="180" Visibility="Hidden"/>
-            <Label x:Name="LabelIsScannedResult" Content="Label" Canvas.Left="73" Canvas.Top="240" Visibility="Hidden"/>
+            <Label x:Name="LabelIsScannedResult" Content="Label" Canvas.Left="81" Canvas.Top="180" Visibility="Hidden"/>
             <Label Content="Person Information" Canvas.Left="165" FontSize="16"/>
 
         </Canvas>
@@ -97,7 +95,7 @@
                     <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
                     <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
                     <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding model}" />
-                    <GridViewColumn Header="Afleverings Dato" Width="150" DisplayMemberBinding="{Binding returnDate}" />
+                    <GridViewColumn Header="Afleverings Dato" Width="150" DisplayMemberBinding="{Binding returnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -111,9 +109,9 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Label Content="Scannede Produkter" HorizontalAlignment="Left" Margin="371,373,0,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Label Content="Scannede Produkter" HorizontalAlignment="Left" Margin="0,387,0,0" VerticalAlignment="Top" FontSize="16" Grid.RowSpan="2" Grid.Column="1"/>
         <Label Content="Udlån / Arkiv" Grid.Column="1" HorizontalAlignment="Left" Margin="249,29,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="ButtonLend" Content="Udlån" IsEnabled="False" Grid.Column="1" HorizontalAlignment="Left" Margin="493,380,0,0" VerticalAlignment="Top" Width="75" Click="ButtonLend_Click" Foreground="White" Grid.RowSpan="2">
+        <Button x:Name="ButtonLend" Content="Udlån" IsEnabled="False" Grid.Column="1" HorizontalAlignment="Left" Margin="477,225,0,0" VerticalAlignment="Top" Width="90" Click="ButtonLend_Click" Foreground="White" Grid.Row="1" Height="27">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
@@ -123,7 +121,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="ButtonReturn" Content="Aflever" IsEnabled="False" Grid.Column="1" HorizontalAlignment="Left" Margin="380,380,0,0" VerticalAlignment="Top" Width="75" Click="ButtonReturn_Click" Foreground="White" Grid.RowSpan="2">
+        <Button x:Name="ButtonReturn" Content="Aflever" IsEnabled="False" Grid.Column="1" HorizontalAlignment="Left" Margin="358,225,0,0" VerticalAlignment="Top" Width="90" Click="ButtonReturn_Click" Foreground="White" Grid.Row="1" Height="27">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
@@ -133,7 +131,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="239,378,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded" Grid.RowSpan="2"/>
+        <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="466,387,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded" Grid.RowSpan="2"/>
         <Button x:Name="ButtonClear" Content="Ryd" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="61" Click="ButtonClear_Click" Foreground="White" Height="22" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -144,7 +142,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="ButtonComment" Content="Skriv En Kommentar" IsEnabled="False" HorizontalAlignment="Left" Margin="296,311,0,0" VerticalAlignment="Top" Width="121" Foreground="White" Height="22" Click="ButtonComment_Click" >
+        <Button x:Name="ButtonComment" Content="Skriv En Kommentar" IsEnabled="False" HorizontalAlignment="Left" Margin="196,293,0,0" VerticalAlignment="Top" Width="150" Foreground="White" Height="27" Click="ButtonComment_Click" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
@@ -154,7 +152,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="ButtonDeleteItems" Content="Fjern Valgt Udstyr" Grid.Column="1" HorizontalAlignment="Left" Margin="70,380,0,0" VerticalAlignment="Top" Width="129" Foreground="White" Click="ButtonDeleteItems_Click" Height="20" Grid.RowSpan="2">
+        <Button x:Name="ButtonDeleteItems" Content="Fjern Valgt Udstyr" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" Width="129" Foreground="White" Click="ButtonDeleteItems_Click" Height="27" Grid.Row="1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>

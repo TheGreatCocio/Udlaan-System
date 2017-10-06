@@ -226,9 +226,6 @@ namespace UdlaanSystem
             LabelZbcNameResult.Content = lendedObject.UserObject.zbcName;
             LabelZbcNameResult.Visibility = Visibility.Visible;
 
-            LabelMifareResult.Content = lendedObject.UserObject.userMifare;
-            LabelMifareResult.Visibility = Visibility.Visible;
-
             LabelPhoneResult.Content = lendedObject.UserObject.phoneNumber;
             LabelPhoneResult.Visibility = Visibility.Visible;
 
@@ -408,7 +405,6 @@ namespace UdlaanSystem
 
             LabelNameResult.Visibility = Visibility.Hidden;
             LabelZbcNameResult.Visibility = Visibility.Hidden;
-            LabelMifareResult.Visibility = Visibility.Hidden;
             LabelPhoneResult.Visibility = Visibility.Hidden;
             LabelTeacherResult.Visibility = Visibility.Hidden;
             LabelIsDisabledResult.Visibility = Visibility.Hidden;
