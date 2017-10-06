@@ -155,7 +155,7 @@ namespace UdlaanSystem
             {
                 foreach (ItemObject item in itemsToInsert)
                 {
-                    if (!listOfIds.Contains(item.id) || item.model == ComboBoxModels.SelectedItem.ToString())
+                    if (!listOfIds.Contains(item.id) && item.model == ComboBoxModels.SelectedItem.ToString())
                     {
                         listOfIds.Add(item.id);
                     }
