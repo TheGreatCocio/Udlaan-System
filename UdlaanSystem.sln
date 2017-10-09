@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdlaanSystem", "UdlaanSystem\UdlaanSystem.csproj", "{8B0FE9B7-C8FF-40CE-BD07-E449AE363927}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupUdlaanSystem", "SetupUdlaanSystem\SetupUdlaanSystem.vdproj", "{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "UdlaanSystemSetup", "SetupUdlaanSystem\SetupUdlaanSystem.vdproj", "{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,12 +13,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8B0FE9B7-C8FF-40CE-BD07-E449AE363927}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{8B0FE9B7-C8FF-40CE-BD07-E449AE363927}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{8B0FE9B7-C8FF-40CE-BD07-E449AE363927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B0FE9B7-C8FF-40CE-BD07-E449AE363927}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B0FE9B7-C8FF-40CE-BD07-E449AE363927}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B0FE9B7-C8FF-40CE-BD07-E449AE363927}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Debug|Any CPU.ActiveCfg = Release
-		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Debug|Any CPU.Build.0 = Release
+		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Debug|Any CPU.ActiveCfg = Debug
+		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Debug|Any CPU.Build.0 = Debug
 		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
