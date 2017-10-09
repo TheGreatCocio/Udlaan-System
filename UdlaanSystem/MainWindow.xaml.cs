@@ -41,18 +41,18 @@ namespace UdlaanSystem
             {
                 if (e.Key == Key.Return) // checks if its the enter button that has been pressed
                 {
-                    ItemObject scannedItem = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text);
+                    ItemObject scannedItem = ItemController.Instance.CheckIfMifareIsItem(TextBoxMain.Text); //Tjekker om den kan finde et item udfra det scannede Mifare. Hvis den ikke returner et item er scannedItem = null og mifare er enter en user eller findes ikke
 
                     if (scannedItem == null)//On User Scanned
                     {
-                        LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text);
-                        if (lendedObject.UserObject == null)
+                        LendedObject lendedObject = LendController.Instance.GetUserData(TextBoxMain.Text); //Henter Det lended Object der tilhøre det usermifare der er blevet scanned, inklusive alle hans date, hans nuværende lån og hans arkiv
+                        if (lendedObject.UserObject == null)//Hvis userobject er null findes han ikke og skal derfor hentes fra den gamle database
                         {
-                            if (!CheckForInternetConnection())
+                            if (!CheckForInternetConnection())//Tjekker om der er internet
                             {
                                 MessageBox.Show("Der Er Ikke Noget Internet");
                             }
-                            else if (isItemsLended == true && lendedObject.UserObject.userMifare != userInUse.userMifare)
+                            else if (isItemsLended == true && lendedObject.UserObject.userMifare != userInUse.userMifare) //Tjekker at du ikke scanner 2 forskellige brugeres udstyr i samma omgang
                             {
                                 MessageBox.Show("Du kan ikke scanne udstyr der er udlånt til forskellige brugere!");
                             }
@@ -63,45 +63,48 @@ namespace UdlaanSystem
                                  * 
                                  * Denne del af koden er UDELUKKENDE til mmigration så udstyret bliver afleveret i den gamle DB!!!
                                  * 
-                                 * 
-                                if (MigrationController.Instance.CheckIfItemIsLendedInOldDB(TextBoxMain.Text))
+                                 */
+                                if (MigrationController.Instance.CheckIfItemIsLendedInOldDB(TextBoxMain.Text))//Hvis mifaret ikke tilhøre en bruger skal vi tjekke om det er udlånt i den gamle DB og aflevere det
                                 {
                                     MigrationController.Instance.ReturnItemInOldDB(TextBoxMain.Text);
                                     MessageBox.Show("Udstyret er afleveret i den gamle databse, men er ikke scannet ind i den nye!" + Environment.NewLine + "Scan det venligst ind når i har tid!");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Findes hverken i den nye eller gamle datebase!!");
-                                }*/
+                                    MessageBox.Show("Findes ikke i databasen!");
+                                }
+                                /*
+                                 * Her Til
+                                 */
                             }
                         }
                         else
                         {
-                            if (isItemsLended == true && lendedObject.UserObject.userMifare != userInUse.userMifare)
+                            if (isItemsLended == true && lendedObject.UserObject.userMifare != userInUse.userMifare) //sikre sig at man ikke scanner udstyr der tilhøre én bruger og derefter scanner en anden bruger i samme omgang
                             {
                                 MessageBox.Show("Du kan ikke scanne andre brugere end den udstyret tilhøre!");
                             }
                             else
                             {
-                                isUserScanned = true;
+                                isUserScanned = true;//Vi sætter isUserScanned for at sikre os at han ikke kan aflevere uden selv at være tilstede
 
-                                userInUse = lendedObject.UserObject;
+                                userInUse = lendedObject.UserObject; //Vi sætter userInUse for at sikre os at man ikke scanner forskellige brugere sammen
 
-                                PrintUserData(lendedObject);
+                                PrintUserData(lendedObject); //Printer alle hans data og hans nuværende lån/arkiv
 
-                                CommentCheck(lendedObject);
+                                CommentCheck(lendedObject);//tjekker om der er nogle noter skrevet om personen
                             }
                         }
 
                     }
                     else//On Items Scanned
                     {
-                        string userMifare = LendController.Instance.CheckIfLended(scannedItem.itemMifare);
-                        TimeSpan timeSpanMonToThur = new TimeSpan(15, 30, 00);
-                        TimeSpan timeSpanFri = new TimeSpan(13, 30, 00);
+                        string userMifare = LendController.Instance.CheckIfLended(scannedItem.itemMifare);//Tjekker om det item der er scanned er udlånt til en person, hvis der er udlånt skal vi hante alle hans data g hans lån/arkiv
+                        TimeSpan timeSpanMonToThur = new TimeSpan(15, 30, 00); //Afleveringsdato for man-tors
+                        TimeSpan timeSpanFri = new TimeSpan(13, 30, 00);//Afleveringsdato for fradag
                         LendObject scannedLendObject = null;
                         
-                        if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+                        if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)//Hvis der er valgt at afleveringsdatoen er fredag
                         {
                             scannedLendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date + timeSpanFri, null);
                         }
@@ -110,19 +113,19 @@ namespace UdlaanSystem
                             scannedLendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date + timeSpanMonToThur, null);
                         }
 
-                        if (userMifare != "")
+                        if (userMifare != "")//Hvis userMifare indeholder noget, er itemmet udlånt
                         {
                             //ScannedItem Er Udlånt
-                            if (isItemsLended != false)
+                            if (isItemsLended != false)//Tjekker at vi ikke scanne udlånt udstyr med ikk-udlånt udstyr
                             {
-                                if (userInUse == null || userMifare == userInUse.userMifare)
+                                if (userInUse == null || userMifare == userInUse.userMifare) //Tjekker at du ikke scanne udstyr der er udlånt til andre end den bruger der er i gang
                                 {
                                     isItemsLended = true;
-                                    if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
+                                    if (!ScannedItemMifares.Contains(scannedItem.itemMifare)) //tjekker at vi ikke scanner det samme mifare mere end én gang
                                     {
-                                        LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);
+                                        LendedObject lendedObject = LendController.Instance.GetUserData(userMifare);//henter brugeren som itemmet er udlånt til's date, lån/arkiv
 
-                                        foreach (LendObject lendObject in lendedObject.LendObjects)
+                                        foreach (LendObject lendObject in lendedObject.LendObjects)//giver det scanned udtyr de rigtige datoer, istedet for de datoer som der er valgt
                                         {
                                             if (lendObject.itemObject.itemMifare == scannedLendObject.itemObject.itemMifare)
                                             {
@@ -131,13 +134,13 @@ namespace UdlaanSystem
                                             }
                                         }
 
-                                        PrintItemToList(scannedLendObject);
+                                        PrintItemToList(scannedLendObject);//printer itemmet til listen over scannet items
 
-                                        userInUse = lendedObject.UserObject;
+                                        userInUse = lendedObject.UserObject;//Vi sætter userInUse for at sikre os at man ikke scanner forskellige brugere sammen
 
-                                        PrintUserData(lendedObject);
+                                        PrintUserData(lendedObject);//Printer alle hans data og hans nuværende lån/arkiv
 
-                                        CommentCheck(lendedObject);
+                                        CommentCheck(lendedObject);//tjekker om der er nogle noter skrevet om personen
                                     }
                                 }
                                 else
@@ -153,27 +156,27 @@ namespace UdlaanSystem
                         else
                         {
                             //ScannedItem Er IKKE Udlånt
-                            if (isItemsLended != true)
+                            if (isItemsLended != true)//tjekker at du ikke scanner udlånt udstyr med ikke-udlånt udstyr
                             {
                                 isItemsLended = false;
                                 try
                                 {
-                                    if (!ScannedItemMifares.Contains(scannedItem.itemMifare))
+                                    if (!ScannedItemMifares.Contains(scannedItem.itemMifare)) //Tjekker at du ikke scanner det samme mifare mere end én gang
                                     {
-                                        if (userInUse != null)
+                                        if (userInUse != null)//Hvis vi har scannet en bruger
                                         {
-                                            if (userInUse.hasPC && !userInUse.isTeacher && scannedLendObject.itemObject.type == "Computer")
+                                            if (userInUse.hasPC && !userInUse.isTeacher && scannedLendObject.itemObject.type == "Computer") //tjekker om han har en computer og om han er lærer
                                             {
                                                 MessageBox.Show("Denne Bruger Har Allerede 1 Computer Og Er Ikke Lærer");
                                             }
                                             else
                                             {
-                                                PrintItemToList(scannedLendObject);
+                                                PrintItemToList(scannedLendObject);//printer itemmet til listen over scannet items
                                             }
                                         }
                                         else
                                         {
-                                            PrintItemToList(scannedLendObject);
+                                            PrintItemToList(scannedLendObject);//printer itemmet til listen over scannet items
                                         }
                                     }
                                     else
@@ -192,14 +195,14 @@ namespace UdlaanSystem
                             }
                         }
                     }
-                    TextBoxMain.Text = "";
-                    TextBoxMain.Focus();
-                    if (isItemsLended == true)
+                    TextBoxMain.Text = ""; //clear Main TextBox
+                    TextBoxMain.Focus();//focuser Main TextBox
+                    if (isItemsLended == true) //hvis vi har scannet et udstyr der er udlånt skal den disable ButtonLend
                     {
                         ButtonReturn.IsEnabled = true;
                         ButtonLend.IsEnabled = false;
                     }
-                    else
+                    else//hvis vi har scannet et udstyr der ikke er udlånt skal den disable ButtonReturn
                     {
                         ButtonLend.IsEnabled = true;
                         ButtonReturn.IsEnabled = false;
