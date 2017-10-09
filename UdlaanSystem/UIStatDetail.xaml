@@ -33,7 +33,7 @@
         <Label x:Name="labelLendDateResult" Content="LabelLendDateResult" HorizontalAlignment="Left" Margin="92,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
         <Label x:Name="labelReturnDateResult" Content="LabelAfleveringsDatoResult" HorizontalAlignment="Left" Margin="333,236,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.095,-0.303" Visibility="Hidden"/>
 
-        <Button x:Name="button" Content="OK" HorizontalAlignment="Left" Margin="521,266,0,0" VerticalAlignment="Top" Width="75" Foreground="White">
+        <Button x:Name="button" Content="OK" HorizontalAlignment="Left" Margin="521,266,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Click="ButtonOK_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>

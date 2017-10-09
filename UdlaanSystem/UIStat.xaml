@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Statestikker" Height="382.048" Width="1060" Background="#FFEEEEEE">
     <Grid>
-        <ListView x:Name="listViewStatToday" HorizontalAlignment="Left" Height="280" Margin="10,50,0,0" VerticalAlignment="Top" Width="430">
+        <ListView x:Name="listViewStatToday" HorizontalAlignment="Left" Height="280" Margin="10,50,0,0" VerticalAlignment="Top" Width="430" SelectionChanged="ListViewStatToday_ItemSelectionChanged" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
@@ -17,7 +17,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="listViewStatAllTime" HorizontalAlignment="Left" Height="280" Margin="445,50,0,0" VerticalAlignment="Top" Width="585" >
+        <ListView x:Name="listViewStatAllTime" HorizontalAlignment="Left" Height="280" Margin="445,50,0,0" VerticalAlignment="Top" Width="585" SelectionChanged="ListViewStatAllTime_ItemSelectionChanged" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Type" Width="70" DisplayMemberBinding="{Binding type}" />

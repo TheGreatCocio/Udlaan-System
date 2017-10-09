@@ -216,6 +216,31 @@ namespace UdlaanSystem
             return statItemList;
         }
 
+        public List<LendObject> GetStatisticsInformation(string mifare)
+        {
+            List<LendObject> statItemList = new List<LendObject>();
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT items.item_mifare, types.type_name, manufacturers.manufacturer_name, models.model_name, items.item_id, items.item_serialnumber, lend.lend_lenddate, lend.lend_returndate FROM lend JOIN items ON lend.lend_itemmifare = items.item_mifare JOIN types ON items.item_type = types.type_id JOIN manufacturers ON items.item_manufacturer = manufacturers.manufacturer_id JOIN models ON items.item_model = models.model_id WHERE lend.lend_usermifare = '" + mifare + "'", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    statItemList.Add(new LendObject(new ItemObject(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt16(4), rdr.GetString(5)), rdr.GetDateTime(6), rdr.GetDateTime(7), null));
+                }
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("BOOOOOOOOOOOOOOOOOOOOOOOM");
+                throw;
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+            return statItemList;
+        }
+
         private string FormatDateBackEnd(string date)
         {
             DateTime temp = Convert.ToDateTime(date);

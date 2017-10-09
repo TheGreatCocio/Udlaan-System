@@ -60,5 +60,21 @@ namespace UdlaanSystem
         {
             return DALLend.Instance.GetStatInformation();
         }
+
+        public List<LendedObject> GetStatisticsInformation()
+        {
+            List<LendedObject> allStatisticsInformation = new List<LendedObject>();
+            List<UserObject> users = UserController.Instance.GetUserStatInformation();
+
+            if (users.Any())
+            {
+                foreach (UserObject user in users)
+                {
+                    allStatisticsInformation.Add(new LendedObject(user, DALLend.Instance.GetStatisticsInformation(user.userMifare)));
+                }
+            }
+
+            return allStatisticsInformation;
+        }
     }
 }

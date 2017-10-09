@@ -241,5 +241,31 @@ namespace UdlaanSystem
 
             return isUser;
         }
+
+        public List<UserObject> GetUserStatInformation()
+        {
+            List<UserObject> userList = new List<UserObject>();
+
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("SELECT user_fname, user_lname, user_zbcname, user_mifare, user_phonenumber, user_isteacher, user_isdisabled, user_comment FROM lend JOIN users ON lend.lend_usermifare = users.user_mifare GROUP BY lend.lend_usermifare", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    userList.Add(new UserObject(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt32(4), Convert.ToBoolean(rdr.GetInt16(5)), false, Convert.ToBoolean(rdr.GetInt16(6)), rdr.GetString(7)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("############################FAILED: " + ex);
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return userList;
+        }
     }
 }

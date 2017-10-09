@@ -64,5 +64,10 @@ namespace UdlaanSystem
         {
             return DALUser.Instance.IsUser(mifare);
         }
+
+        public List<UserObject> GetUserStatInformation()
+        {
+            return DALUser.Instance.GetUserStatInformation();
+        }
     }
 }

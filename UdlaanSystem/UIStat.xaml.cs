@@ -19,23 +19,67 @@ namespace UdlaanSystem
     /// </summary>
     public partial class UIStat : Window
     {
+        List<LendedObject> statList = LendController.Instance.GetStatisticsInformation();
+
         public UIStat()
         {
             InitializeComponent();
 
-            List<ListViewObject> statList = LendController.Instance.GetStatInformation();
-
-            foreach (ListViewObject stat in statList)
+            foreach (LendedObject stat in statList)
             {
-                if (stat.returnDate.Date == DateTime.Now.Date)
+                foreach (LendObject item in stat.LendObjects)
                 {
-                    this.listViewStatToday.Items.Add(stat);
+                    if (item.returnDate.Date == DateTime.Now.Date)
+                    {
+                        this.listViewStatToday.Items.Add(new ListViewObject(item.itemObject.itemMifare, item.itemObject.type, item.itemObject.manufacturer, item.itemObject.model, item.itemObject.id, item.itemObject.serialNumber, item.lendDate, item.returnDate, null, false, stat.UserObject.zbcName));
+                    }
+                    else if (item.returnDate.Date < DateTime.Now.Date)
+                    {
+                        this.listViewStatAllTime.Items.Add(new ListViewObject(item.itemObject.itemMifare, item.itemObject.type, item.itemObject.manufacturer, item.itemObject.model, item.itemObject.id, item.itemObject.serialNumber, item.lendDate, item.returnDate, null, false, stat.UserObject.zbcName));
+                    }
                 }
-                else if (stat.returnDate.Date < DateTime.Now.Date)
-                {
-                    this.listViewStatAllTime.Items.Add(stat);
-                }
+
             }
+        }
+
+        public void ListViewStatAllTime_ItemSelectionChanged(object sender, EventArgs e)
+        {
+            ListViewObject selectedItem = listViewStatAllTime.SelectedItem as ListViewObject;
+
+            foreach (LendedObject statObject in statList)
+            {
+                foreach (LendObject item in statObject.LendObjects)
+                {
+                    if (selectedItem.itemMifare == item.itemObject.itemMifare)
+                    {
+                        CallStatDetails(statObject);
+                    }
+                }
+
+            }
+        }
+
+        public void ListViewStatToday_ItemSelectionChanged(object sender, EventArgs e)
+        {
+            ListViewObject selectedItem = listViewStatToday.SelectedItem as ListViewObject;
+
+            foreach (LendedObject statObject in statList)
+            {
+                foreach (LendObject item in statObject.LendObjects)
+                {
+                    if (selectedItem.itemMifare == item.itemObject.itemMifare)
+                    {
+                        CallStatDetails(statObject);
+                    }
+                }
+
+            }
+        }
+
+        private void CallStatDetails(LendedObject selectedItem)
+        {
+            UIStatDetail uIStatDetail = new UIStatDetail(selectedItem);
+            uIStatDetail.ShowDialog();
         }
     }
 }
