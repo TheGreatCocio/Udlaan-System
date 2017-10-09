@@ -124,7 +124,7 @@ namespace UdlaanSystem
 
                                         foreach (LendObject lendObject in lendedObject.LendObjects)
                                         {
-                                            if (lendObject.itemObject == scannedLendObject.itemObject)
+                                            if (lendObject.itemObject.itemMifare == scannedLendObject.itemObject.itemMifare)
                                             {
                                                 scannedLendObject.returnDate = lendObject.returnDate;
                                                 scannedLendObject.lendDate = lendObject.lendDate;

@@ -191,14 +191,18 @@ namespace UdlaanSystem
             }
         }
 
-        public List<LendedObject> GetStatInformation ()
+        public List<ListViewObject> GetStatInformation ()
         {
-            List<LendedObject> statItemList = new List<LendedObject>();
+            List<ListViewObject> statItemList = new List<ListViewObject>();
             try
             {
                 ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT", MysqlConnection);
-                cmd.ExecuteNonQuery();
+                MySqlCommand cmd = new MySqlCommand("SELECT items.item_mifare, types.type_name, manufacturers.manufacturer_name, models.model_name, items.item_id, items.item_serialnumber, lend.lend_lenddate, lend.lend_returndate, users.user_zbcname FROM lend JOIN items ON lend.lend_itemmifare = items.item_mifare JOIN types ON items.item_type = types.type_id JOIN manufacturers ON items.item_manufacturer = manufacturers.manufacturer_id JOIN models ON items.item_model = models.model_id JOIN users ON lend.lend_usermifare = users.user_mifare", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    statItemList.Add(new ListViewObject(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt16(4), rdr.GetString(5), rdr.GetDateTime(6), rdr.GetDateTime(7), null, null, rdr.GetString(8)));
+                }
             }
             catch (Exception)
             {
