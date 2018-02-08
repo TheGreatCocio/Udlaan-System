@@ -158,7 +158,7 @@ namespace UdlaanSystem
             try
             {
                 ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM models WHERE model_selected_type = '" + typeID + "' AND model_selected_manufacturer = '" + manufacturerID + "'", MysqlConnection);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM models WHERE model_selected_type = '" + typeID + "' AND model_selected_manufacturer = '" + manufacturerID + "' ORDER BY model_name", MysqlConnection);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -215,7 +215,7 @@ namespace UdlaanSystem
                 ConnectMySql();
                 foreach (ItemObject item in itemsToInsert)
                 {
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO items (item_mifare, item_type, item_manufacturer, item_model, item_id, item_serialnumber) VALUES ('" + item.itemMifare + "', '" + Convert.ToInt16(item.type) + "', '" + Convert.ToInt16(item.manufacturer) + "', '" + Convert.ToInt16(item.model) + "', '" + item.id + "', '" + item.serialNumber + "')", MysqlConnection);
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO items (item_mifare, item_type, item_manufacturer, item_model, item_id, item_serialnumber) VALUES ('" + item.ItemMifare + "', '" + Convert.ToInt16(item.Type) + "', '" + Convert.ToInt16(item.Manufacturer) + "', '" + Convert.ToInt16(item.Model) + "', '" + item.Id + "', '" + item.SerialNumber + "')", MysqlConnection);
                     Debug.WriteLine(cmd.ToString());
                     cmd.ExecuteNonQuery();
                 }

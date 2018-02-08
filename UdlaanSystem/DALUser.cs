@@ -143,7 +143,7 @@ namespace UdlaanSystem
             try
             {
                 ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO users (user_mifare, user_fname, user_lname, user_zbcname, user_phonenumber, user_isdisabled, user_isteacher) VALUES ('" + userObject.userMifare + "', '" + userObject.fName + "', '" + userObject.lName + "', '" + userObject.zbcName + "', '" + userObject.phoneNumber + "', '" + userObject.isDisabled + "', '" + userObject.isTeacher + "')", MysqlConnection);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO users (user_mifare, user_fname, user_lname, user_zbcname, user_phonenumber, user_isdisabled, user_isteacher) VALUES ('" + userObject.UserMifare + "', '" + userObject.FName + "', '" + userObject.LName + "', '" + userObject.ZbcName + "', '" + userObject.PhoneNumber + "', '" + userObject.IsDisabled + "', '" + userObject.IsTeacher + "')", MysqlConnection);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -161,7 +161,7 @@ namespace UdlaanSystem
             try
             {
                 ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("UPDATE users SET user_mifare = '" + userObject.userMifare + "', user_fname = '" + userObject.fName + "', user_lname = '" + userObject.lName + "', user_zbcname = '" + userObject.zbcName + "', user_phonenumber = '" + userObject.phoneNumber + "', user_isdisabled = " + userObject.isDisabled + ", user_isteacher = " + userObject.isTeacher + " WHERE user_zbcname = '" + userObject.zbcName + "'", MysqlConnection);
+                MySqlCommand cmd = new MySqlCommand("UPDATE users SET user_mifare = '" + userObject.UserMifare + "', user_fname = '" + userObject.FName + "', user_lname = '" + userObject.LName + "', user_zbcname = '" + userObject.ZbcName + "', user_phonenumber = '" + userObject.PhoneNumber + "', user_isdisabled = " + userObject.IsDisabled + ", user_isteacher = " + userObject.IsTeacher + " WHERE user_zbcname = '" + userObject.ZbcName + "'", MysqlConnection);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

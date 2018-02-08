@@ -56,11 +56,11 @@ namespace UdlaanSystem
             else
             {
                 ButtonCreateOrUpdate.Content = "Opdater Bruger";
-                textBoxUserMifare.Text = userObject.userMifare;
-                textBoxPhoneNumber.Text = userObject.phoneNumber.ToString();
-                LabelFNameResult.Content = userObject.fName;
-                LabelLNameResult.Content = userObject.lName;
-                checkBoxIsTeacher.IsChecked = userObject.isTeacher;
+                textBoxUserMifare.Text = userObject.UserMifare;
+                textBoxPhoneNumber.Text = userObject.PhoneNumber.ToString();
+                LabelFNameResult.Content = userObject.FName;
+                LabelLNameResult.Content = userObject.LName;
+                checkBoxIsTeacher.IsChecked = userObject.IsTeacher;
             }
         }
 

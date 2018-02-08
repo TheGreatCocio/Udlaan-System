@@ -29,14 +29,14 @@ namespace UdlaanSystem
         {
             InitializeComponent();
             scannedUser = currentUser;
-            textBoxUserNote.Text = UserController.Instance.GetUserNote(scannedUser.userMifare);
+            textBoxUserNote.Text = UserController.Instance.GetUserNote(scannedUser.UserMifare);
         }
 
         private bool firstRun = true;
 
         private void ButtonConfirmUserNote_Click(object sender, RoutedEventArgs e)
         {
-            UserController.Instance.UpdateUserNote(textBoxUserNote.Text, scannedUser.userMifare);
+            UserController.Instance.UpdateUserNote(textBoxUserNote.Text, scannedUser.UserMifare);
             if (textBoxUserNote.Text == "")
             {
                 MessageBox.Show("Note Slettet");
