@@ -73,6 +73,7 @@ namespace UdlaanSystem
                 textBoxSerialNumber.IsEnabled = true;
             }
             CreateManufacturerList(selectedTypeID);
+            ClearBoxes();
         }
 
         public void CreateManufacturerList(int typeID)
@@ -101,7 +102,7 @@ namespace UdlaanSystem
                     }
                 }
                 CreateModelList(selectedManufacturerID, selectedTypeID);
-
+                ClearBoxes();
             }
         }
 
@@ -129,50 +130,119 @@ namespace UdlaanSystem
                         selectedModelID = Convert.ToInt16(arrayStr[0]);
                     }
                 }
-                
+                ClearBoxes();
             }
         }
 
         private void BtnAddItem_Click(object sender, RoutedEventArgs e)
         {
             ItemObject itemToAdd = null;
-
-            if (ComboBoxTypes.SelectedItem.Equals("Computer"))
+            if (ItemController.Instance.CheckIfMifareIsItem(textBoxItemMifare.Text) == null)
             {
-                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text);
-                if (!itemsToInsert.Contains(itemToAdd))
+                if (itemsToInsert.Any())
                 {
-                    this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text));
-                    itemsToInsert.Add(itemToAdd);
+                    foreach (ItemObject itemMifare in itemsToInsert)
+                    {
+                        if (itemMifare.itemMifare != textBoxItemMifare.Text)
+                        {
+                            if (ComboBoxTypes.SelectedItem.Equals("Computer"))
+                            {
+                                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text);
+                                if (!itemsToInsert.Contains(itemToAdd))
+                                {
+                                    this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text));
+                                    itemsToInsert.Add(itemToAdd);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Dette Mifare Er Allerede I Brug!");
+                                }
+                                ClearBoxes();
+                                textBoxItemMifare.Focus();
+                            }
+                            else
+                            {
+                                foreach (ItemObject item in itemsToInsert)
+                                {
+                                    if (!listOfIds.Contains(item.id) && ItemController.Instance.GetItemModelName(Convert.ToUInt16(item.model)) == ComboBoxModels.SelectedItem.ToString())
+                                    {
+                                        listOfIds.Add(item.id);
+                                    }
+                                }
+                                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedModelID, listOfIds), textBoxSerialNumber.Text);
+                                if (!itemsToInsert.Contains(itemToAdd))
+                                {
+                                    UIShowID bigIdBox = new UIShowID(itemToAdd.id);
+                                    bigIdBox.ShowDialog();
+                                    this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), itemToAdd.id, ""));
+                                    itemsToInsert.Add(itemToAdd);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Dette Mifare Er Allerede I Brug!");
+                                }
+                                ClearBoxes();
+                                listOfIds.Clear();
+                                textBoxItemMifare.Focus();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Dette Produkt Er Allerede I Listen");
+                            ClearBoxes();
+                            textBoxItemMifare.Focus();
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Dette Mifare Er Allerede I Brug!");
+                    if (ComboBoxTypes.SelectedItem.Equals("Computer"))
+                    {
+                        itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text);
+                        if (!itemsToInsert.Contains(itemToAdd))
+                        {
+                            this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), Convert.ToInt16(textBoxID.Text), textBoxSerialNumber.Text));
+                            itemsToInsert.Add(itemToAdd);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Dette Mifare Er Allerede I Brug!");
+                        }
+                        ClearBoxes();
+                        textBoxItemMifare.Focus();
+                    }
+                    else
+                    {
+                        foreach (ItemObject item in itemsToInsert)
+                        {
+                            if (!listOfIds.Contains(item.id) && ItemController.Instance.GetItemModelName(Convert.ToUInt16(item.model)) == ComboBoxModels.SelectedItem.ToString())
+                            {
+                                listOfIds.Add(item.id);
+                            }
+                        }
+                        itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedModelID, listOfIds), textBoxSerialNumber.Text);
+                        if (!itemsToInsert.Contains(itemToAdd))
+                        {
+                            UIShowID bigIdBox = new UIShowID(itemToAdd.id);
+                            bigIdBox.ShowDialog();
+                            this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), itemToAdd.id, ""));
+                            itemsToInsert.Add(itemToAdd);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Dette Mifare Er Allerede I Brug!");
+                        }
+                        ClearBoxes();
+                        listOfIds.Clear();
+                        textBoxItemMifare.Focus();
+                    }
                 }
             }
             else
             {
-                foreach (ItemObject item in itemsToInsert)
-                {
-                    if (!listOfIds.Contains(item.id) && ItemController.Instance.GetItemModelName(Convert.ToUInt16(item.model)) == ComboBoxModels.SelectedItem.ToString())
-                    {
-                        listOfIds.Add(item.id);
-                    }
-                }
-                itemToAdd = new ItemObject(textBoxItemMifare.Text, selectedTypeID.ToString(), selectedManufacturerID.ToString(), selectedModelID.ToString(), ItemController.Instance.CalculateNextID(selectedModelID, listOfIds), textBoxSerialNumber.Text);
-                if (!itemsToInsert.Contains(itemToAdd))
-                {
-                    UIShowID bigIdBox = new UIShowID(itemToAdd.id);
-                    bigIdBox.ShowDialog();
-                    this.ListViewAddItems.Items.Add(new ItemObject(textBoxItemMifare.Text, ComboBoxTypes.SelectedItem.ToString(), ComboBoxManufacturers.SelectedItem.ToString(), ComboBoxModels.SelectedItem.ToString(), itemToAdd.id, ""));
-                    itemsToInsert.Add(itemToAdd);
-                }
-                else
-                {
-                    MessageBox.Show("Dette Mifare Er Allerede I Brug!");
-                }
+                MessageBox.Show("Dette Produkt Er Allerede I DataBasen");
                 ClearBoxes();
-                listOfIds.Clear();
+                textBoxItemMifare.Focus();
             }
         }
 
@@ -205,6 +275,21 @@ namespace UdlaanSystem
                             ListViewAddItems.Items.RemoveAt(i);
                         }
                     }
+                }
+            }
+        }
+
+        private void textBoxMifareInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && textBoxItemMifare.Text != "" )
+            {
+                if (textBoxSerialNumber.IsEnabled && textBoxSerialNumber.Text != "" && textBoxID.IsEnabled && textBoxID.Text != "")
+                {
+                    BtnAddItem_Click(this, new RoutedEventArgs());
+                }
+                else if (!textBoxSerialNumber.IsEnabled && !textBoxID.IsEnabled)
+                {
+                    BtnAddItem_Click(this, new RoutedEventArgs());
                 }
             }
         }

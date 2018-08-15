@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdlaanSystem", "UdlaanSystem\UdlaanSystem.csproj", "{8B0FE9B7-C8FF-40CE-BD07-E449AE363927}"
 EndProject
@@ -20,8 +20,12 @@ Global
 		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Debug|Any CPU.ActiveCfg = Debug
 		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Debug|Any CPU.Build.0 = Debug
 		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Release|Any CPU.ActiveCfg = Release
+		{0EB87B57-B8E5-4BDD-BDDF-043F69B67A38}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38BFCBF1-6B0F-47F1-BDEA-572E4A53FA63}
 	EndGlobalSection
 EndGlobal

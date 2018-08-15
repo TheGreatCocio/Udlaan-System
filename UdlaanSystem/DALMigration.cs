@@ -32,7 +32,7 @@ namespace UdlaanSystem
         {
             if (Settings1.Default.LocationNæstved == true)
             {
-
+                sqlConn = @"server=10.108.48.19; Database=pc_udlaan_nv; User Id=udlaan; Password=RFIDrules;integrated security=false";
             }
             else if (Settings1.Default.LocationRingsted == true)
             {
@@ -40,11 +40,11 @@ namespace UdlaanSystem
             }
             else if (Settings1.Default.LocationRoskilde == true)
             {
-
+                sqlConn = @"server=10.108.48.19; Database=pc_udlaan_ro; User Id=udlaan; Password=RFIDrules;integrated security=false";
             }
             else if (Settings1.Default.LocationVordingborg == true)
             {
-
+                sqlConn = @"server=10.108.48.19; Database=pc_udlaan_vb; User Id=udlaan; Password=RFIDrules;integrated security=false";
             }
 
             if (MysqlConnection == null)

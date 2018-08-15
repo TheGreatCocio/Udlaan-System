@@ -362,20 +362,22 @@ namespace UdlaanSystem
         {
             if (isUserScanned == true)
             {
-                if (SmsController.Instance.GenerateVerificationSms(userInUse.phoneNumber))
+                if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
                 {
-                    if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
-                    {
-                        SmsController.Instance.GenerateReturnReceipt(userInUse, scannedItems);
-                        MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
+                    MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
 
-                        ClearUI();
-                    }
-                    else
-                    {
-                        MessageBox.Show("OPS, udstyret blev IKKE afleveret! Hvis dette fortsætter, kontakt IT.");
-                    }
+                    ClearUI();
                 }
+                else
+                {
+                    MessageBox.Show("OPS, udstyret blev IKKE afleveret! Hvis dette fortsætter, kontakt IT.");
+                }
+
+
+                /*if (SmsController.Instance.GenerateVerificationSms(userInUse.phoneNumber))
+                {
+                    //SmsController.Instance.GenerateReturnReceipt(userInUse, scannedItems);
+                }*/
             }
             else
             {
