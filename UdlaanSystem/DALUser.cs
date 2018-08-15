@@ -267,5 +267,29 @@ namespace UdlaanSystem
 
             return userList;
         }
+
+        public bool UpdateUserZbcNameToUniLogin(string zbcName, string uniLogin)
+        {
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand("UPDATE users SET user_zbcname = '" + uniLogin + "' WHERE user_zbcname = '" + zbcName + "'", MysqlConnection);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("############################FAILED: " + ex);
+                return false;
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return true;
+        }
+
+        
     }
 }

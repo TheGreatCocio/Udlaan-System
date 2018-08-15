@@ -69,5 +69,10 @@ namespace UdlaanSystem
         {
             return DALUser.Instance.GetUserStatInformation();
         }
+
+        public bool UpdateUserZbcNameToUniLogin(string zbcName, string uniLogin)
+        {
+            return DALUser.Instance.UpdateUserZbcNameToUniLogin(zbcName, uniLogin);
+        }
     }
 }

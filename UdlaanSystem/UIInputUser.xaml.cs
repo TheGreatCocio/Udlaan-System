@@ -133,5 +133,11 @@ namespace UdlaanSystem
             }
             this.Close();
         }
+
+        private void ButtonUnilogin_Click(object sender, RoutedEventArgs e)
+        {
+            UIChangeToUniLogin uniLoginChangeBox = new UIChangeToUniLogin();
+            uniLoginChangeBox.ShowDialog();
+        }
     }
 }

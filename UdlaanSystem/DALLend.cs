@@ -147,7 +147,7 @@ namespace UdlaanSystem
                 try
                 {
                     ConnectMySql();
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO lend (lend_itemmifare, lend_usermifare, lend_lenddate, lend_returndate) VALUES ('" + lendObject.itemObject.itemMifare + "', '" + lendedObjectToAddToDB.UserObject.userMifare + "', '" + FormatDateBackEnd(lendObject.lendDate.ToString()) + "', '" + FormatDateBackEnd(lendObject.returnDate.ToString()) + "')", MysqlConnection);
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO lend (lend_itemmifare, lend_usermifare, lend_lenddate, lend_returndate) VALUES ('" + lendObject.ItemObject.ItemMifare + "', '" + lendedObjectToAddToDB.UserObject.UserMifare + "', '" + FormatDateBackEnd(lendObject.LendDate.ToString()) + "', '" + FormatDateBackEnd(lendObject.ReturnDate.ToString()) + "')", MysqlConnection);
                     cmd.ExecuteNonQuery();
                     //MySqlDataReader rdr = cmd.ExecuteReader();
                     success = true;
@@ -174,7 +174,7 @@ namespace UdlaanSystem
 
                 foreach (LendObject lendObjectToReturn in lendObjectsToReturn)
                 {
-                    MySqlCommand cmd = new MySqlCommand("CALL removeLend('" + lendObjectToReturn.itemObject.itemMifare + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')", MysqlConnection);
+                    MySqlCommand cmd = new MySqlCommand("CALL removeLend('" + lendObjectToReturn.ItemObject.ItemMifare + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')", MysqlConnection);
                     cmd.ExecuteNonQuery();
                 }
                 return true;

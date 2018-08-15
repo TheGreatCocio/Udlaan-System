@@ -1,0 +1,31 @@
+﻿<Window x:Class="UdlaanSystem.UIChangeToUniLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UdlaanSystem"
+        mc:Ignorable="d"
+        Title="Skift til Uni Login" Height="308.781" Width="448.952" Background="#FFEEEEEE" >
+    <Grid>
+        <Label x:Name="LabelSearch" Content="Søg(Uni Login)" HorizontalAlignment="Left" Margin="17,61,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxUniLogin" HorizontalAlignment="Left" Height="23" Margin="17,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxUniLogin_TextChanged"/>
+        <Label x:Name="LabelFName" Content="Fornavn:" HorizontalAlignment="Left" Margin="17,122,0,0" VerticalAlignment="Top" Width="56"/>
+        <Label x:Name="LabelLName" Content="Efternavn:" HorizontalAlignment="Left" Margin="17,153,0,0" VerticalAlignment="Top" Width="62"/>
+        <Label x:Name="LabelFNameResult" Content="" HorizontalAlignment="Left" Margin="78,122,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="LabelLNameResult" Content="" HorizontalAlignment="Left" Margin="86,153,0,0" VerticalAlignment="Top" Width="172"/>
+        <Label x:Name="LabelFound" Content="Fundet!" HorizontalAlignment="Left" Margin="288,87,0,0" VerticalAlignment="Top" Visibility="Hidden" Foreground="LawnGreen"/>
+        <Button x:Name="ButtonSave" Content="GEM" HorizontalAlignment="Left" Margin="246,188,0,0" VerticalAlignment="Top" Width="152" Click="ButtonSave_Click" IsEnabled="False" Foreground="White" Height="33">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label Content="Zbcnavn" HorizontalAlignment="Left" Margin="17,11,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxZbcName" HorizontalAlignment="Left" Height="23" Margin="17,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" TextChanged="TextBoxZbcName_TextChanged"/>
+        <Label x:Name="LabelFoundZbc" Content="Fundet!" HorizontalAlignment="Left" Margin="288,36,0,0" VerticalAlignment="Top" Visibility="Hidden" Foreground="LawnGreen"/>
+    </Grid>
+</Window>
