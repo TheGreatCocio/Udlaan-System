@@ -10,29 +10,29 @@ namespace UdlaanSystem
     {
         public ListViewObject(string itemMifare, string type, string manufacturer, string model, int id, string serialNumber, DateTime lendDate, DateTime returnDate, DateTime? returnedDate, bool? isOverdue, string zbcName)
         {
-            this.itemMifare = itemMifare;
-            this.type = type;
-            this.manufacturer = manufacturer;
-            this.model = model;
-            this.id = id;
-            this.serialNumber = serialNumber;
-            this.lendDate = lendDate;
-            this.returnDate = returnDate;
-            this.returnedDate = returnedDate;
-            this.isOverdue = isOverdue;
-            this.zbcName = zbcName;
+            ItemMifare = itemMifare;
+            Type = type;
+            Manufacturer = manufacturer;
+            Model = model;
+            Id = id;
+            SerialNumber = serialNumber;
+            LendDate = lendDate;
+            ReturnDate = returnDate;
+            ReturnedDate = returnedDate;
+            IsOverdue = isOverdue;
+            ZbcName = zbcName;
         }
 
-        public string itemMifare { get; set; }
-        public string type { get; set; }
-        public string manufacturer { get; set; }
-        public string model { get; set; }
-        public int id { get; set; }
-        public string serialNumber { get; set; }
-        public DateTime lendDate { get; set; }
-        public DateTime returnDate { get; set; }
-        public DateTime? returnedDate { get; set; }
-        public bool? isOverdue { get; set; }
-        public string zbcName { get; set; }
+        public string ItemMifare { get; set; }
+        public string Type { get; set; }
+        public string Manufacturer { get; set; }
+        public string Model { get; set; }
+        public int Id { get; set; }
+        public string SerialNumber { get; set; }
+        public DateTime LendDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public DateTime? ReturnedDate { get; set; }
+        public bool? IsOverdue { get; set; }
+        public string ZbcName { get; set; }
     }
 }

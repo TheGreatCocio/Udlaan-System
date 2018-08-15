@@ -28,16 +28,16 @@ namespace UdlaanSystem
         {
             InitializeComponent();
 
-            labelFnameResult.Content = selectedItem.UserObject.fName;
+            labelFnameResult.Content = selectedItem.UserObject.FName;
             labelFnameResult.Visibility = Visibility.Visible;
-            labelLnameResult.Content = selectedItem.UserObject.lName;
+            labelLnameResult.Content = selectedItem.UserObject.LName;
             labelLnameResult.Visibility = Visibility.Visible;
-            labelZbcnameResult.Content = selectedItem.UserObject.zbcName;
+            labelZbcnameResult.Content = selectedItem.UserObject.ZbcName;
             labelZbcnameResult.Visibility = Visibility.Visible;
-            labelPhoneNumberResult.Content = selectedItem.UserObject.phoneNumber;
+            labelPhoneNumberResult.Content = selectedItem.UserObject.PhoneNumber;
             labelPhoneNumberResult.Visibility = Visibility.Visible;
 
-            if (selectedItem.UserObject.isTeacher)
+            if (selectedItem.UserObject.IsTeacher)
             {
                 labelIsTeacherResult.Content = "Ja";
             }
@@ -49,19 +49,19 @@ namespace UdlaanSystem
 
             foreach (LendObject information in selectedItem.LendObjects)
             {
-                labelTypeResult.Content = information.itemObject.type;
+                labelTypeResult.Content = information.ItemObject.Type;
                 labelTypeResult.Visibility = Visibility.Visible;
-                labelManufacturerResult.Content = information.itemObject.manufacturer;
+                labelManufacturerResult.Content = information.ItemObject.Manufacturer;
                 labelManufacturerResult.Visibility = Visibility.Visible;
-                labelModelResult.Content = information.itemObject.model;
+                labelModelResult.Content = information.ItemObject.Model;
                 labelModelResult.Visibility = Visibility.Visible;
-                labelSerialNumberResult.Content = information.itemObject.serialNumber;
+                labelSerialNumberResult.Content = information.ItemObject.SerialNumber;
                 labelSerialNumberResult.Visibility = Visibility.Visible;
-                labelIDResult.Content = information.itemObject.id;
+                labelIDResult.Content = information.ItemObject.Id;
                 labelIDResult.Visibility = Visibility.Visible;
-                labelLendDateResult.Content = information.lendDate.ToString("dd-MM-yyyy HH:mm");
+                labelLendDateResult.Content = information.LendDate.ToString("dd-MM-yyyy HH:mm");
                 labelLendDateResult.Visibility = Visibility.Visible;
-                labelReturnDateResult.Content = information.returnDate.ToString("dd-MM-yyyy HH:mm");
+                labelReturnDateResult.Content = information.ReturnDate.ToString("dd-MM-yyyy HH:mm");
                 labelReturnDateResult.Visibility = Visibility.Visible;
             }
         }

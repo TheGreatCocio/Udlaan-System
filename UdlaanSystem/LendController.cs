@@ -36,9 +36,9 @@ namespace UdlaanSystem
             List<LendObject> lendObjectList = DALLend.Instance.GetLendedByUserMifare(userMifare).Concat(DALLend.Instance.GetArchiveByUserMifare(userMifare)).ToList();
             foreach (LendObject obj in lendObjectList)
             {
-                if (obj.returnedDate == null && obj.itemObject.type == "Computer")
+                if (obj.ReturnedDate == null && obj.ItemObject.Type == "Computer")
                 {
-                    userObject.hasPC = true;
+                    userObject.HasPC = true;
                 }
             }
             LendedObject lendedObject = new LendedObject(userObject, lendObjectList);
@@ -70,7 +70,7 @@ namespace UdlaanSystem
             {
                 foreach (UserObject user in users)
                 {
-                    allStatisticsInformation.Add(new LendedObject(user, DALLend.Instance.GetStatisticsInformation(user.userMifare)));
+                    allStatisticsInformation.Add(new LendedObject(user, DALLend.Instance.GetStatisticsInformation(user.UserMifare)));
                 }
             }
 

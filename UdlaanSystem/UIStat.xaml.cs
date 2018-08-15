@@ -29,13 +29,13 @@ namespace UdlaanSystem
             {
                 foreach (LendObject item in stat.LendObjects)
                 {
-                    if (item.returnDate.Date == DateTime.Now.Date)
+                    if (item.ReturnDate.Date == DateTime.Now.Date)
                     {
-                        this.listViewStatToday.Items.Add(new ListViewObject(item.itemObject.itemMifare, item.itemObject.type, item.itemObject.manufacturer, item.itemObject.model, item.itemObject.id, item.itemObject.serialNumber, item.lendDate, item.returnDate, null, false, stat.UserObject.zbcName));
+                        this.listViewStatToday.Items.Add(new ListViewObject(item.ItemObject.ItemMifare, item.ItemObject.Type, item.ItemObject.Manufacturer, item.ItemObject.Model, item.ItemObject.Id, item.ItemObject.SerialNumber, item.LendDate, item.ReturnDate, null, false, stat.UserObject.ZbcName));
                     }
-                    else if (item.returnDate.Date < DateTime.Now.Date)
+                    else if (item.ReturnDate.Date < DateTime.Now.Date)
                     {
-                        this.listViewStatAllTime.Items.Add(new ListViewObject(item.itemObject.itemMifare, item.itemObject.type, item.itemObject.manufacturer, item.itemObject.model, item.itemObject.id, item.itemObject.serialNumber, item.lendDate, item.returnDate, null, false, stat.UserObject.zbcName));
+                        this.listViewStatAllTime.Items.Add(new ListViewObject(item.ItemObject.ItemMifare, item.ItemObject.Type, item.ItemObject.Manufacturer, item.ItemObject.Model, item.ItemObject.Id, item.ItemObject.SerialNumber, item.LendDate, item.ReturnDate, null, false, stat.UserObject.ZbcName));
                     }
                 }
 
@@ -50,7 +50,7 @@ namespace UdlaanSystem
             {
                 foreach (LendObject item in statObject.LendObjects)
                 {
-                    if (selectedItem.itemMifare == item.itemObject.itemMifare)
+                    if (selectedItem.ItemMifare == item.ItemObject.ItemMifare)
                     {
                         CallStatDetails(statObject);
                     }
@@ -67,7 +67,7 @@ namespace UdlaanSystem
             {
                 foreach (LendObject item in statObject.LendObjects)
                 {
-                    if (selectedItem.itemMifare == item.itemObject.itemMifare)
+                    if (selectedItem.ItemMifare == item.ItemObject.ItemMifare)
                     {
                         CallStatDetails(statObject);
                     }

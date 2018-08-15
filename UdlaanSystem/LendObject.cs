@@ -10,15 +10,15 @@ namespace UdlaanSystem
     {
         public LendObject(ItemObject itemObject, DateTime lendDate, DateTime returnDate, DateTime? returnedDate)
         {
-            this.itemObject = itemObject;
-            this.lendDate = lendDate;
-            this.returnDate = returnDate;
-            this.returnedDate = returnedDate;
+            ItemObject = itemObject;
+            LendDate = lendDate;
+            ReturnDate = returnDate;
+            ReturnedDate = returnedDate;
         }
 
-        public ItemObject itemObject { get; set; }
-        public DateTime lendDate { get; set; }
-        public DateTime returnDate { get; set; }
-        public DateTime? returnedDate { get; set; }
+        public ItemObject ItemObject { get; set; }
+        public DateTime LendDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public DateTime? ReturnedDate { get; set; }
     }
 }

@@ -122,7 +122,7 @@ namespace UdlaanSystem
             if (!ComboBoxModels.Items.IsEmpty)
             {
                 string selectedModelsName = ComboBoxModels.SelectedItem.ToString();
-               
+
                 foreach (string[] arrayStr in models)
                 {
                     if (arrayStr.Contains(selectedModelsName))
@@ -269,7 +269,7 @@ namespace UdlaanSystem
                     
                     if (ListViewAddItems.SelectedItems.Contains(TESTITEM))
                     {
-                        if (itemObject.itemMifare == TESTITEM.itemMifare)
+                        if (itemObject.ItemMifare == TESTITEM.ItemMifare)
                         {
                             itemsToInsert.Remove(itemObject);
                             ListViewAddItems.Items.RemoveAt(i);

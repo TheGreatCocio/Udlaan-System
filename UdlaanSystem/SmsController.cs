@@ -115,12 +115,12 @@ namespace UdlaanSystem
 
                 foreach (LendObject lendObject in lendObjects)
                 {
-                    returnDate = lendObject.returnDate;
-                    itemsMsg += lendObject.itemObject.type + " " + lendObject.itemObject.manufacturer + " " + lendObject.itemObject.model + " " + lendObject.itemObject.id + Environment.NewLine;
+                    returnDate = lendObject.ReturnDate;
+                    itemsMsg += lendObject.ItemObject.Type + " " + lendObject.ItemObject.Manufacturer + " " + lendObject.ItemObject.Model + " " + lendObject.ItemObject.Id + Environment.NewLine;
                 }
 
-                string msg = "Hej " + userObject.zbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " lånt følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine + "Dette udstyr skal være afleveret den " + returnDate + " senest!" + Environment.NewLine + Environment.NewLine + "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy " + location; //Ubuy Rinsted kan ændres så man vælger location i config filen
-                DALSms.Instance.SendSms(userObject.phoneNumber, msg);
+                string msg = "Hej " + userObject.ZbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " lånt følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine + "Dette udstyr skal være afleveret den " + returnDate + " senest!" + Environment.NewLine + Environment.NewLine + "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy " + location; //Ubuy Rinsted kan ændres så man vælger location i config filen
+                DALSms.Instance.SendSms(userObject.PhoneNumber, msg);
             }
         }
 
@@ -149,10 +149,10 @@ namespace UdlaanSystem
                 string itemsMsg = "";
                 foreach (LendObject lendObject in lendObjects)
                 {
-                    itemsMsg += lendObject.itemObject.type + " " + lendObject.itemObject.manufacturer + " " + lendObject.itemObject.model + " " + lendObject.itemObject.id + Environment.NewLine;
+                    itemsMsg += lendObject.ItemObject.Type + " " + lendObject.ItemObject.Manufacturer + " " + lendObject.ItemObject.Model + " " + lendObject.ItemObject.Id + Environment.NewLine;
                 }
-                string msg = "Hej " + userObject.zbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine +  "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy " + location; //Ubuy Rinsted kan ændres så man vælger location i config filen
-                DALSms.Instance.SendSms(userObject.phoneNumber, msg);
+                string msg = "Hej " + userObject.ZbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine +  "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy " + location; //Ubuy Rinsted kan ændres så man vælger location i config filen
+                DALSms.Instance.SendSms(userObject.PhoneNumber, msg);
             }
         }
     }

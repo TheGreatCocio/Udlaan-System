@@ -10,25 +10,25 @@ namespace UdlaanSystem
     {
         public UserObject(string fName, string lName, string zbcName, string userMifare, int phoneNumber, bool isTeacher, bool hasPC, bool isDisabled, string comment)
         {
-            this.fName = fName;
-            this.lName = lName;
-            this.zbcName = zbcName;
-            this.userMifare = userMifare;
-            this.phoneNumber = phoneNumber;
-            this.isTeacher = isTeacher;
-            this.hasPC = hasPC;
-            this.isDisabled = isDisabled;
-            this.comment = comment;
+            FName = fName;
+            LName = lName;
+            ZbcName = zbcName;
+            UserMifare = userMifare;
+            PhoneNumber = phoneNumber;
+            IsTeacher = isTeacher;
+            HasPC = hasPC;
+            IsDisabled = isDisabled;
+            Comment = comment;
         }
 
-        public string fName { get; set; }
-        public string lName { get; set; }
-        public string zbcName { get; set; }
-        public string userMifare { get; set; }
-        public int phoneNumber { get; set; }
-        public bool isTeacher { get; set; }
-        public bool hasPC { get; set; }
-        public bool isDisabled { get; set; }
-        public string comment { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
+        public string ZbcName { get; set; }
+        public string UserMifare { get; set; }
+        public int PhoneNumber { get; set; }
+        public bool IsTeacher { get; set; }
+        public bool HasPC { get; set; }
+        public bool IsDisabled { get; set; }
+        public string Comment { get; set; }
     }
 }

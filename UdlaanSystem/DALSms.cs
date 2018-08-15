@@ -12,7 +12,6 @@ namespace UdlaanSystem
 {
     class DALSms
     {
-        //https://data.efif.dk/JSON/SMS.ashx?key=2e9a42f3-1353-46e2-ba61-3ef81c5d8693&receivers=22781002&message=Rekt
         public string key = "2e9a42f3-1353-46e2-ba61-3ef81c5d8693";
 
         public DALSms()

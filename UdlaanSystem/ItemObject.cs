@@ -10,21 +10,21 @@ namespace UdlaanSystem
     {
         public ItemObject(string itemMifare, string type, string manufacturer, string model, int id , string serialNumber)
         {
-            this.itemMifare = itemMifare;
-            this.type = type;
-            this.manufacturer = manufacturer;
-            this.model = model;
-            this.id = id;
-            this.serialNumber = serialNumber;
+            ItemMifare = itemMifare;
+            Type = type;
+            Manufacturer = manufacturer;
+            Model = model;
+            Id = id;
+            SerialNumber = serialNumber;
             
         }
 
-        public string itemMifare { get; set; }
-        public string type { get; set; }
-        public string manufacturer { get; set; }
-        public string model { get; set; }
-        public int id { get; set; }
-        public string serialNumber { get; set; }
+        public string ItemMifare { get; set; }
+        public string Type { get; set; }
+        public string Manufacturer { get; set; }
+        public string Model { get; set; }
+        public int Id { get; set; }
+        public string SerialNumber { get; set; }
         
     }
 }
