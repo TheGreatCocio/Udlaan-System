@@ -43,7 +43,7 @@ namespace UdlaanSystem {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LocationRingsted {
             get {
                 return ((bool)(this["LocationRingsted"]));
@@ -52,7 +52,7 @@ namespace UdlaanSystem {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool LocationRoskilde {
             get {
                 return ((bool)(this["LocationRoskilde"]));
