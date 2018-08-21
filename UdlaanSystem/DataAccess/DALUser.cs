@@ -9,7 +9,7 @@ using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
 using System.DirectoryServices.AccountManagement;
 
-namespace UdlaanSystem
+namespace UdlaanSystem.DataAccess
 {
     class DALUser
     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows;
 
-namespace UdlaanSystem
+namespace UdlaanSystem.DataAccess
 {
     class DALLend
     {

@@ -7,7 +7,7 @@
         xmlns:System="clr-namespaceTongue Tiedystem;assembly=mscorlib"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="Ubuy Ringsted" Height="697.665" Width="1104.277" ResizeMode="NoResize" Background="#FFEEEEEE" BorderBrush="Black" >
+        Title="Zbc Supply Udlån" Height="697.665" Width="1104.277" ResizeMode="NoResize" Background="#FFEEEEEE" BorderBrush="Black" >
     <Grid x:Name="grid1" Margin="10,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="388*"/>
@@ -49,13 +49,13 @@
             </ListView.RenderTransform>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding type}" />
-                    <GridViewColumn Header="Producent" Width="200" DisplayMemberBinding="{Binding manufacturer}" />
-                    <GridViewColumn Header="Model" Width="130" DisplayMemberBinding="{Binding model}" />
-                    <GridViewColumn Header="ID" Width="70" DisplayMemberBinding="{Binding id}" />
-                    <GridViewColumn Header="Serie Nummer" Width="170" DisplayMemberBinding="{Binding serialNumber}" />
-                    <GridViewColumn Header="Udlånt Dato" Width="200" DisplayMemberBinding="{Binding lendDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
-                    <GridViewColumn Header="Afleverings Dato" Width="192" DisplayMemberBinding="{Binding returnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"/>
+                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="200" DisplayMemberBinding="{Binding Manufacturer}" />
+                    <GridViewColumn Header="Model" Width="130" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="ID" Width="70" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Serie Nummer" Width="170" DisplayMemberBinding="{Binding SerialNumber}" />
+                    <GridViewColumn Header="Udlånt Dato" Width="200" DisplayMemberBinding="{Binding LendDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
+                    <GridViewColumn Header="Afleverings Dato" Width="192" DisplayMemberBinding="{Binding ReturnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -67,7 +67,7 @@
             <Label x:Name="LabelIsDisabled" Content="Deaktiveret :" Canvas.Left="314" Canvas.Top="180"/>
             <Label x:Name="LabelIsScanned" Content="Er Scannet :" Canvas.Left="2" Canvas.Top="180" RenderTransformOrigin="0.127,0.5"/>
             <Label x:Name="LabelNameResult" Content="Label" Canvas.Left="73" Canvas.Top="45" Visibility="Hidden"/>
-            <Label x:Name="LabelZbcNameResult" Content="Label" Canvas.Left="73" Canvas.Top="114" Visibility="Hidden"/>
+            <Label x:Name="LabelZbcNameResult" Content="Label" Canvas.Left="73" Canvas.Top="112" Visibility="Hidden"/>
             <Label x:Name="LabelPhoneResult" Content="Label" Canvas.Left="390" Canvas.Top="43" Visibility="Hidden"/>
             <Label x:Name="LabelTeacherResult" Content="Label" Canvas.Left="390" Canvas.Top="114" Visibility="Hidden"/>
             <Label x:Name="LabelIsDisabledResult" Content="Label" Canvas.Left="390" Canvas.Top="180" Visibility="Hidden"/>
@@ -79,11 +79,11 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding isOverdue}" Value="true">
+                        <DataTrigger Binding="{Binding IsOverdue}" Value="true">
                             <Setter Property="Background" Value="Red"/>
                             <Setter Property="Foreground" Value="White"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding isOverdue}" Value="false">
+                        <DataTrigger Binding="{Binding IsOverdue}" Value="false">
                             <Setter Property="Background" Value="Green"/>
                             <Setter Property="Foreground" Value="White"/>
                         </DataTrigger>
@@ -92,10 +92,10 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
-                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
-                    <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding model}" />
-                    <GridViewColumn Header="Afleverings Dato" Width="150" DisplayMemberBinding="{Binding returnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
+                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding Manufacturer}" />
+                    <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="Afleverings Dato" Width="150" DisplayMemberBinding="{Binding ReturnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -131,7 +131,17 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="466,387,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded" Grid.RowSpan="2"/>
+        <DatePicker x:Name="datePickerReturn" HorizontalAlignment="Left" Margin="466,387,0,0" VerticalAlignment="Top" Grid.Column="1" Loaded="DatePickerReturn_Loaded" Grid.RowSpan="2" SelectedDateChanged="DatePickerReturn_SelectedDateChanged"/>
+        <Button x:Name="ButtonReturnWIthoutCard" Content="Aflever Uden Studie Kort" IsEnabled="False" Grid.Column="1" HorizontalAlignment="Left" Margin="140.2,224.8,0,0" VerticalAlignment="Top" Width="180" Click="ButtonReturnWithoutCard_Click" Foreground="White" Grid.Row="1" Height="27">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button x:Name="ButtonClear" Content="Ryd" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="61" Click="ButtonClear_Click" Foreground="White" Height="22" >
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">

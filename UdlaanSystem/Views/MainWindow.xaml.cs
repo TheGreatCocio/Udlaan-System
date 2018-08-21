@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UdlaanSystem.Managers;
 
 namespace UdlaanSystem
 {
@@ -200,6 +201,7 @@ namespace UdlaanSystem
                     if (isItemsLended == true) //hvis vi har scannet et udstyr der er udlånt skal den disable ButtonLend
                     {
                         ButtonReturn.IsEnabled = true;
+                        ButtonReturnWIthoutCard.IsEnabled = true;
                         ButtonLend.IsEnabled = false;
                     }
                     else//hvis vi har scannet et udstyr der ikke er udlånt skal den disable ButtonReturn
@@ -336,18 +338,42 @@ namespace UdlaanSystem
                 }
                 else
                 {
-                    if (SmsController.Instance.GenerateVerificationSms(userInUse.PhoneNumber))
+                    if (Settings1.Default.LocationRoskilde)
                     {
                         if (LendController.Instance.GenLendedObject(userInUse, scannedItems))
                         {
-                            SmsController.Instance.GenerateLendReceipt(userInUse, scannedItems);
-                            MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
-
+                            if (userInUse.PhoneNumber.ToString().Length < 8 )
+                            {
+                                MessageBox.Show("Udstyret er nu udlånt men personen har ikke et gyldigt nummer så ingen kvitering sendt");
+                            }
+                            else
+                            {
+                                SmsController.Instance.GenerateLendReceipt(userInUse, scannedItems);
+                                MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
+                            }
+                            
                             ClearUI();
                         }
                         else
                         {
                             MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
+                        }
+                    }
+                    else
+                    {
+                        if (SmsController.Instance.GenerateVerificationSms(userInUse.PhoneNumber))
+                        {
+                            if (LendController.Instance.GenLendedObject(userInUse, scannedItems))
+                            {
+                                SmsController.Instance.GenerateLendReceipt(userInUse, scannedItems);
+                                MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
+
+                                ClearUI();
+                            }
+                            else
+                            {
+                                MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
+                            }
                         }
                     }
                 }
@@ -383,6 +409,20 @@ namespace UdlaanSystem
             {
                 MessageBox.Show("Brugeren SKAL scannes for at kunne aflevere sit udstyr!");
             }
+        }
+
+        private void ButtonReturnWithoutCard_Click(object sender, RoutedEventArgs e)
+        {            
+            if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
+            {
+                MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
+
+                ClearUI();
+            }
+            else
+            {
+                MessageBox.Show("OPS, udstyret blev IKKE afleveret! Hvis dette fortsætter, kontakt IT.");
+            } 
         }
 
         private void ButtonStat_Click(object sender, RoutedEventArgs e)
@@ -428,6 +468,7 @@ namespace UdlaanSystem
             TextBoxMain.Focus();
 
             ButtonReturn.IsEnabled = false;
+            ButtonReturnWIthoutCard.IsEnabled = false;
             ButtonLend.IsEnabled = false;
         }
 

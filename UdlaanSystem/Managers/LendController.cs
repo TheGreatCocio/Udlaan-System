@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UdlaanSystem.DataAccess;
 
-namespace UdlaanSystem
+namespace UdlaanSystem.Managers
 {
     class LendController
     {

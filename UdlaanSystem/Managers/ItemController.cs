@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using UdlaanSystem.DataAccess;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdlaanSystem
+namespace UdlaanSystem.Managers
 {
     class ItemController
     {

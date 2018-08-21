@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.VisualBasic;
+using UdlaanSystem.DataAccess;
 
-namespace UdlaanSystem
+namespace UdlaanSystem.Managers
 {
     class SmsController
     {

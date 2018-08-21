@@ -80,47 +80,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DALMigration.cs" />
-    <Compile Include="ItemObject.cs" />
-    <Compile Include="LendController.cs" />
-    <Compile Include="LendedObject.cs" />
-    <Compile Include="LendObject.cs" />
-    <Compile Include="ListViewObject.cs" />
-    <Compile Include="MigrationController.cs" />
+    <Compile Include="DataAccess\DALMigration.cs" />
+    <Compile Include="Objects\ItemObject.cs" />
+    <Compile Include="Managers\LendController.cs" />
+    <Compile Include="Objects\LendedObject.cs" />
+    <Compile Include="Objects\LendObject.cs" />
+    <Compile Include="Objects\ListViewObject.cs" />
+    <Compile Include="Managers\MigrationController.cs" />
     <Compile Include="Settings1.cs" />
     <Compile Include="Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings1.settings</DependentUpon>
     </Compile>
-    <Compile Include="SmsController.cs" />
-    <Compile Include="UIChangeToUniLogin.xaml.cs">
+    <Compile Include="Managers\SmsController.cs" />
+    <Compile Include="Views\UIChangeToUniLogin.xaml.cs">
       <DependentUpon>UIChangeToUniLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UIInputItem.xaml.cs">
+    <Compile Include="Views\UIInputItem.xaml.cs">
       <DependentUpon>UIInputItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UIInputUser.xaml.cs">
+    <Compile Include="Views\UIInputUser.xaml.cs">
       <DependentUpon>UIInputUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UIShowID.xaml.cs">
+    <Compile Include="Views\UIShowID.xaml.cs">
       <DependentUpon>UIShowID.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UISmsInput.xaml.cs">
+    <Compile Include="Views\UISmsInput.xaml.cs">
       <DependentUpon>UISmsInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UIStat.xaml.cs">
+    <Compile Include="Views\UIStat.xaml.cs">
       <DependentUpon>UIStat.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UIStatDetail.xaml.cs">
+    <Compile Include="Views\UIStatDetail.xaml.cs">
       <DependentUpon>UIStatDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UIUserNote.xaml.cs">
+    <Compile Include="Views\UIUserNote.xaml.cs">
       <DependentUpon>UIUserNote.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserController.cs" />
-    <Compile Include="UserObject.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Managers\UserController.cs" />
+    <Compile Include="Objects\UserObject.cs" />
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -128,44 +128,44 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DALItem.cs" />
-    <Compile Include="DALLend.cs" />
-    <Compile Include="DALSms.cs" />
-    <Compile Include="DALUser.cs" />
-    <Compile Include="ItemController.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="DataAccess\DALItem.cs" />
+    <Compile Include="DataAccess\DALLend.cs" />
+    <Compile Include="DataAccess\DALSms.cs" />
+    <Compile Include="DataAccess\DALUser.cs" />
+    <Compile Include="Managers\ItemController.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UIChangeToUniLogin.xaml">
+    <Page Include="Views\UIChangeToUniLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UIInputItem.xaml">
+    <Page Include="Views\UIInputItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UIInputUser.xaml">
+    <Page Include="Views\UIInputUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UIShowID.xaml">
+    <Page Include="Views\UIShowID.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UISmsInput.xaml">
+    <Page Include="Views\UISmsInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UIStat.xaml">
+    <Page Include="Views\UIStat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UIStatDetail.xaml">
+    <Page Include="Views\UIStatDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UIUserNote.xaml">
+    <Page Include="Views\UIUserNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,5 +200,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

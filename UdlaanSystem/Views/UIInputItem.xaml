@@ -20,12 +20,12 @@
         <ListView x:Name="ListViewAddItems" HorizontalAlignment="Left" Height="280" Margin="108.427,25,0,0" VerticalAlignment="Top" Width="619" Grid.Column="1" SelectionMode="Multiple">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
-                    <GridViewColumn Header="Producent" Width="120" DisplayMemberBinding="{Binding manufacturer}" />
-                    <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding model}" />
-                    <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding id}" />
-                    <GridViewColumn Header="Serie Nummer" Width="100" DisplayMemberBinding="{Binding serialNumber}" />
-                    <GridViewColumn Header="Mifare" Width="110" DisplayMemberBinding="{Binding itemMifare}" />
+                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="120" DisplayMemberBinding="{Binding Manufacturer}" />
+                    <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Serie Nummer" Width="100" DisplayMemberBinding="{Binding SerialNumber}" />
+                    <GridViewColumn Header="Mifare" Width="110" DisplayMemberBinding="{Binding ItemMifare}" />
                 </GridView>
             </ListView.View>
         </ListView>

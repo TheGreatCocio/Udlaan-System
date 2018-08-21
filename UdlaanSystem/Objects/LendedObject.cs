@@ -10,8 +10,8 @@ namespace UdlaanSystem
     {
         public LendedObject(UserObject userObject, List<LendObject> lendObjects)
         {
-            UserObject = UserObject;
-            LendObjects = LendObjects;
+            UserObject = userObject;
+            LendObjects = lendObjects;
         }
 
         public UserObject UserObject { get; set; }

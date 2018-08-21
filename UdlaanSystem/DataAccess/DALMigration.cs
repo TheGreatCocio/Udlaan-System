@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdlaanSystem
+namespace UdlaanSystem.DataAccess
 {
     class DALMigration
     { //Denne del af koden er UDELUKKENDE til mmigration så udstyret bliver afleveret i den gamle DB!!!
@@ -93,15 +93,23 @@ namespace UdlaanSystem
             try
             {
                 ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand();
+                if (Settings1.Default.LocationRingsted == true)
+                {
+                    cmd = new MySqlCommand("CALL removeBorrower('" + itemMifareToReturnInOldDB + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')", MysqlConnection);
+                }
+                else if (Settings1.Default.LocationRoskilde == true)
+                {
+                    cmd = new MySqlCommand("DELETE FROM udlaant WHERE pc_mifare = '" + itemMifareToReturnInOldDB + "'", MysqlConnection);
+                }
                 
-                MySqlCommand cmd = new MySqlCommand("CALL removeBorrower('" + itemMifareToReturnInOldDB + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')", MysqlConnection);
                 cmd.ExecuteNonQuery();
                 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Debug.WriteLine("BOOOOOOOOOOOOOOOOOOOOOOOM");
+                Debug.WriteLine("BOOOOOOOOOOOOOOOOOOOOOOOM  " + ex);
                 return false;
                 throw;
             }

@@ -22,7 +22,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Label x:Name="LabelSearch" Content="Søg(Zbc Navn)" HorizontalAlignment="Left" Margin="23,5,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LabelSearch" Content="Søg(Uni Login)" HorizontalAlignment="Left" Margin="23,5,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelUserMifare" Content="Mifare" HorizontalAlignment="Left" Margin="23,59,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelPhoneNumber" Content="Mobil Nr." HorizontalAlignment="Left" Margin="23,113,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelFNameResult" Content="" HorizontalAlignment="Left" Margin="83,169,0,0" VerticalAlignment="Top" Width="180"/>
@@ -39,6 +39,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <Label x:Name="labelEUUser" Content="EU Elev:" HorizontalAlignment="Left" Margin="27,257,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <CheckBox x:Name="checkBoxEUUser" Content="" HorizontalAlignment="Left" Margin="78,264,0,0" VerticalAlignment="Top" Click="checkBoxEU_CheckedChanged" Width="19" Visibility="Hidden" IsChecked="False"/>
 
     </Grid>
 </Window>

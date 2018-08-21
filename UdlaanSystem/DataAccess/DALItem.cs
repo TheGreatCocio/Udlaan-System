@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdlaanSystem
+namespace UdlaanSystem.DataAccess
 {
     class DALItem
     {
@@ -30,7 +30,7 @@ namespace UdlaanSystem
         private MySqlConnection MysqlConnection = null;
 
         private void ConnectMySql()
-        {
+        {            
             if (Settings1.Default.LocationNæstved == true)
             {
                 sqlConn = @"server=10.108.48.19; Database=supply_nv; User Id=udlaan; Password=RFIDrules; integrated security=false";

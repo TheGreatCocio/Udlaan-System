@@ -10,21 +10,21 @@
         <ListView x:Name="listViewStatToday" HorizontalAlignment="Left" Height="280" Margin="10,50,0,0" VerticalAlignment="Top" Width="430" SelectionChanged="ListViewStatToday_ItemSelectionChanged" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding type}" />
-                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
-                    <GridViewColumn Header="Model" Width="97" DisplayMemberBinding="{Binding model}" />
-                    <GridViewColumn Header="ZBCnavn" Width="99" DisplayMemberBinding="{Binding zbcName}" />
+                    <GridViewColumn Header="Type" Width="74" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding Manufacturer}" />
+                    <GridViewColumn Header="Model" Width="97" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="ZBCnavn" Width="99" DisplayMemberBinding="{Binding ZbcName}" />
                 </GridView>
             </ListView.View>
         </ListView>
         <ListView x:Name="listViewStatAllTime" HorizontalAlignment="Left" Height="280" Margin="445,50,0,0" VerticalAlignment="Top" Width="585" SelectionChanged="ListViewStatAllTime_ItemSelectionChanged" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Type" Width="70" DisplayMemberBinding="{Binding type}" />
-                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding manufacturer}" />
-                    <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding model}" />
-                    <GridViewColumn Header="ZBCnavn" Width="100" DisplayMemberBinding="{Binding zbcName}" />
-                    <GridViewColumn Header="Afleveringsdato" Width="105" DisplayMemberBinding="{Binding returnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
+                    <GridViewColumn Header="Type" Width="70" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Producent" Width="150" DisplayMemberBinding="{Binding Manufacturer}" />
+                    <GridViewColumn Header="Model" Width="150" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="ZBCnavn" Width="100" DisplayMemberBinding="{Binding ZbcName}" />
+                    <GridViewColumn Header="Afleveringsdato" Width="105" DisplayMemberBinding="{Binding ReturnDate, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
                 </GridView>
             </ListView.View>
         </ListView>
