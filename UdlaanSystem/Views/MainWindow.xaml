@@ -7,7 +7,7 @@
         xmlns:System="clr-namespaceTongue Tiedystem;assembly=mscorlib"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="Zbc Supply Udlån" Height="697.665" Width="1104.277" ResizeMode="NoResize" Background="#FFEEEEEE" BorderBrush="Black" >
+        Title="ZBC Supply Udlåns System" Height="697.665" Width="1104.277" ResizeMode="NoResize" Background="#FFEEEEEE" BorderBrush="Black" >
     <Grid x:Name="grid1" Margin="10,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="388*"/>
@@ -99,7 +99,17 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="ButtonStat" Content="Vis Statestik" HorizontalAlignment="Left" Margin="437,12,0,0" VerticalAlignment="Top" Width="131" Grid.Column="1" Click="ButtonStat_Click" Foreground="White" Visibility="Visible">
+        <Button x:Name="ButtonConfig" Content="Konfigurations Panel" HorizontalAlignment="Left" Margin="50 12 0 0" VerticalAlignment="Top" Width="175" Grid.Column="1" Click="ButtonConfig_Click" Foreground="White" Visibility="Visible">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5 1" MappingMode="RelativeToBoundingBox" StartPoint="0.5 0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793" />
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="ButtonStat" Content="Vis Statestik" HorizontalAlignment="Right" Margin="7 12 20 0" VerticalAlignment="Top" Width="131" Grid.Column="1" Click="ButtonStat_Click" Foreground="White" Visibility="Visible">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>

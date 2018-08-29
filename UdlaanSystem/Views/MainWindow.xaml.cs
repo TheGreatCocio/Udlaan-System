@@ -35,7 +35,6 @@ namespace UdlaanSystem
         private bool isUserScanned = false;
         private bool? isItemsLended = null;
 
-
         private void OnMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {
             if (TextBoxMain.IsFocused) // checks if the maintextbox is focused
@@ -60,10 +59,7 @@ namespace UdlaanSystem
                             else
                             {
                                 /*
-                                 * 
-                                 * 
                                  * Denne del af koden er UDELUKKENDE til mmigration så udstyret bliver afleveret i den gamle DB!!!
-                                 * 
                                  */
                                 if (MigrationController.Instance.CheckIfItemIsLendedInOldDB(TextBoxMain.Text))//Hvis mifaret ikke tilhøre en bruger skal vi tjekke om det er udlånt i den gamle DB og aflevere det
                                 {
@@ -98,7 +94,7 @@ namespace UdlaanSystem
                         }
 
                     }
-                    else//On Items Scanned
+                    else //On Items Scanned
                     {
                         string userMifare = LendController.Instance.CheckIfLended(scannedItem.ItemMifare);//Tjekker om det item der er scanned er udlånt til en person, hvis der er udlånt skal vi hante alle hans data g hans lån/arkiv
                         TimeSpan timeSpanMonToThur = new TimeSpan(15, 30, 00); //Afleveringsdato for man-tors
@@ -212,7 +208,6 @@ namespace UdlaanSystem
                 }
             }
         }
-
         private void PrintItemToList(LendObject lendObject)
         {
             scannedItems.Add(lendObject);
@@ -221,10 +216,6 @@ namespace UdlaanSystem
                 lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, 
                 lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, null, ""));
         }
-
-        
-
-
         public void PrintUserData(LendedObject lendedObject)
         {
             LabelNameResult.Content = ($"{lendedObject.UserObject.FName} {lendedObject.UserObject.LName}");
@@ -243,7 +234,6 @@ namespace UdlaanSystem
 
             LabelIsScannedResult.Content = (isUserScanned) ? "Ja" : "Nej";
             LabelIsScannedResult.Foreground = (isUserScanned) ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
-
 
             //if (userInUse.IsDisabled)
             //{
@@ -382,6 +372,13 @@ namespace UdlaanSystem
         {
             UIStat uiUserNote = new UIStat();
             uiUserNote.ShowDialog();
+        }
+
+        // Configuration Panel Button | Load up login page, to access Config Panel 
+        private void ButtonConfig_Click(object sender, RoutedEventArgs e)
+        {
+            UIConfigPanelLogin configPanelLogin = new UIConfigPanelLogin();
+            configPanelLogin.ShowDialog();
         }
 
         //Når Datepickeren bliver loaded bliver dens valgte værdi sat til i morgen.

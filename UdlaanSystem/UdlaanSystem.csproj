@@ -97,6 +97,12 @@
     <Compile Include="Views\UIChangeToUniLogin.xaml.cs">
       <DependentUpon>UIChangeToUniLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UIConfigPanelDetail.xaml.cs">
+      <DependentUpon>UIConfigPanelDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UIConfigPanelLogin.xaml.cs">
+      <DependentUpon>UIConfigPanelLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UIInputItem.xaml.cs">
       <DependentUpon>UIInputItem.xaml</DependentUpon>
     </Compile>
@@ -140,6 +146,14 @@
     <Page Include="Views\UIChangeToUniLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UIConfigPanelDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UIConfigPanelLogin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UIInputItem.xaml">
       <SubType>Designer</SubType>

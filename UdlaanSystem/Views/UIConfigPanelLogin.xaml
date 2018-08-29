@@ -1,0 +1,12 @@
+﻿<Window x:Name="UIConfigPanelLoginForm" x:Class="UdlaanSystem.UIConfigPanelLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UdlaanSystem"
+        mc:Ignorable="d"
+        Title="Konfigurations Panel" Height="382.048" Width="1060" Background="#FFEEEEEE">
+    <Grid>
+        
+    </Grid>
+</Window>
