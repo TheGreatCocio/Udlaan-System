@@ -15,11 +15,11 @@ using UdlaanSystem.Managers;
 
 namespace UdlaanSystem
 {
-    /// <summary>
-    /// Interaction logic for UIStat.xaml
-    /// </summary>
-    public partial class FiskDetail : Window
+    public partial class UIConfigPanelDetail : Window
     {
-
+        public UIConfigPanelDetail()
+        {
+            InitializeComponent();
+        }
     }
 }

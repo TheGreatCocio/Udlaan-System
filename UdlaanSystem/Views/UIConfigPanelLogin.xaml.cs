@@ -15,8 +15,11 @@ using UdlaanSystem.Managers;
 
 namespace UdlaanSystem
 {
-    public partial class FiskLogin : Window
+    public partial class UIConfigPanelLogin : Window
     {
-        
+        public UIConfigPanelLogin()
+        {
+            InitializeComponent();
+        }
     }
 }

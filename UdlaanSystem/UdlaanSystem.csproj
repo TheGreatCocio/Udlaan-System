@@ -38,7 +38,7 @@
       <HintPath>..\..\MySQL\v461\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="mysql.data">
-      <HintPath>..\..\MySQL\v461\mysql.data.dll</HintPath>
+      <HintPath>C:\Users\tobi3686\Downloads\mysql.data.dll</HintPath>
     </Reference>
     <Reference Include="mysql.data.entity">
       <HintPath>..\..\MySQL\v461\mysql.data.entity.dll</HintPath>

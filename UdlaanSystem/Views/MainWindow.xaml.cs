@@ -377,7 +377,7 @@ namespace UdlaanSystem
         // Configuration Panel Button | Load up login page, to access Config Panel 
         private void ButtonConfig_Click(object sender, RoutedEventArgs e)
         {
-            UIConfigPanelLogin configPanelLogin = new UIConfigPanelLogin();
+            UIConfigPanelDetail configPanelLogin = new UIConfigPanelDetail();
             configPanelLogin.ShowDialog();
         }
 

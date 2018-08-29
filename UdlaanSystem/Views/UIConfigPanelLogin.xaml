@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UdlaanSystem"
         mc:Ignorable="d"
-        Title="Konfigurations Panel" Height="382.048" Width="1060" Background="#FFEEEEEE">
+        Title="Konfigurations Panel Log ind" Height="382.048" Width="1060" Background="#FFEEEEEE">
     <Grid>
         
     </Grid>
