@@ -31,10 +31,9 @@ namespace UdlaanSystem.DataAccess
 
         public void SendSms(int receiver, string msg)
         {
-            
-            var json = new WebClient().DownloadString("https://data.efif.dk/JSON/SMS.ashx?key=" + key + "&receivers=" + receiver + "&message=" + msg + "");
+                var json = new WebClient().DownloadString("https://data.efif.dk/JSON/SMS.ashx?key=" + key + "&receivers=" + receiver + "&message=" + msg + "");
 
-            Debug.WriteLine(json);
+                Debug.WriteLine(json);
         }
     }
 }

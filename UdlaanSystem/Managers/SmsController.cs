@@ -152,7 +152,7 @@ namespace UdlaanSystem.Managers
                 {
                     itemsMsg += lendObject.ItemObject.Type + " " + lendObject.ItemObject.Manufacturer + " " + lendObject.ItemObject.Model + " " + lendObject.ItemObject.Id + Environment.NewLine;
                 }
-                string msg = "Hej " + userObject.ZbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine +  "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy " + location; //Ubuy Rinsted kan ændres så man vælger location i config filen
+                string msg = "Hej " + userObject.ZbcName + Environment.NewLine + Environment.NewLine + "Du har den " + DateTime.Now + " afleveret følgende udstyr:" + Environment.NewLine + Environment.NewLine + itemsMsg + Environment.NewLine + "Med Venlig Hilsen" + Environment.NewLine + "-Ubuy " + location; //Ubuy Rinsted kan ændres så man vælger location i config filen                    
                 DALSms.Instance.SendSms(userObject.PhoneNumber, msg);
             }
         }

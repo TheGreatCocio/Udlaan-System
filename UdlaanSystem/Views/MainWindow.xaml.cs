@@ -217,7 +217,9 @@ namespace UdlaanSystem
         {
             scannedItems.Add(lendObject);
             ScannedItemMifares.Add(lendObject.ItemObject.ItemMifare);
-            this.ListViewItems.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, null, ""));
+            this.ListViewItems.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, 
+                lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, 
+                lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, null, ""));
         }
 
         
@@ -225,7 +227,7 @@ namespace UdlaanSystem
 
         public void PrintUserData(LendedObject lendedObject)
         {
-            LabelNameResult.Content = lendedObject.UserObject.FName + " " + lendedObject.UserObject.LName;
+            LabelNameResult.Content = ($"{lendedObject.UserObject.FName} {lendedObject.UserObject.LName}");
             LabelNameResult.Visibility = Visibility.Visible;
 
             LabelZbcNameResult.Content = lendedObject.UserObject.ZbcName;
@@ -234,36 +236,36 @@ namespace UdlaanSystem
             LabelPhoneResult.Content = lendedObject.UserObject.PhoneNumber;
             LabelPhoneResult.Visibility = Visibility.Visible;
 
-            if (lendedObject.UserObject.IsTeacher)
-            {
-                LabelTeacherResult.Content = "Ja";
-            }
-            else
-            {
-                LabelTeacherResult.Content = "Nej";
-            }
+            LabelTeacherResult.Content = (lendedObject.UserObject.IsTeacher) ? "Ja" : "Nej";
 
-            if (userInUse.IsDisabled)
-            {
-                LabelIsDisabledResult.Content = "Ja";
-                LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Red);
-            }
-            else
-            {
-                LabelIsDisabledResult.Content = "Nej";
-                LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Green);
-            }
+            LabelIsDisabledResult.Content = (userInUse.IsDisabled) ? "Ja" : "Nej";
+            LabelIsDisabledResult.Foreground = (userInUse.IsDisabled) ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
 
-            if (isUserScanned)
-            {
-                LabelIsScannedResult.Content = "Ja";
-                LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Green);
-            }
-            else
-            {
-                LabelIsScannedResult.Content = "Nej";
-                LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Red);
-            }
+            LabelIsScannedResult.Content = (isUserScanned) ? "Ja" : "Nej";
+            LabelIsScannedResult.Foreground = (isUserScanned) ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
+
+
+            //if (userInUse.IsDisabled)
+            //{
+            //    LabelIsDisabledResult.Content = "Ja";
+            //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Red);
+            //}
+            //else
+            //{
+            //    LabelIsDisabledResult.Content = "Nej";
+            //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Green);
+            //}
+
+            //if (isUserScanned)
+            //{
+            //    LabelIsScannedResult.Content = "Ja";
+            //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Green);
+            //}
+            //else
+            //{
+            //    LabelIsScannedResult.Content = "Nej";
+            //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Red);
+            //}
 
             LabelTeacherResult.Visibility = Visibility.Visible;
             LabelIsDisabledResult.Visibility = Visibility.Visible;
@@ -296,7 +298,9 @@ namespace UdlaanSystem
                         isOverdue = false;
                     }
                 }
-                this.ListViewLend.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, isOverdue, ""));
+                this.ListViewLend.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, 
+                    lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, 
+                    lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, isOverdue, ""));
             }
             TextBoxMain.Focus();
         }
@@ -338,42 +342,15 @@ namespace UdlaanSystem
                 }
                 else
                 {
-                    if (Settings1.Default.LocationRoskilde)
+                    if (!Settings1.Default.PartSmsService)
                     {
-                        if (LendController.Instance.GenLendedObject(userInUse, scannedItems))
-                        {
-                            if (userInUse.PhoneNumber.ToString().Length < 8 )
-                            {
-                                MessageBox.Show("Udstyret er nu udlånt men personen har ikke et gyldigt nummer så ingen kvitering sendt");
-                            }
-                            else
-                            {
-                                SmsController.Instance.GenerateLendReceipt(userInUse, scannedItems);
-                                MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
-                            }
-                            
-                            ClearUI();
-                        }
-                        else
-                        {
-                            MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
-                        }
+                        GenerateLend();
                     }
                     else
                     {
                         if (SmsController.Instance.GenerateVerificationSms(userInUse.PhoneNumber))
                         {
-                            if (LendController.Instance.GenLendedObject(userInUse, scannedItems))
-                            {
-                                SmsController.Instance.GenerateLendReceipt(userInUse, scannedItems);
-                                MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
-
-                                ClearUI();
-                            }
-                            else
-                            {
-                                MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
-                            }
+                            GenerateLend();
                         }
                     }
                 }
@@ -383,27 +360,12 @@ namespace UdlaanSystem
                 MessageBox.Show("Du Skal Scanne En Bruger");
             }
         }
-
+        
         private void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
             if (isUserScanned == true)
             {
-                if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
-                {
-                    MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
-
-                    ClearUI();
-                }
-                else
-                {
-                    MessageBox.Show("OPS, udstyret blev IKKE afleveret! Hvis dette fortsætter, kontakt IT.");
-                }
-
-
-                /*if (SmsController.Instance.GenerateVerificationSms(userInUse.phoneNumber))
-                {
-                    //SmsController.Instance.GenerateReturnReceipt(userInUse, scannedItems);
-                }*/
+                MoveToArchive();                   
             }
             else
             {
@@ -412,17 +374,8 @@ namespace UdlaanSystem
         }
 
         private void ButtonReturnWithoutCard_Click(object sender, RoutedEventArgs e)
-        {            
-            if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
-            {
-                MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
-
-                ClearUI();
-            }
-            else
-            {
-                MessageBox.Show("OPS, udstyret blev IKKE afleveret! Hvis dette fortsætter, kontakt IT.");
-            } 
+        {
+            MoveToArchive();
         }
 
         private void ButtonStat_Click(object sender, RoutedEventArgs e)
@@ -509,7 +462,9 @@ namespace UdlaanSystem
             this.ListViewItems.Items.Clear();
             foreach (LendObject lendObject in scannedItems)
             {
-                this.ListViewItems.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, null, ""));
+                this.ListViewItems.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, 
+                    lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, 
+                    lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, null, ""));
             }
         }
 
@@ -538,6 +493,43 @@ namespace UdlaanSystem
                 }
             }
             TextBoxMain.Focus();
+        }
+
+        private void GenerateLend()
+        {
+            if (LendController.Instance.GenLendedObject(userInUse, scannedItems))
+            {
+                if (userInUse.PhoneNumber.ToString().Length < 8)
+                {
+                    MessageBox.Show("Udstyret er nu udlånt men personen har ikke et gyldigt nummer så ingen kvitering sendt");
+                }
+                else
+                {
+                    SmsController.Instance.GenerateLendReceipt(userInUse, scannedItems);
+                    MessageBox.Show("Udstyret er nu udlånt og der er sendt en kvitering til personen via SMS");
+                }
+
+                ClearUI();
+            }
+            else
+            {
+                MessageBox.Show("OPS, udstyret blev IKKE udlånt! Hvis dette fortsætter, kontakt IT.");
+            }
+        }
+
+        private void MoveToArchive()
+        {
+            if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
+            {
+                SmsController.Instance.GenerateReturnReceipt(userInUse, scannedItems);
+                MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");                
+                
+                ClearUI();
+            }
+            else
+            {
+                MessageBox.Show("OPS, udstyret blev IKKE afleveret! Hvis dette fortsætter, kontakt IT.");
+            }
         }
 
         public static bool CheckForInternetConnection()
