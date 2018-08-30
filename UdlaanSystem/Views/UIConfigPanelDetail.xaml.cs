@@ -20,6 +20,8 @@ namespace UdlaanSystem
         public UIConfigPanelDetail()
         {
             InitializeComponent();
+
+            Settings1.Default.PartSmsService = false;
         }
     }
 }

@@ -29,7 +29,7 @@
             <ComboBoxItem Content="Test2" />
             <ComboBoxItem Content="Test3" />
         </ComboBox>
-        <Button Grid.Column="1" Grid.Row="1" Content="" Margin="3" FontSize="16px" />
+        <Button Grid.Column="1" Grid.Row="1" Name="SMSService" Content="" Margin="3" FontSize="16px" />
         <Button Grid.Column="1" Grid.Row="2" Content="" Margin="3" FontSize="16px" />
         <Button Grid.Column="1" Grid.Row="8" Content="Gem Ændringer" FontSize="12px" Width="100px" Margin="0 0 10 -3" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
     </Grid>
