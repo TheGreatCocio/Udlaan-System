@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +28,7 @@ namespace UdlaanSystem
         {
             InitializeComponent();
             TextBoxMain.Focus();
+            StartScanner();
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
@@ -490,6 +493,30 @@ namespace UdlaanSystem
                 }
             }
             TextBoxMain.Focus();
+        }
+
+        private void RestartScanner_Click(object sender, RoutedEventArgs e)
+        {
+            StartScanner();
+        }
+
+        private void StartScanner()
+        {
+            try
+            {
+                foreach (Process proc in Process.GetProcessesByName("javaw"))
+                {
+                    proc.Kill();
+                }
+                Thread.Sleep(100);
+                Process p = new Process();
+                p.StartInfo.FileName = Settings1.Default.JavaPath;
+                p.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void GenerateLend()
