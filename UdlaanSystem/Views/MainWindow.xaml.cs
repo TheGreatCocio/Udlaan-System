@@ -100,8 +100,8 @@ namespace UdlaanSystem
                     else //On Items Scanned
                     {
                         string userMifare = LendController.Instance.CheckIfLended(scannedItem.ItemMifare);//Tjekker om det item der er scanned er udlånt til en person, hvis der er udlånt skal vi hante alle hans data g hans lån/arkiv
-                        TimeSpan timeSpanMonToThur = new TimeSpan(15, 30, 00); //Afleveringsdato for man-tors
-                        TimeSpan timeSpanFri = new TimeSpan(13, 30, 00);//Afleveringsdato for fradag
+                        TimeSpan timeSpanMonToThur = Settings1.Default.TimeForReturnMonToThur; //Afleveringsdato for man-tors
+                        TimeSpan timeSpanFri = Settings1.Default.TimeForReturnFriday;//Afleveringsdato for fradag
                         LendObject scannedLendObject = null;
                         
                         if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)//Hvis der er valgt at afleveringsdatoen er fredag
@@ -137,10 +137,16 @@ namespace UdlaanSystem
                                         PrintItemToList(scannedLendObject);//printer itemmet til listen over scannet items
 
                                         userInUse = lendedObject.UserObject;//Vi sætter userInUse for at sikre os at man ikke scanner forskellige brugere sammen
+                                        if (lendedObject.UserObject == null)
+                                        {
+                                            MessageBox.Show("Brugeren der har lånt dette produkt kan ikke findes i databasen. Der kan stadig afleveres men du kan ikke se hvem der har haft lånt dette.");
+                                        }
+                                        else
+                                        {
+                                            PrintUserData(lendedObject);//Printer alle hans data og hans nuværende lån/arkiv
 
-                                        PrintUserData(lendedObject);//Printer alle hans data og hans nuværende lån/arkiv
-
-                                        CommentCheck(lendedObject);//tjekker om der er nogle noter skrevet om personen
+                                            CommentCheck(lendedObject);//tjekker om der er nogle noter skrevet om personen
+                                        }
                                     }
                                 }
                                 else
@@ -221,81 +227,83 @@ namespace UdlaanSystem
         }
         public void PrintUserData(LendedObject lendedObject)
         {
-            LabelNameResult.Content = ($"{lendedObject.UserObject.FName} {lendedObject.UserObject.LName}");
-            LabelNameResult.Visibility = Visibility.Visible;
+            
+                LabelNameResult.Content = ($"{lendedObject.UserObject.FName} {lendedObject.UserObject.LName}");
+                LabelNameResult.Visibility = Visibility.Visible;
 
-            LabelZbcNameResult.Content = lendedObject.UserObject.ZbcName;
-            LabelZbcNameResult.Visibility = Visibility.Visible;
+                LabelZbcNameResult.Content = lendedObject.UserObject.ZbcName;
+                LabelZbcNameResult.Visibility = Visibility.Visible;
 
-            LabelPhoneResult.Content = lendedObject.UserObject.PhoneNumber;
-            LabelPhoneResult.Visibility = Visibility.Visible;
+                LabelPhoneResult.Content = lendedObject.UserObject.PhoneNumber;
+                LabelPhoneResult.Visibility = Visibility.Visible;
 
-            LabelTeacherResult.Content = (lendedObject.UserObject.IsTeacher) ? "Ja" : "Nej";
+                LabelTeacherResult.Content = (lendedObject.UserObject.IsTeacher) ? "Ja" : "Nej";
 
-            LabelIsDisabledResult.Content = (userInUse.IsDisabled) ? "Ja" : "Nej";
-            LabelIsDisabledResult.Foreground = (userInUse.IsDisabled) ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
+                LabelIsDisabledResult.Content = (userInUse.IsDisabled) ? "Ja" : "Nej";
+                LabelIsDisabledResult.Foreground = (userInUse.IsDisabled) ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
 
-            LabelIsScannedResult.Content = (isUserScanned) ? "Ja" : "Nej";
-            LabelIsScannedResult.Foreground = (isUserScanned) ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
+                LabelIsScannedResult.Content = (isUserScanned) ? "Ja" : "Nej";
+                LabelIsScannedResult.Foreground = (isUserScanned) ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
 
-            //if (userInUse.IsDisabled)
-            //{
-            //    LabelIsDisabledResult.Content = "Ja";
-            //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Red);
-            //}
-            //else
-            //{
-            //    LabelIsDisabledResult.Content = "Nej";
-            //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Green);
-            //}
+                //if (userInUse.IsDisabled)
+                //{
+                //    LabelIsDisabledResult.Content = "Ja";
+                //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Red);
+                //}
+                //else
+                //{
+                //    LabelIsDisabledResult.Content = "Nej";
+                //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Green);
+                //}
 
-            //if (isUserScanned)
-            //{
-            //    LabelIsScannedResult.Content = "Ja";
-            //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Green);
-            //}
-            //else
-            //{
-            //    LabelIsScannedResult.Content = "Nej";
-            //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Red);
-            //}
+                //if (isUserScanned)
+                //{
+                //    LabelIsScannedResult.Content = "Ja";
+                //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Green);
+                //}
+                //else
+                //{
+                //    LabelIsScannedResult.Content = "Nej";
+                //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Red);
+                //}
 
-            LabelTeacherResult.Visibility = Visibility.Visible;
-            LabelIsDisabledResult.Visibility = Visibility.Visible;
-            LabelIsScannedResult.Visibility = Visibility.Visible;
+                LabelTeacherResult.Visibility = Visibility.Visible;
+                LabelIsDisabledResult.Visibility = Visibility.Visible;
+                LabelIsScannedResult.Visibility = Visibility.Visible;
 
-            ButtonComment.IsEnabled = true;
+                ButtonComment.IsEnabled = true;
 
-            this.ListViewLend.Items.Clear();
+                this.ListViewLend.Items.Clear();
 
-            foreach (LendObject lendObject in lendedObject.LendObjects)
-            {
-                bool? isOverdue = null;
-
-                if (lendObject.ReturnDate.Date < DateTime.Now.Date && lendObject.ReturnedDate == null)
+                foreach (LendObject lendObject in lendedObject.LendObjects)
                 {
-                    isOverdue = true;
-                }
-                else if (lendObject.ReturnDate.Date > DateTime.Now.Date && lendObject.ReturnedDate == null)
-                {
-                    isOverdue = false;
-                }
-                else if (lendObject.ReturnDate.Date == DateTime.Now.Date && lendObject.ReturnedDate == null)
-                {
-                    if (lendObject.ReturnDate.TimeOfDay < DateTime.Now.TimeOfDay && lendObject.ReturnedDate == null)
+                    bool? isOverdue = null;
+
+                    if (lendObject.ReturnDate.Date < DateTime.Now.Date && lendObject.ReturnedDate == null)
                     {
                         isOverdue = true;
                     }
-                    else if (lendObject.ReturnDate.TimeOfDay >= DateTime.Now.TimeOfDay && lendObject.ReturnedDate == null)
+                    else if (lendObject.ReturnDate.Date > DateTime.Now.Date && lendObject.ReturnedDate == null)
                     {
                         isOverdue = false;
                     }
+                    else if (lendObject.ReturnDate.Date == DateTime.Now.Date && lendObject.ReturnedDate == null)
+                    {
+                        if (lendObject.ReturnDate.TimeOfDay < DateTime.Now.TimeOfDay && lendObject.ReturnedDate == null)
+                        {
+                            isOverdue = true;
+                        }
+                        else if (lendObject.ReturnDate.TimeOfDay >= DateTime.Now.TimeOfDay && lendObject.ReturnedDate == null)
+                        {
+                            isOverdue = false;
+                        }
+                    }
+                    this.ListViewLend.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type,
+                        lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber,
+                        lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, isOverdue, ""));
                 }
-                this.ListViewLend.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, 
-                    lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, 
-                    lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, isOverdue, ""));
-            }
-            TextBoxMain.Focus();
+                TextBoxMain.Focus();            
+            
         }
 
         private void ButtonItem_Click(object sender, RoutedEventArgs e)
