@@ -128,14 +128,29 @@ namespace UdlaanSystem
             }
         }
 
+        //[global::System.Configuration.ApplicationScopedSettingAttribute()]
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        //[global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\Desktop\\Hexadecimal.jar")]
+        //public string JavaPath
+        //{
+        //    get
+        //    {
+        //        return ((string)(this["JavaPath"]));
+        //    }
+        //}
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\Desktop\\Hexadecimal.jar")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string JavaPath
         {
             get
             {
                 return ((string)(this["JavaPath"]));
+            }
+            set
+            {
+                this["JavaPath"] = value;
             }
         }
 
