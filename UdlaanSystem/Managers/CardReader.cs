@@ -105,7 +105,7 @@ namespace UdlaanSystem.Managers
             uID = BitConverter.ToString(test.GetData());
             string[] a = uID.Split('-');
             Array.Reverse(a);
-            parrent.CardInserted(string.Join("", a));
+            //parrent.CardInserted(string.Join("", a));
         }
     }
 }
