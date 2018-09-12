@@ -47,7 +47,6 @@ namespace UdlaanSystem
         private List<LendObject> scannedItems = new List<LendObject>();
         private List<string> ScannedItemMifares = new List<string>();
         private UserObject userInUse = null;
-        private UserObject scannedUser = null;
         //private UserObject scannedUser = null;
         private bool isUserScanned = false;
         private bool? isItemsLended = null;

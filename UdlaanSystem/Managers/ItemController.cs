@@ -28,8 +28,6 @@ namespace UdlaanSystem.Managers
         {
             ItemObject item = DALItem.Instance.GetItemByMifare(itemMifare);
 
-            return item;
-            
             return item;            
         }
 

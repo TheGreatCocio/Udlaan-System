@@ -32,16 +32,11 @@ namespace UdlaanSystem
 
         List<ItemObject> itemsToInsert = new List<ItemObject>();
         List<int> listOfIds = new List<int>();
-        List<string[]> typesOnItemsToInsert = new List<string[]>();
-
         List<string[]> typesOnItemsToInsert = new List<string[]>();        
 
         public UIInputItem()
         {
             InitializeComponent();
-
-            CreateTypeList();
-
             CreateTypeList();            
         }
 
