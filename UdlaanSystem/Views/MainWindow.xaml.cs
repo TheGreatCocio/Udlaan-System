@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UdlaanSystem.Managers;
+using UdlaanSystem.Views;
 
 namespace UdlaanSystem
 {
@@ -390,6 +391,12 @@ namespace UdlaanSystem
         {
             UIConfigPanelDetail configPanelLogin = new UIConfigPanelDetail();
             configPanelLogin.ShowDialog();
+        }
+
+        private void ButtonEditItem_Click(object sender, RoutedEventArgs e)
+        {
+            UIEditProduct uiEditProduct = new UIEditProduct();
+            uiEditProduct.ShowDialog();
         }
 
         //Når Datepickeren bliver loaded bliver dens valgte værdi sat til i morgen.

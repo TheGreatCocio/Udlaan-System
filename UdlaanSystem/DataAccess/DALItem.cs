@@ -260,5 +260,70 @@ namespace UdlaanSystem.DataAccess
 
             return modelName;
         }
+
+        public bool FindItemByID(ItemObject item)
+        {
+            string statement = string.Empty;
+            bool wentThrough = false;
+            if (item.Type.Equals("Computer"))
+            {
+                statement = ($" AND item_serialnumber = '{item.SerialNumber}'");
+            }
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM items WHERE item_type = {item.Type} " +
+                    $"AND item_manufacturer = {item.Manufacturer} AND item_model = {item.Model} AND item_id = {item.Id}{statement}", MysqlConnection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    wentThrough = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+                wentThrough = false;
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return wentThrough;
+        }
+
+        public bool UpdateMifareOnItem(ItemObject item)
+        {
+            string statement = string.Empty;
+            bool wentThrough = false;
+            if (item.Type.Equals("1"))
+            {
+                statement = ($" AND item_serialnumber = '{item.SerialNumber}'");
+            }
+            try
+            {
+                ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"UPDATE items SET item_mifare = {item.ItemMifare} WHERE item_type = {item.Type} " +
+                    $"AND item_manufacturer = {item.Manufacturer} AND item_model = {item.Model} AND item_id = {item.Id}{statement}", MysqlConnection);
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    wentThrough = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MysqlConnection.Close();
+                Debug.WriteLine("############################FAILED: " + ex);
+                wentThrough = false;
+            }
+            finally
+            {
+                MysqlConnection.Close();
+            }
+
+            return wentThrough;
+        }
     }
 }

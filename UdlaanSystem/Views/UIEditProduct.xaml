@@ -1,0 +1,43 @@
+﻿<Window x:Class="UdlaanSystem.Views.UIEditProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UdlaanSystem.Views"
+        mc:Ignorable="d"
+        Title="Rediger Produkt" Height="500
+        " Width="300
+        ">
+    <Grid>
+        <ComboBox x:Name="ComboBoxTypes" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxTypes_SelectionChanged"/>
+        <ComboBox x:Name="ComboBoxManufacturers" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxManufacturer_SelectionChanged"/>
+        <ComboBox x:Name="ComboBoxModels" HorizontalAlignment="Center" Margin="0,117,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBoxModels_SelectionChanged"/>
+        <TextBox x:Name="TextboxSerialNumber" HorizontalAlignment="Center" Height="23" Margin="36,239,35,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextboxNewMifare" HorizontalAlignment="Center" Height="23" Margin="86,393,86,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextboxID" HorizontalAlignment="Center" Height="23" Margin="36,181,35,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="ID" HorizontalAlignment="Center" Margin="0,156,0,0" VerticalAlignment="Top" Height="26"/>
+        <Label Content="Serie Nummer" HorizontalAlignment="Center" Margin="52,214,53,0" VerticalAlignment="Top" Height="26"/>
+        <Button x:Name="ButtonSearch" Content="Søg" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="120" Click="ButtonSearch_Click" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label x:Name="LabelFound" Content="Ikke Fundet" HorizontalAlignment="Center" Margin="0,305,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label Content="Nyt Mifare" HorizontalAlignment="Center" Margin="112,362,114,0" VerticalAlignment="Top" Height="26"/>
+        <Button x:Name="ButtonSave" Content="Gem" HorizontalAlignment="Center" Margin="86,430,86,0" VerticalAlignment="Top" Width="120" Click="ButtonSave_Click" Foreground="White">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                    <GradientStop Color="#FF9E9EA2"/>
+                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+    </Grid>
+</Window>
