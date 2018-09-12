@@ -16,6 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UdlaanSystem.Managers;
+using System.Configuration;
+using UdlaanSystem.Views;
 using UdlaanSystem.Views;
 
 namespace UdlaanSystem
@@ -30,14 +32,28 @@ namespace UdlaanSystem
             InitializeComponent();
             TextBoxMain.Focus();
             StartScanner();
+
+            //CardReader cardReader = new CardReader(this);
+            //if (cardReader.IsClosed() && cardReader.AnyReadersAvailable())
+            //{
+            //    cardReader.ReaderOne();
+            //    cardReader.FindReader();
+            //    cardReader.OpenCardReader();
+            //}
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
         private List<string> ScannedItemMifares = new List<string>();
         private UserObject userInUse = null;
-        private UserObject scannedUser = null;
+        //private UserObject scannedUser = null;
         private bool isUserScanned = false;
         private bool? isItemsLended = null;
+
+        //public void CardInserted(string hex)
+        //{
+        //    Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() => TextBoxMain.Text = hex));
+        //    System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+        //}
 
         private void OnMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {

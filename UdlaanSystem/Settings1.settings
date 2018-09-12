@@ -24,7 +24,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="JavaPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Users\Admin\Desktop\Hexadecimal.jar</Value>
+      <Value Profile="(Default)">C:\Hexadecimal.jar</Value>
     </Setting>
     <Setting Name="TimeForReturnMonToThur" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">15:15:00</Value>
