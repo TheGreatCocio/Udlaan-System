@@ -34,6 +34,7 @@ namespace UdlaanSystem
         List<int> listOfIds = new List<int>();
         List<string[]> typesOnItemsToInsert = new List<string[]>();
 
+        List<string[]> typesOnItemsToInsert = new List<string[]>();        
 
         public UIInputItem()
         {
@@ -41,7 +42,14 @@ namespace UdlaanSystem
 
             CreateTypeList();
 
+            CreateTypeList();            
         }
+
+        //public void CardInserted(string hex)
+        //{
+        //    Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() => textBoxItemMifare.Text = hex));
+        //    System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+        //}
 
         public void CreateTypeList()
         {

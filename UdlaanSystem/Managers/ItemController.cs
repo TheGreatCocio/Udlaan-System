@@ -30,6 +30,7 @@ namespace UdlaanSystem.Managers
 
             return item;
             
+            return item;            
         }
 
 
@@ -73,6 +74,16 @@ namespace UdlaanSystem.Managers
         public string GetItemModelName(int modelID)
         {
             return DALItem.Instance.GetItemModelName(modelID);
+        }
+
+        public bool FindItemByID(ItemObject item)
+        {
+            return DALItem.Instance.FindItemByID(item);
+        }
+
+        public bool UpdateMifareOnItem(ItemObject item)
+        {
+            return DALItem.Instance.UpdateMifareOnItem(item);
         }
     }
 }

@@ -7,9 +7,11 @@
     </Setting>
     <Setting Name="LocationNæstved" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LocationRingsted" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="LocationRoskilde" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

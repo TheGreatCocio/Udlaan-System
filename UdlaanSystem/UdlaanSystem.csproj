@@ -58,10 +58,21 @@
     <Reference Include="mysql.web">
       <HintPath>..\..\MySQL\v461\mysql.web.dll</HintPath>
     </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+    <Reference Include="PCSC, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Packages\PCSC.dll</HintPath>
+    </Reference>
+    <Reference Include="PCSC.Iso7816, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Packages\PCSC.Iso7816.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -99,6 +110,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataAccess\DALMigration.cs" />
+    <Compile Include="Managers\CardReader.cs" />
     <Compile Include="Objects\ItemObject.cs" />
     <Compile Include="Managers\LendController.cs" />
     <Compile Include="Objects\LendedObject.cs" />
@@ -121,6 +133,9 @@
     </Compile>
     <Compile Include="Views\UIConfigPanelLogin.xaml.cs">
       <DependentUpon>UIConfigPanelLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UIEditProduct.xaml.cs">
+      <DependentUpon>UIEditProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UIInputItem.xaml.cs">
       <DependentUpon>UIInputItem.xaml</DependentUpon>
@@ -173,6 +188,10 @@
     <Page Include="Views\UIConfigPanelLogin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UIEditProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UIInputItem.xaml">
       <SubType>Designer</SubType>
@@ -236,6 +255,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Packages\PCSC.dll" />
+    <Content Include="Packages\PCSC.Iso7816.dll" />
     <Content Include="Resources\Hexadecimal.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
