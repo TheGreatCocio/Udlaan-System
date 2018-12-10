@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UdlaanSystem.DataAccess;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UdlaanSystem.Properties;
 
 namespace UdlaanSystem.Managers
 {
@@ -11,6 +9,7 @@ namespace UdlaanSystem.Managers
     {
         public ItemController()
         {
+
         }
         private static ItemController instance;
 
@@ -39,12 +38,12 @@ namespace UdlaanSystem.Managers
 
         public List<string[]> GetItemManufacturers(int typeID)
         {
-            return DALItem.Instance.getItemManufacturers(typeID);
+            return DALItem.Instance.GetItemManufacturers(typeID);
         }
 
         public List<string[]> GetItemModels(int manufacturerID, int typeID)
         {
-            return DALItem.Instance.getItemModels(manufacturerID, typeID);
+            return DALItem.Instance.GetItemModels(manufacturerID, typeID);
         }
 
         public int CalculateNextID (int model, List<int> listOfIds) 

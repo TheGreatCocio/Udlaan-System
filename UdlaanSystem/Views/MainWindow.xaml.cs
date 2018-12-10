@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
+using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UdlaanSystem.Managers;
-using System.Configuration;
 using UdlaanSystem.Views;
-using UdlaanSystem.Views;
+using UdlaanSystem.Properties;
 
 namespace UdlaanSystem
 {
@@ -32,6 +26,8 @@ namespace UdlaanSystem
             InitializeComponent();
             TextBoxMain.Focus();
             StartScanner();
+            GetSystemDetails();     
+            
 
             //CardReader cardReader = new CardReader(this);
             //if (cardReader.IsClosed() && cardReader.AnyReadersAvailable())
@@ -117,10 +113,10 @@ namespace UdlaanSystem
                     else //On Items Scanned
                     {
                         string userMifare = LendController.Instance.CheckIfLended(scannedItem.ItemMifare);//Tjekker om det item der er scanned er udlånt til en person, hvis der er udlånt skal vi hante alle hans data g hans lån/arkiv
-                        TimeSpan timeSpanMonToThur = Settings1.Default.TimeForReturnMonToThur; //Afleveringsdato for man-tors
-                        TimeSpan timeSpanFri = Settings1.Default.TimeForReturnFriday;//Afleveringsdato for fradag
+                        TimeSpan timeSpanMonToThur = Settings.Default.TimeForReturnMonToThur; //Afleveringsdato for man-tors
+                        TimeSpan timeSpanFri = Settings.Default.TimeForReturnFriday;//Afleveringsdato for fradag
                         LendObject scannedLendObject = null;
-                        
+
                         if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)//Hvis der er valgt at afleveringsdatoen er fredag
                         {
                             scannedLendObject = new LendObject(scannedItem, DateTime.Now, datePickerReturn.SelectedDate.Value.Date + timeSpanFri, null);
@@ -238,89 +234,89 @@ namespace UdlaanSystem
         {
             scannedItems.Add(lendObject);
             ScannedItemMifares.Add(lendObject.ItemObject.ItemMifare);
-            this.ListViewItems.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, 
-                lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, 
+            this.ListViewItems.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type,
+                lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber,
                 lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, null, ""));
         }
         public void PrintUserData(LendedObject lendedObject)
         {
-            
-                LabelNameResult.Content = ($"{lendedObject.UserObject.FName} {lendedObject.UserObject.LName}");
-                LabelNameResult.Visibility = Visibility.Visible;
 
-                LabelZbcNameResult.Content = lendedObject.UserObject.ZbcName;
-                LabelZbcNameResult.Visibility = Visibility.Visible;
+            LabelNameResult.Content = ($"{lendedObject.UserObject.FName} {lendedObject.UserObject.LName}");
+            LabelNameResult.Visibility = Visibility.Visible;
 
-                LabelPhoneResult.Content = lendedObject.UserObject.PhoneNumber;
-                LabelPhoneResult.Visibility = Visibility.Visible;
+            LabelZbcNameResult.Content = lendedObject.UserObject.ZbcName;
+            LabelZbcNameResult.Visibility = Visibility.Visible;
 
-                LabelTeacherResult.Content = (lendedObject.UserObject.IsTeacher) ? "Ja" : "Nej";
+            LabelPhoneResult.Content = lendedObject.UserObject.PhoneNumber;
+            LabelPhoneResult.Visibility = Visibility.Visible;
 
-                LabelIsDisabledResult.Content = (userInUse.IsDisabled) ? "Ja" : "Nej";
-                LabelIsDisabledResult.Foreground = (userInUse.IsDisabled) ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
+            LabelTeacherResult.Content = (lendedObject.UserObject.IsTeacher) ? "Ja" : "Nej";
 
-                LabelIsScannedResult.Content = (isUserScanned) ? "Ja" : "Nej";
-                LabelIsScannedResult.Foreground = (isUserScanned) ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
+            LabelIsDisabledResult.Content = (userInUse.IsDisabled) ? "Ja" : "Nej";
+            LabelIsDisabledResult.Foreground = (userInUse.IsDisabled) ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
 
-                //if (userInUse.IsDisabled)
-                //{
-                //    LabelIsDisabledResult.Content = "Ja";
-                //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Red);
-                //}
-                //else
-                //{
-                //    LabelIsDisabledResult.Content = "Nej";
-                //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Green);
-                //}
+            LabelIsScannedResult.Content = (isUserScanned) ? "Ja" : "Nej";
+            LabelIsScannedResult.Foreground = (isUserScanned) ? new SolidColorBrush(Colors.Green) : new SolidColorBrush(Colors.Red);
 
-                //if (isUserScanned)
-                //{
-                //    LabelIsScannedResult.Content = "Ja";
-                //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Green);
-                //}
-                //else
-                //{
-                //    LabelIsScannedResult.Content = "Nej";
-                //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Red);
-                //}
+            //if (userInUse.IsDisabled)
+            //{
+            //    LabelIsDisabledResult.Content = "Ja";
+            //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Red);
+            //}
+            //else
+            //{
+            //    LabelIsDisabledResult.Content = "Nej";
+            //    LabelIsDisabledResult.Foreground = new SolidColorBrush(Colors.Green);
+            //}
 
-                LabelTeacherResult.Visibility = Visibility.Visible;
-                LabelIsDisabledResult.Visibility = Visibility.Visible;
-                LabelIsScannedResult.Visibility = Visibility.Visible;
+            //if (isUserScanned)
+            //{
+            //    LabelIsScannedResult.Content = "Ja";
+            //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Green);
+            //}
+            //else
+            //{
+            //    LabelIsScannedResult.Content = "Nej";
+            //    LabelIsScannedResult.Foreground = new SolidColorBrush(Colors.Red);
+            //}
 
-                ButtonComment.IsEnabled = true;
+            LabelTeacherResult.Visibility = Visibility.Visible;
+            LabelIsDisabledResult.Visibility = Visibility.Visible;
+            LabelIsScannedResult.Visibility = Visibility.Visible;
 
-                this.ListViewLend.Items.Clear();
+            ButtonComment.IsEnabled = true;
 
-                foreach (LendObject lendObject in lendedObject.LendObjects)
+            this.ListViewLend.Items.Clear();
+
+            foreach (LendObject lendObject in lendedObject.LendObjects)
+            {
+                bool? isOverdue = null;
+
+                if (lendObject.ReturnDate.Date < DateTime.Now.Date && lendObject.ReturnedDate == null)
                 {
-                    bool? isOverdue = null;
-
-                    if (lendObject.ReturnDate.Date < DateTime.Now.Date && lendObject.ReturnedDate == null)
+                    isOverdue = true;
+                }
+                else if (lendObject.ReturnDate.Date > DateTime.Now.Date && lendObject.ReturnedDate == null)
+                {
+                    isOverdue = false;
+                }
+                else if (lendObject.ReturnDate.Date == DateTime.Now.Date && lendObject.ReturnedDate == null)
+                {
+                    if (lendObject.ReturnDate.TimeOfDay < DateTime.Now.TimeOfDay && lendObject.ReturnedDate == null)
                     {
                         isOverdue = true;
                     }
-                    else if (lendObject.ReturnDate.Date > DateTime.Now.Date && lendObject.ReturnedDate == null)
+                    else if (lendObject.ReturnDate.TimeOfDay >= DateTime.Now.TimeOfDay && lendObject.ReturnedDate == null)
                     {
                         isOverdue = false;
                     }
-                    else if (lendObject.ReturnDate.Date == DateTime.Now.Date && lendObject.ReturnedDate == null)
-                    {
-                        if (lendObject.ReturnDate.TimeOfDay < DateTime.Now.TimeOfDay && lendObject.ReturnedDate == null)
-                        {
-                            isOverdue = true;
-                        }
-                        else if (lendObject.ReturnDate.TimeOfDay >= DateTime.Now.TimeOfDay && lendObject.ReturnedDate == null)
-                        {
-                            isOverdue = false;
-                        }
-                    }
-                    this.ListViewLend.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type,
-                        lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber,
-                        lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, isOverdue, ""));
                 }
-                TextBoxMain.Focus();            
-            
+                this.ListViewLend.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type,
+                    lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber,
+                    lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, isOverdue, ""));
+            }
+            TextBoxMain.Focus();
+
         }
 
         private void ButtonItem_Click(object sender, RoutedEventArgs e)
@@ -354,13 +350,13 @@ namespace UdlaanSystem
                 {
                     MessageBox.Show("OPS, udstyret blev IKKE udlånt! Brugeren har i forvejen 1 computer og denne bruger er ikke lærer");
                 }
-                else if(!userInUse.IsTeacher && !userInUse.HasPC && scannedItemsContainsComputer > 1)
+                else if (!userInUse.IsTeacher && !userInUse.HasPC && scannedItemsContainsComputer > 1)
                 {
                     MessageBox.Show("OPS, udstyret blev IKKE udlånt! Der er scannet mere end 1 computer og denne bruger er ikke lærer");
                 }
                 else
                 {
-                    if (!Settings1.Default.PartSmsService)
+                    if (!Settings.Default.PartSmsService)
                     {
                         GenerateLend();
                     }
@@ -378,12 +374,12 @@ namespace UdlaanSystem
                 MessageBox.Show("Du Skal Scanne En Bruger");
             }
         }
-        
+
         private void ButtonReturn_Click(object sender, RoutedEventArgs e)
         {
             if (isUserScanned == true)
             {
-                MoveToArchive();                   
+                MoveToArchive();
             }
             else
             {
@@ -493,8 +489,8 @@ namespace UdlaanSystem
             this.ListViewItems.Items.Clear();
             foreach (LendObject lendObject in scannedItems)
             {
-                this.ListViewItems.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type, 
-                    lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber, 
+                this.ListViewItems.Items.Add(new ListViewObject(lendObject.ItemObject.ItemMifare, lendObject.ItemObject.Type,
+                    lendObject.ItemObject.Manufacturer, lendObject.ItemObject.Model, lendObject.ItemObject.Id, lendObject.ItemObject.SerialNumber,
                     lendObject.LendDate, lendObject.ReturnDate, lendObject.ReturnedDate, null, ""));
             }
         }
@@ -541,7 +537,7 @@ namespace UdlaanSystem
                 }
                 Thread.Sleep(100);
                 Process p = new Process();
-                p.StartInfo.FileName = Settings1.Default.JavaPath;
+                p.StartInfo.FileName = Settings.Default.JavaPath;
                 p.Start();
             }
             catch (Exception ex)
@@ -577,8 +573,8 @@ namespace UdlaanSystem
             if (LendController.Instance.MoveLendedIntoArchive(scannedItems))
             {
                 SmsController.Instance.GenerateReturnReceipt(userInUse, scannedItems);
-                MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");                
-                
+                MessageBox.Show("Udstyret er nu afleveret og der er sendt en kvitering til personen via SMS");
+
                 ClearUI();
             }
             else
@@ -603,6 +599,78 @@ namespace UdlaanSystem
             {
                 return false;
             }
+        }
+
+        // Get Informations about the system, and the client system.
+        public void GetSystemDetails()
+        {
+            // ################################################# Udlaan System Build Version #################################################
+            // Get Instance of Assembly File, Get assembly version
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+
+            // Display AssemblyVersion in SystemVersion x:Name applied by Index {0}.{1}.{2}.{3}
+            SystemVersion.Text = String.Format(SystemVersion.Text, version.Major, version.Minor, version.Build, version.Revision);
+
+            // Debug - Assembly Version
+            //Debug.Print("########################### VERSION ########################### " + String.Format(SystemVersion.Text, version.Major, version.Minor, version.Build, version.Revision));
+
+            // ################################################# Operative System Version #################################################
+            // Display Current Operative System
+            OSVersion.Text = String.Format(OSVersion.Text, Environment.OSVersion.VersionString);
+
+            // Debug - OS Version
+            //Debug.Print("########################### OS VERSION ###########################" + Environment.OSVersion.VersionString);
+
+            // ################################################# Location of the System | Ringsted | Roskilde | Næstved | Vordingborg #################################################
+            // Instance Settings File
+            Settings settings = new Settings();
+
+            // Look up Foreach Item in the Settings List
+            foreach (SettingsProperty item in settings.Properties)
+            {
+                // Look all items up which contains Location.
+                if (item.Name.Contains("Location"))
+                {
+                    // Look if the item is the same as System.Boolean - means True or False
+                    //Debug.Print("########################### LOCATION ###########################" + item.Name);
+                    if (item.PropertyType.ToString() == "System.Boolean")
+                    {
+                        // Write out everything that has the True value.
+                        //Debug.Print("########################### Is Bool ########################### " + item.Name);
+                        if (item.DefaultValue.ToString().Equals("True"))
+                        {
+                            // Remove "Location", in the string, one char at a time.
+                            //Debug.Print("########################### Is True ###########################" + item.Name);
+                            string str = item.Name.Remove(0, 8);
+
+                            // Write out Location that is true in the MainWindow.xaml
+                            SystemLocationConnection.Text = String.Format(SystemLocationConnection.Text, str);
+                        }
+                        else
+                        {
+                            // If the item is False - We remove the "Location", chars too.
+                            string falseStr = item.Name.Remove(0, 8);
+
+                            //Debug.Print("FALSE " + falseStr);
+                        }
+                    }
+                }
+                else
+                {
+                    //Debug.Print("########################### OTHER ###########################" + item.Name);
+                }
+            }            
+        }
+
+        private void CloseProgram_Click(object sender, RoutedEventArgs e)
+        {
+            CloseProgram();
+        }
+
+        private void CloseProgram()
+        {
+            Debug.Print("########################### User Closed Program ###########################");
+            Environment.Exit(0);
         }
     }
 }

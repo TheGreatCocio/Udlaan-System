@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows;
+using UdlaanSystem.Properties;
 
 namespace UdlaanSystem.DataAccess
 {
@@ -31,21 +32,25 @@ namespace UdlaanSystem.DataAccess
 
         private void ConnectMySql()
         {
-            if (Settings1.Default.LocationNæstved == true)
+            if (Settings.Default.LocationTestdb == true)
             {
-                sqlConn = @"server=10.108.48.19; Database=supply_nv; User Id=udlaan; Password=RFIDrules; integrated security=false";
+                sqlConn = @"server=10.108.48.19; Database=supply_testdb; User Id=developer; Password=jZrQV6+cfsjq;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
-            else if (Settings1.Default.LocationRingsted == true)
+            else if (Settings.Default.LocationNæstved == true)
             {
-                sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules; integrated security=false";
+                sqlConn = @"server=10.108.48.19; Database=supply_nv; User Id=udlaan; Password=RFIDrules;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
-            else if (Settings1.Default.LocationRoskilde == true)
+            else if (Settings.Default.LocationRingsted == true)
             {
-                sqlConn = @"server=10.108.48.19; Database=supply_ro; User Id=udlaan; Password=RFIDrules; integrated security=false";
+                sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
-            else if (Settings1.Default.LocationVordingborg == true)
+            else if (Settings.Default.LocationRoskilde == true)
             {
-                sqlConn = @"server=10.108.48.19; Database=supply_vb; User Id=udlaan; Password=RFIDrules; integrated security=false";
+                sqlConn = @"server=10.108.48.19; Database=supply_ro; User Id=udlaan; Password=RFIDrules;persistsecurityinfo=True;port=3306;SslMode=none;";
+            }
+            else if (Settings.Default.LocationVordingborg == true)
+            {
+                sqlConn = @"server=10.108.48.19; Database=supply_vb; User Id=udlaan; Password=RFIDrules;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
 
             if (MysqlConnection == null)

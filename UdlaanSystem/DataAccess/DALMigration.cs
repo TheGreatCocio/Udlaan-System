@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UdlaanSystem.Properties;
 
 namespace UdlaanSystem.DataAccess
 {
@@ -30,21 +31,25 @@ namespace UdlaanSystem.DataAccess
 
         private void ConnectMySql()
         {
-            if (Settings1.Default.LocationNæstved == true)
+            if (Settings.Default.LocationTestdb == true)
             {
-                sqlConn = @"server=10.108.48.19; Database=pc_udlaan_nv; User Id=udlaan; Password=RFIDrules;integrated security=false";
+                sqlConn = @"server=10.108.48.19; Database=supply_testdb; User Id=developer; Password=jZrQV6+cfsjq;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
-            else if (Settings1.Default.LocationRingsted == true)
+            else if (Settings.Default.LocationNæstved == true)
             {
-                sqlConn = @"server=10.108.48.19; Database=pc_udlaan_ri; User Id=udlaan; Password=RFIDrules;integrated security=false";
+                sqlConn = @"server=10.108.48.19; Database=supply_nv; User Id=udlaan; Password=RFIDrules;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
-            else if (Settings1.Default.LocationRoskilde == true)
+            else if (Settings.Default.LocationRingsted == true)
             {
-                sqlConn = @"server=10.108.48.19; Database=pc_udlaan_ro; User Id=udlaan; Password=RFIDrules;integrated security=false";
+                sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
-            else if (Settings1.Default.LocationVordingborg == true)
+            else if (Settings.Default.LocationRoskilde == true)
             {
-                sqlConn = @"server=10.108.48.19; Database=pc_udlaan_vb; User Id=udlaan; Password=RFIDrules;integrated security=false";
+                sqlConn = @"server=10.108.48.19; Database=supply_ro; User Id=udlaan; Password=RFIDrules;persistsecurityinfo=True;port=3306;SslMode=none;";
+            }
+            else if (Settings.Default.LocationVordingborg == true)
+            {
+                sqlConn = @"server=10.108.48.19; Database=supply_vb; User Id=udlaan; Password=RFIDrules;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
 
             if (MysqlConnection == null)
@@ -94,11 +99,11 @@ namespace UdlaanSystem.DataAccess
             {
                 ConnectMySql();
                 MySqlCommand cmd = new MySqlCommand();
-                if (Settings1.Default.LocationRingsted == true)
+                if (Settings.Default.LocationRingsted == true)
                 {
                     cmd = new MySqlCommand("CALL removeBorrower('" + itemMifareToReturnInOldDB + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')", MysqlConnection);
                 }
-                else if (Settings1.Default.LocationRoskilde == true)
+                else if (Settings.Default.LocationRoskilde == true)
                 {
                     cmd = new MySqlCommand("DELETE FROM udlaant WHERE pc_mifare = '" + itemMifareToReturnInOldDB + "'", MysqlConnection);
                 }
