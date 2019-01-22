@@ -36,6 +36,7 @@ namespace UdlaanSystem.DataAccess
         {
             if (Settings.Default.LocationTestdb == true)
             {
+                // Other Account: User Id=developer; Password=jZrQV6+cfsjq
                 sqlConn = @"server=10.108.48.19; Database=supply_testdb; User Id=developer; Password=jZrQV6+cfsjq;persistsecurityinfo=True;port=3306;SslMode=none;";
             }
             else if (Settings.Default.LocationNæstved == true)
