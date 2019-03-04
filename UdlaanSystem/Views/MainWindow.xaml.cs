@@ -26,6 +26,7 @@ namespace UdlaanSystem
             InitializeComponent();
             TextBoxMain.Focus();
             StartScanner();
+<<<<<<< HEAD
             GetSystemDetails();     
             
 
@@ -36,20 +37,16 @@ namespace UdlaanSystem
             //    cardReader.FindReader();
             //    cardReader.OpenCardReader();
             //}
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
         private List<string> ScannedItemMifares = new List<string>();
         private UserObject userInUse = null;
-        //private UserObject scannedUser = null;
+        private UserObject scannedUser = null;
         private bool isUserScanned = false;
         private bool? isItemsLended = null;
-
-        //public void CardInserted(string hex)
-        //{
-        //    Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() => TextBoxMain.Text = hex));
-        //    System.Windows.Forms.SendKeys.SendWait("{ENTER}");
-        //}
 
         private void OnMyfareScanned(object sender, KeyEventArgs e)// Runs when a key is pressed.
         {

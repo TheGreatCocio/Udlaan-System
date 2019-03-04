@@ -104,24 +104,19 @@
     <Reference Include="mysql.web">
       <HintPath>..\..\MySQL\v461\mysql.web.dll</HintPath>
     </Reference>
-    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
-    <Reference Include="PCSC, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Packages\PCSC.dll</HintPath>
-    </Reference>
-    <Reference Include="PCSC.Iso7816, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Packages\PCSC.Iso7816.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+<<<<<<< HEAD
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+<<<<<<< HEAD
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
@@ -130,6 +125,8 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -167,14 +164,26 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataAccess\DALMigration.cs" />
+<<<<<<< HEAD
     <Compile Include="DataAccess\DALSql.cs" />
     <Compile Include="Managers\CardReader.cs" />
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
     <Compile Include="Objects\ItemObject.cs" />
     <Compile Include="Managers\LendController.cs" />
     <Compile Include="Objects\LendedObject.cs" />
     <Compile Include="Objects\LendObject.cs" />
     <Compile Include="Objects\ListViewObject.cs" />
     <Compile Include="Managers\MigrationController.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Settings1.cs" />
+    <Compile Include="Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings1.settings</DependentUpon>
+    </Compile>
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
     <Compile Include="Managers\SmsController.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Views\UIChangeToUniLogin.xaml.cs">
@@ -291,13 +300,18 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+<<<<<<< HEAD
+=======
+    <None Include="Settings1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings11.Designer.cs</LastGenOutput>
+    </None>
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Packages\PCSC.dll" />
-    <Content Include="Packages\PCSC.Iso7816.dll" />
     <Content Include="Resources\Hexadecimal.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

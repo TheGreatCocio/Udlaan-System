@@ -22,12 +22,6 @@ namespace UdlaanSystem
 
     public partial class UIInputUser : Window
     {
-        //public void CardInserted(string hex)
-        //{
-        //    Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() => textBoxUserMifare.Text = hex));
-        //    System.Windows.Forms.SendKeys.SendWait("{ENTER}");
-        //}
-
         public UIInputUser()
         {
             InitializeComponent();
