@@ -106,16 +106,20 @@
     </Reference>
     <Reference Include="System" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
 =======
 >>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+<<<<<<< HEAD
 <<<<<<< HEAD
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
@@ -125,6 +129,8 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
 >>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
     <Reference Include="System.Xml" />
@@ -165,8 +171,11 @@
     </ApplicationDefinition>
     <Compile Include="DataAccess\DALMigration.cs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="DataAccess\DALSql.cs" />
     <Compile Include="Managers\CardReader.cs" />
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
 >>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
     <Compile Include="Objects\ItemObject.cs" />
