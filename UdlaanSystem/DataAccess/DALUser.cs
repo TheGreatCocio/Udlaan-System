@@ -295,7 +295,5 @@ namespace UdlaanSystem.DataAccess
 
             return true;
         }
-
-        
     }
 }
