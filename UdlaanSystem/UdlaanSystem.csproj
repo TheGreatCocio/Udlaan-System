@@ -312,6 +312,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Fakes Include="Fakes\Antlr3.Runtime.fakes" />
+    <Fakes Include="Fakes\mysql.data.entity.fakes" />
+    <Fakes Include="Fakes\MySql.Debugger.fakes" />
+    <Fakes Include="Fakes\MySql.Debugger.VisualStudio.fakes" />
+    <Fakes Include="Fakes\MySql.Parser.fakes" />
+    <Fakes Include="Fakes\mysql.visualstudio.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
