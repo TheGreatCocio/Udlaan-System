@@ -108,10 +108,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
 >>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
@@ -125,6 +128,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
@@ -133,6 +137,8 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
 >>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
@@ -179,8 +185,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="DataAccess\DALSql.cs" />
     <Compile Include="Managers\CardReader.cs" />
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
 >>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======

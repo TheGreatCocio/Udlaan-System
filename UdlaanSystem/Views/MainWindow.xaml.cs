@@ -29,6 +29,7 @@ namespace UdlaanSystem
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             GetSystemDetails();     
             
 
@@ -39,6 +40,8 @@ namespace UdlaanSystem
             //    cardReader.FindReader();
             //    cardReader.OpenCardReader();
             //}
+=======
+>>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
 >>>>>>> parent of 0c46662... Merge branch 'master' of https://github.com/TheGreatCocio/Udlaan-System
 =======
