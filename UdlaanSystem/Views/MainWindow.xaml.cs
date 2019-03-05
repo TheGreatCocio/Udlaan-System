@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using UdlaanSystem.Managers;
 using UdlaanSystem.Views;
-using UdlaanSystem.Properties;
+using UdlaanSystem.Views;
 
 namespace UdlaanSystem
 {
@@ -26,16 +26,6 @@ namespace UdlaanSystem
             InitializeComponent();
             TextBoxMain.Focus();
             StartScanner();
-            GetSystemDetails();     
-            
-
-            //CardReader cardReader = new CardReader(this);
-            //if (cardReader.IsClosed() && cardReader.AnyReadersAvailable())
-            //{
-            //    cardReader.ReaderOne();
-            //    cardReader.FindReader();
-            //    cardReader.OpenCardReader();
-            //}
         }
 
         private List<LendObject> scannedItems = new List<LendObject>();
