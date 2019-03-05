@@ -11,8 +11,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using UdlaanSystem.Managers;
+using System.Configuration;
+=======
 using UdlaanSystem.Views;
+>>>>>>> c171fbbd41223b0a3b633309c544ad0ebbe0c8d6
+=======
 using UdlaanSystem.Views;
+>>>>>>> c171fbbd41223b0a3b633309c544ad0ebbe0c8d6
 
 namespace UdlaanSystem
 {
