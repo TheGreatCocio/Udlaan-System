@@ -145,14 +145,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataAccess\DALMigration.cs" />
-    <Compile Include="Managers\CardReader.cs" />
     <Compile Include="Objects\ItemObject.cs" />
     <Compile Include="Managers\LendController.cs" />
     <Compile Include="Objects\LendedObject.cs" />
     <Compile Include="Objects\LendObject.cs" />
     <Compile Include="Objects\ListViewObject.cs" />
     <Compile Include="Managers\MigrationController.cs" />
-    <Compile Include="Settings1.cs" />
     <Compile Include="Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
