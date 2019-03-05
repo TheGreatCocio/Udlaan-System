@@ -151,14 +151,13 @@
     <Compile Include="Objects\LendObject.cs" />
     <Compile Include="Objects\ListViewObject.cs" />
     <Compile Include="Managers\MigrationController.cs" />
-    <Compile Include="Settings1.Designer.cs">
+    <Compile Include="Managers\SmsController.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Settings11.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings1.settings</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Managers\SmsController.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="Views\UIChangeToUniLogin.xaml.cs">
       <DependentUpon>UIChangeToUniLogin.xaml</DependentUpon>
     </Compile>
