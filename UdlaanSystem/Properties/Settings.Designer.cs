@@ -8,22 +8,144 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UdlaanSystem.Properties
-{
-
-
+namespace UdlaanSystem.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SmsService {
+            get {
+                return ((bool)(this["SmsService"]));
+            }
+            set {
+                this["SmsService"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LocationNæstved {
+            get {
+                return ((bool)(this["LocationNæstved"]));
+            }
+            set {
+                this["LocationNæstved"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LocationRingsted {
+            get {
+                return ((bool)(this["LocationRingsted"]));
+            }
+            set {
+                this["LocationRingsted"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LocationRoskilde {
+            get {
+                return ((bool)(this["LocationRoskilde"]));
+            }
+            set {
+                this["LocationRoskilde"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LocationVordingborg {
+            get {
+                return ((bool)(this["LocationVordingborg"]));
+            }
+            set {
+                this["LocationVordingborg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseTestDB {
+            get {
+                return ((bool)(this["UseTestDB"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PartSmsService {
+            get {
+                return ((bool)(this["PartSmsService"]));
+            }
+            set {
+                this["PartSmsService"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Hexadecimal.jar")]
+        public string JavaPath {
+            get {
+                return ((string)(this["JavaPath"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15:15:00")]
+        public global::System.TimeSpan TimeForReturnMonToThur {
+            get {
+                return ((global::System.TimeSpan)(this["TimeForReturnMonToThur"]));
+            }
+            set {
+                this["TimeForReturnMonToThur"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14:30:00")]
+        public global::System.TimeSpan TimeForReturnFriday {
+            get {
+                return ((global::System.TimeSpan)(this["TimeForReturnFriday"]));
+            }
+            set {
+                this["TimeForReturnFriday"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LocationTestdb {
+            get {
+                return ((bool)(this["LocationTestdb"]));
+            }
+            set {
+                this["LocationTestdb"] = value;
             }
         }
     }

@@ -1,15 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
-using MySql.Data;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UdlaanSystem.DataAccess
 {
-    class DALItem
+    internal class DALItem
     {
         public DALItem()
         {
@@ -26,50 +22,18 @@ namespace UdlaanSystem.DataAccess
             }
         }
 
-        private string sqlConn;
-        private MySqlConnection MysqlConnection = null;
+        /* Object instance of Sql Connection */
+        private DALSql SqlConnection = new DALSql();
 
-        private void ConnectMySql()
-        {            
-            if (Settings1.Default.LocationNæstved == true)
-            {
-                sqlConn = @"server=10.108.48.19; Database=supply_nv; User Id=udlaan; Password=RFIDrules; integrated security=false";
-            }
-            else if (Settings1.Default.LocationRingsted == true)
-            {
-                sqlConn = @"server=10.108.48.19; Database=supply_ri; User Id=udlaan; Password=RFIDrules; integrated security=false";
-            }
-            else if (Settings1.Default.LocationRoskilde == true)
-            {
-                sqlConn = @"server=10.108.48.19; Database=supply_ro; User Id=udlaan; Password=RFIDrules; integrated security=false";
-            }
-            else if (Settings1.Default.LocationVordingborg == true)
-            {
-                sqlConn = @"server=10.108.48.19; Database=supply_vb; User Id=udlaan; Password=RFIDrules; integrated security=false";
-            }
-
-            if (MysqlConnection == null)
-            {
-                MysqlConnection = new MySqlConnection(sqlConn);
-            }
-            try
-            {
-                MysqlConnection.Open();
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine("####################Failed to connect to sql server: " + ex);
-            }
-        }
-
+        #region GetItemByMifare
         public ItemObject GetItemByMifare(string mifare)
         {
             ItemObject item = null;
 
             try
             {
-                ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT items.item_mifare, types.type_name, manufacturers.manufacturer_name, models.model_name, items.item_id, items.item_serialnumber FROM items JOIN types ON items.item_type = types.type_id JOIN manufacturers ON items.item_manufacturer = manufacturers.manufacturer_id JOIN models ON items.item_model = models.model_id WHERE items.item_mifare = '" + mifare +  "'", MysqlConnection);
+                SqlConnection.ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"SELECT items.item_mifare, types.type_name, manufacturers.manufacturer_name, models.model_name, items.item_id, items.item_serialnumber FROM items JOIN types ON items.item_type = types.type_id JOIN manufacturers ON items.item_manufacturer = manufacturers.manufacturer_id JOIN models ON items.item_model = models.model_id WHERE items.item_mifare = '{mifare}', {SqlConnection.mySqlConnection}");
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -78,25 +42,27 @@ namespace UdlaanSystem.DataAccess
             }
             catch (Exception ex)
             {
-                MysqlConnection.Close();
-                Debug.WriteLine("############################FAILED: " + ex);
+                SqlConnection.mySqlConnection.Close();
+                Debug.WriteLine($"############################FAILED Getting item by mifare id: {ex}");
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
 
             return item;
         }
+        #endregion GetItemByMifare
 
+        #region GetItemTypes
         public List<string[]> GetItemTypes()
         {
             List<string[]> types = new List<string[]>();
 
             try
             {
-                ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM types", MysqlConnection);
+                SqlConnection.ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM types, {SqlConnection.mySqlConnection}");
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -107,27 +73,30 @@ namespace UdlaanSystem.DataAccess
                     Debug.WriteLine("############################ Success!");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
                 Debug.WriteLine("############################FAILED: " + ex);
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
 
             return types;
         }
+        #endregion GetItemTypes
 
-        public List<string[]> getItemManufacturers(int typeID)
+        #region GetItemManufacturers
+        public List<string[]> GetItemManufacturers(int typeID)
         {
+            /* Instanciate List of manufactors with a string array */ 
             List<string[]> manufacturers = new List<string[]>();
 
             try
             {
-                ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM manufacturers WHERE manufacturer_selected_type = '" + typeID + "'", MysqlConnection);
+                SqlConnection.ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM manufacturers WHERE manufacturer_selected_type = '{typeID}', {SqlConnection.mySqlConnection}");
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -140,25 +109,28 @@ namespace UdlaanSystem.DataAccess
             }
             catch (Exception ex)
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
                 Debug.WriteLine("############################FAILED: " + ex);
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
 
             return manufacturers;
         }
+        #endregion GetItemManufacturers
 
-        public List<string[]> getItemModels(int manufacturerID, int typeID)
+        #region GetItemModels
+        public List<string[]> GetItemModels(int manufacturerID, int typeID)
         {
+            /* Instanciate list of Item Models, with a string array. */
             List<string[]> models = new List<string[]>();
 
             try
             {
-                ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM models WHERE model_selected_type = '" + typeID + "' AND model_selected_manufacturer = '" + manufacturerID + "' ORDER BY model_name", MysqlConnection);
+                SqlConnection.ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM models WHERE model_selected_type = '{typeID}' AND model_selected_manufacturer = '{manufacturerID}' ORDER BY model_name;, {SqlConnection.mySqlConnection}");
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -166,31 +138,32 @@ namespace UdlaanSystem.DataAccess
                     model[0] = rdr.GetInt32(0).ToString();
                     model[1] = rdr.GetString(1);
                     models.Add(model);
-                    Debug.WriteLine("############################ Success!");
+                    Debug.WriteLine($"############################ Success!");
                 }
             }
             catch (Exception ex)
             {
-                MysqlConnection.Close();
-                Debug.WriteLine("############################FAILED: " + ex);
+                SqlConnection.mySqlConnection.Close();
+                Debug.WriteLine($"############################ FAILED GetItemModels: {ex}");
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
 
             return models;
         }
+        #endregion GetItemModels
 
-        public List<int> RetrieveIdInformation (int model)
+        #region RetrieveIdInformation
+        public List<int> RetrieveIdInformation(int model)
         {
-            List<int> id = new List<int>();    
+            List<int> id = new List<int>();
 
             try
             {
-                ConnectMySql();
-
-                MySqlCommand cmd = new MySqlCommand("SELECT item_id FROM items WHERE item_model = '" + model + "' ORDER BY `items`.`item_id` ASC", MysqlConnection);
+                SqlConnection.ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"SELECT item_id FROM items WHERE item_model = '{model}' ORDER BY `items`.`item_id` ASC;, {SqlConnection.mySqlConnection}");
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -199,47 +172,54 @@ namespace UdlaanSystem.DataAccess
             }
             catch (Exception ex)
             {
+                SqlConnection.mySqlConnection.Close();
                 Debug.WriteLine("############################FAILED: " + ex);
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
             return id;
         }
+        #endregion RetrieveIdInformation
 
-        public bool InsertItemsIntoDB(List<ItemObject> itemsToInsert) 
+        #region InsertItemsIntoDB
+        public bool InsertItemsIntoDB(List<ItemObject> itemsToInsert)
         {
             try
             {
-                ConnectMySql();
+                SqlConnection.ConnectMySql();
+                /* Foreach scanned item in the object, insert them into the database. */
                 foreach (ItemObject item in itemsToInsert)
                 {
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO items (item_mifare, item_type, item_manufacturer, item_model, item_id, item_serialnumber) VALUES ('" + item.ItemMifare + "', '" + Convert.ToInt16(item.Type) + "', '" + Convert.ToInt16(item.Manufacturer) + "', '" + Convert.ToInt16(item.Model) + "', '" + item.Id + "', '" + item.SerialNumber + "')", MysqlConnection);
+                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO items (item_mifare, item_type, item_manufacturer, item_model, item_id, item_serialnumber) VALUES ('{item.ItemMifare}', '{ Convert.ToInt16(item.Type) }', '{ Convert.ToInt16(item.Manufacturer)}', '{ Convert.ToInt16(item.Model)}', '{ item.Id }', '{item.SerialNumber}');, {SqlConnection.mySqlConnection}");
                     Debug.WriteLine(cmd.ToString());
                     cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
+                SqlConnection.mySqlConnection.Close();
                 Debug.WriteLine("############################FAILED: " + ex);
                 return false;
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
             return true;
         }
+        #endregion InsertItemsIntoDB
 
+        #region GetItemModelName
         public string GetItemModelName(int modelID)
         {
             string modelName = "";
 
             try
             {
-                ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand("SELECT model_name FROM models WHERE model_id = '" + modelID + "'", MysqlConnection);
+                SqlConnection.ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"SELECT model_name FROM models WHERE model_id = '{modelID}', {SqlConnection.mySqlConnection}");
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -250,17 +230,19 @@ namespace UdlaanSystem.DataAccess
             }
             catch (Exception ex)
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
                 Debug.WriteLine("############################FAILED: " + ex);
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
 
             return modelName;
         }
+        #endregion
 
+        #region FindItemByID
         public bool FindItemByID(ItemObject item)
         {
             string statement = string.Empty;
@@ -271,9 +253,8 @@ namespace UdlaanSystem.DataAccess
             }
             try
             {
-                ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM items WHERE item_type = {item.Type} " +
-                    $"AND item_manufacturer = {item.Manufacturer} AND item_model = {item.Model} AND item_id = {item.Id}{statement}", MysqlConnection);
+                SqlConnection.ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM items WHERE item_type = {item.Type} AND item_manufacturer = {item.Manufacturer} AND item_model = {item.Model} AND item_id = {item.Id}{statement}, {SqlConnection.mySqlConnection}");
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -282,18 +263,20 @@ namespace UdlaanSystem.DataAccess
             }
             catch (Exception ex)
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
                 Debug.WriteLine("############################FAILED: " + ex);
                 wentThrough = false;
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
 
             return wentThrough;
         }
+        #endregion
 
+        #region UpdateMifareOnItem
         public bool UpdateMifareOnItem(ItemObject item)
         {
             string statement = string.Empty;
@@ -304,9 +287,8 @@ namespace UdlaanSystem.DataAccess
             }
             try
             {
-                ConnectMySql();
-                MySqlCommand cmd = new MySqlCommand($"UPDATE items SET item_mifare = {item.ItemMifare} WHERE item_type = {item.Type} " +
-                    $"AND item_manufacturer = {item.Manufacturer} AND item_model = {item.Model} AND item_id = {item.Id}{statement}", MysqlConnection);
+                SqlConnection.ConnectMySql();
+                MySqlCommand cmd = new MySqlCommand($"UPDATE items SET item_mifare = {item.ItemMifare} WHERE item_type = {item.Type} AND item_manufacturer = {item.Manufacturer} AND item_model = {item.Model} AND item_id = {item.Id}{statement}, {SqlConnection.mySqlConnection}");
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     wentThrough = true;
@@ -314,16 +296,17 @@ namespace UdlaanSystem.DataAccess
             }
             catch (Exception ex)
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
                 Debug.WriteLine("############################FAILED: " + ex);
                 wentThrough = false;
             }
             finally
             {
-                MysqlConnection.Close();
+                SqlConnection.mySqlConnection.Close();
             }
 
             return wentThrough;
-        }
+        } 
+        #endregion
     }
 }

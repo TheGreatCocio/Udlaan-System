@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UdlaanSystem.Managers;
+using UdlaanSystem.Properties;
 
 namespace UdlaanSystem
 {
@@ -31,24 +32,24 @@ namespace UdlaanSystem
 
         private void LoadSettings()
         {
-            if (Settings1.Default.LocationNæstved)
+            if (Settings.Default.LocationNæstved)
             {
                 LocationCombo.Text = "Næstved";
             }
-            else if (Settings1.Default.LocationRingsted)
+            else if (Settings.Default.LocationRingsted)
             {
                 LocationCombo.Text = "Ringsted";
             }
-            else if (Settings1.Default.LocationRoskilde)
+            else if (Settings.Default.LocationRoskilde)
             {
                 LocationCombo.Text = "Roskilde";
             }
-            else if (Settings1.Default.LocationVordingborg)
+            else if (Settings.Default.LocationVordingborg)
             {
                 LocationCombo.Text = "Vordingbord";
             }
 
-            if (Settings1.Default.SmsService)
+            if (Settings.Default.SmsService)
             {
                 SMSService.Background = Brushes.LightSeaGreen;
                 SMSService.Content = "TIL";
@@ -59,7 +60,7 @@ namespace UdlaanSystem
                 SMSService.Content = "FRA";
             }
 
-            if (Settings1.Default.PartSmsService)
+            if (Settings.Default.PartSmsService)
             {
                 LendSmsService.Background = Brushes.LightSeaGreen;
                 LendSmsService.Content = "TIL";
@@ -70,21 +71,21 @@ namespace UdlaanSystem
                 LendSmsService.Content = "FRA";
             }
 
-            TimeReturnFri.Value = Settings1.Default.TimeForReturnFriday;
-            TimeReturnMonThur.Value = Settings1.Default.TimeForReturnMonToThur;
+            TimeReturnFri.Value = Settings.Default.TimeForReturnFriday;
+            TimeReturnMonThur.Value = Settings.Default.TimeForReturnMonToThur;
         }
 
         private void SMSService_Click(Object sender, RoutedEventArgs e)
         {
-            if (Settings1.Default.SmsService)
+            if (Settings.Default.SmsService)
             {
-                Settings1.Default.SmsService = false;
+                Settings.Default.SmsService = false;
                 SMSService.Background = Brushes.IndianRed;
                 SMSService.Content = "FRA";
             }
             else
             {
-                Settings1.Default.SmsService = true;
+                Settings.Default.SmsService = true;
                 SMSService.Background = Brushes.LightSeaGreen;
                 SMSService.Content = "TIL";
             }
@@ -93,15 +94,15 @@ namespace UdlaanSystem
 
         private void LendSmsService_Click(object sender, RoutedEventArgs e)
         {
-            if (Settings1.Default.PartSmsService)
+            if (Settings.Default.PartSmsService)
             {
-                Settings1.Default.PartSmsService = false;
+                Settings.Default.PartSmsService = false;
                 LendSmsService.Background = Brushes.IndianRed;
                 LendSmsService.Content = "FRA";
             }
             else
             {
-                Settings1.Default.PartSmsService = true;
+                Settings.Default.PartSmsService = true;
                 LendSmsService.Background = Brushes.LightSeaGreen;
                 LendSmsService.Content = "TIL";
             }
@@ -116,7 +117,7 @@ namespace UdlaanSystem
             }
             else
             {
-                Settings1.Default.TimeForReturnFriday = (TimeSpan)TimeReturnFri.Value;
+                Settings.Default.TimeForReturnFriday = (TimeSpan)TimeReturnFri.Value;
                 changesHasBeenMade = true;
             }            
         }
@@ -129,7 +130,7 @@ namespace UdlaanSystem
             }
             else
             {
-                Settings1.Default.TimeForReturnMonToThur = (TimeSpan)TimeReturnMonThur.Value;
+                Settings.Default.TimeForReturnMonToThur = (TimeSpan)TimeReturnMonThur.Value;
                 changesHasBeenMade = true;
             }
         }
@@ -138,7 +139,7 @@ namespace UdlaanSystem
         {
             if (changesHasBeenMade)
             {
-                Settings1.Default.Save();
+                Settings.Default.Save();
                 MessageBox.Show("Du har lavet en ændring. Programmet genstarter nu så de nye ændringer træder i kraft");
                 System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Shutdown();

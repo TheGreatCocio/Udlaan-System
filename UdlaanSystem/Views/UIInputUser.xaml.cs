@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UdlaanSystem.Managers;
+using UdlaanSystem.Properties;
 
 namespace UdlaanSystem
 {
@@ -21,17 +22,11 @@ namespace UdlaanSystem
 
     public partial class UIInputUser : Window
     {
-        //public void CardInserted(string hex)
-        //{
-        //    Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() => textBoxUserMifare.Text = hex));
-        //    System.Windows.Forms.SendKeys.SendWait("{ENTER}");
-        //}
-
         public UIInputUser()
         {
             InitializeComponent();
             textBoxZbcName.Focus();
-            if (Settings1.Default.LocationRoskilde)
+            if (Settings.Default.LocationRoskilde)
             {
                 labelEUUser.Visibility = Visibility.Visible;
                 checkBoxEUUser.Visibility = Visibility.Visible;
@@ -129,7 +124,7 @@ namespace UdlaanSystem
         private void ButtonCreateOrUpdate_Click(object sender, RoutedEventArgs e)
         {
             // Hvis lokationen er "Roskilde" så har de muligheden for at gå uden om Tlf Nummer hvis det er EU elever der skal låne
-            if (Settings1.Default.LocationRoskilde)
+            if (Settings.Default.LocationRoskilde)
             {
                 if (checkBoxEUUser.IsChecked == false)
                 {

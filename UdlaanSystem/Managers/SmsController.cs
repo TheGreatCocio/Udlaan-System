@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.VisualBasic;
 using UdlaanSystem.DataAccess;
+using UdlaanSystem.Properties;
 
 namespace UdlaanSystem.Managers
 {
@@ -29,7 +26,7 @@ namespace UdlaanSystem.Managers
         //Generere en 6 cifret kode og sender den til det nummer den får med ned.
         public bool GenerateVerificationSms(int phoneNumber)
         {
-            if (Settings1.Default.SmsService == true)
+            if (Settings.Default.SmsService == true)
             {
                 Random rnd = new Random();
                 int code = rnd.Next(100000, 1000000);
@@ -92,24 +89,24 @@ namespace UdlaanSystem.Managers
         public void GenerateLendReceipt(UserObject userObject, List<LendObject> lendObjects)
         {
             string location = "";
-            if (Settings1.Default.LocationNæstved == true)
+            if (Settings.Default.LocationNæstved == true)
             {
                 location = "Næstved";
             }
-            else if (Settings1.Default.LocationRingsted == true)
+            else if (Settings.Default.LocationRingsted == true)
             {
                 location = "Ringsted";
             }
-            else if (Settings1.Default.LocationRoskilde == true)
+            else if (Settings.Default.LocationRoskilde == true)
             {
                 location = "Roskilde";
             }
-            else if (Settings1.Default.LocationVordingborg == true)
+            else if (Settings.Default.LocationVordingborg == true)
             {
                 location = "Vordingborg";
             }
 
-            if (Settings1.Default.SmsService == true)
+            if (Settings.Default.SmsService == true)
             {
                 string itemsMsg = "";
                 DateTime returnDate = new DateTime();
@@ -128,24 +125,24 @@ namespace UdlaanSystem.Managers
         public void GenerateReturnReceipt(UserObject userObject, List<LendObject> lendObjects)
         {
             string location = "";
-            if (Settings1.Default.LocationNæstved == true)
+            if (Settings.Default.LocationNæstved == true)
             {
                 location = "Næstved";
             }
-            else if (Settings1.Default.LocationRingsted == true)
+            else if (Settings.Default.LocationRingsted == true)
             {
                 location = "Ringsted";
             }
-            else if (Settings1.Default.LocationRoskilde == true)
+            else if (Settings.Default.LocationRoskilde == true)
             {
                 location = "Roskilde";
             }
-            else if (Settings1.Default.LocationVordingborg == true)
+            else if (Settings.Default.LocationVordingborg == true)
             {
                 location = "Vordingborg";
             }
 
-            if (Settings1.Default.SmsService == true)
+            if (Settings.Default.SmsService == true)
             {
                 string itemsMsg = "";
                 foreach (LendObject lendObject in lendObjects)
